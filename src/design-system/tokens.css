@@ -1,0 +1,56 @@
+:root {
+  color-scheme: light;
+
+  --paper-warm: #fbf7eb;
+  --paper-cream: #f5eedc;
+  --paper-cool: #f9faf7;
+  --desk-oak: #cbb99f;
+  --desk-shadow: #9b8871;
+  --ink-900: #252b2a;
+  --ink-700: #4c5552;
+  --ink-500: #737c77;
+  --rule: #c7cbc2;
+  --rule-strong: #9fa79f;
+  --powder: #a9c8da;
+  --sage: #a9bda4;
+  --lavender: #bbb1cf;
+  --butter: #e8d28a;
+  --peach: #e8b99e;
+  --coral: #d98772;
+  --mint: #a9cdbf;
+  --highlight-butter: #f1dc85aa;
+  --danger: #8f3c36;
+  --focus-ring: #365f78;
+
+  --font-editorial: Georgia, "Times New Roman", serif;
+  --font-reading: Charter, Georgia, "Times New Roman", serif;
+  --font-ui: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-numeric: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --radius-paper: 3px;
+  --radius-control: 8px;
+  --shadow-paper: 0 1px 2px rgb(55 46 34 / 12%), 0 14px 36px rgb(55 46 34 / 12%);
+  --shadow-lift: 0 3px 5px rgb(55 46 34 / 14%), 0 18px 42px rgb(55 46 34 / 18%);
+  --layer-base: 0;
+  --layer-paper: 10;
+  --layer-nav: 30;
+  --layer-dialog: 50;
+
+  --motion-quick: 120ms;
+  --motion-place: 220ms;
+  --motion-turn: 340ms;
+  --ease-place: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --ease-lift: cubic-bezier(0.2, 0.65, 0.3, 1);
+
+  --content-max: 76rem;
+  --reading-max: 44rem;
+}

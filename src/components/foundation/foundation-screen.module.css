@@ -1,0 +1,57 @@
+.header {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.9rem;
+}
+
+.title {
+  max-width: 15ch;
+  margin: 1rem 0 0.8rem;
+  font-family: var(--font-editorial);
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.notebookTitle {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.description {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--ink-700);
+  font-family: var(--font-reading);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.empty {
+  max-width: 34rem;
+  margin-top: clamp(3rem, 9vw, 8rem);
+  padding: 1.5rem 0 1.5rem 1.4rem;
+  border-left: 2px solid var(--rule-strong);
+}
+
+.empty h2 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-editorial);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.empty p {
+  margin: 0;
+  color: var(--ink-700);
+  line-height: 1.65;
+}
+
+.foundationNote {
+  margin-top: 3rem;
+  color: var(--ink-500);
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}

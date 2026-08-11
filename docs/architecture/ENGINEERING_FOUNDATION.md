@@ -9,6 +9,7 @@ The repository separates:
 - `src/design-system`: Campus Atelier tokens and semantic surfaces
 - `src/domain`: validated framework-independent records and constructors
 - `src/infrastructure/local`: Dexie database and typed local repositories
+- `src/infrastructure/media`: replaceable browser image preparation
 - `src/infrastructure/supabase`: browser/server authentication clients
 - `src/sync`: transport-independent outbox synchronization
 - `supabase/migrations`: server schema, ownership constraints, RLS, and private Storage policies
@@ -74,7 +75,13 @@ No end-to-end encryption claim is made. The encryption approach remains undecide
 
 ## Media lifecycle
 
-Local media records support local blob, pending upload, upload, retry/failure, private remote object key, and pending deletion. Store object keys rather than public URLs. Compression and thumbnails belong at a replaceable processing boundary. Polished photo capture is Phase 2.
+Local media records support local blob, pending upload, upload, retry/failure, private remote object key, and pending deletion. Store object keys rather than public URLs. Phase 2 prepares JPEG, PNG, and WebP images in the browser, caps input at 20 MB, applies orientation, scales the longest edge to at most 2560 px, and re-encodes pixels before storage. Re-encoding strips embedded metadata; the original file is not retained. The local blob and dimensions commit before any remote work. Remote upload verifies the authenticated owner and writes only to an owner-prefixed private key.
+
+## Phase 2 Day bundle
+
+Dexie version 3 adds reflection records and media metadata while retaining the version 1→2 upgrader and existing records. A loaded Day bundle contains its Day, ordered moments, journal entries, local media, and morning/evening reflections. Mood, photo, and journal references are explicit Moment variants so Today stays chronological without making content type the primary navigation.
+
+Journal autosave is debounced after local input changes. Deletion marks the entity and its linked timeline reference with tombstones and queues explicit delete operations; it does not physically erase records before sync and retention can observe them. See [Phase 2 Daily Journal](PHASE_2_DAILY_JOURNAL.md).
 
 ## Error and logging conventions
 

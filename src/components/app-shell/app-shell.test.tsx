@@ -17,7 +17,7 @@ describe("AppShell", () => {
     expect(screen.getByRole("link", { name: "Calendar" })).toHaveAttribute("href", "/calendar");
     expect(screen.getByRole("link", { name: "+ Add to Today" })).toHaveAttribute(
       "href",
-      "/today#foundation-capture",
+      "/today#quick-capture",
     );
     expect(screen.getByRole("link", { name: "Skip to main content" })).toHaveAttribute(
       "href",

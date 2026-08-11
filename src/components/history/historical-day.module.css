@@ -1,0 +1,136 @@
+.desk {
+  min-height: 100%;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: var(--desk-oak);
+}
+.notebook {
+  max-width: 66rem;
+  margin: auto;
+  background: var(--paper-cream);
+  box-shadow: var(--shadow-paper);
+  padding: clamp(1.2rem, 4vw, 3rem);
+  min-height: calc(100vh - 6rem);
+}
+.notebook > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 3px double var(--rule-strong);
+  padding-bottom: 2rem;
+}
+.notebook header p {
+  font: 0.72rem var(--font-numeric);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+.notebook h1 {
+  font: clamp(2.4rem, 6vw, 4.5rem)/1 var(--font-editorial);
+  margin: 0.5rem 0;
+}
+.notebook header > div:last-child {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.notebook button {
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-cool);
+  padding: 0.65rem 0.8rem;
+  cursor: pointer;
+}
+.notebook section > h2 {
+  font: 1.5rem var(--font-editorial);
+  margin: 2rem 0 1rem;
+}
+.notebook ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+.notebook li {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+  background: rgb(255 255 255 / 30%);
+}
+.notebook li time {
+  font: 0.72rem var(--font-numeric);
+  color: var(--ink-500);
+}
+.notebook li p {
+  font: 1.05rem/1.6 var(--font-reading);
+  white-space: pre-wrap;
+}
+.notebook img {
+  width: 100%;
+  max-width: 100%;
+  max-height: 34rem;
+  object-fit: contain;
+}
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+.controls button {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  padding: 0.2rem;
+  color: var(--ink-700);
+}
+.edit textarea {
+  width: 100%;
+  min-height: 8rem;
+  font: 1rem/1.6 var(--font-reading);
+  background: var(--paper-cool);
+  border: 1px solid var(--rule);
+  padding: 0.75rem;
+}
+.empty {
+  border: 1px dashed var(--rule-strong);
+  padding: 2rem;
+  text-align: center;
+}
+.reflections > div {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.reflections > div span {
+  color: var(--ink-500);
+  margin-left: auto;
+}
+.notebook footer {
+  margin-top: 2rem;
+  color: var(--ink-500);
+  font-size: 0.8rem;
+}
+@media (max-width: 42rem) {
+  .desk {
+    padding: 0.5rem;
+  }
+  .notebook {
+    min-height: calc(100dvh - 6rem);
+  }
+  .notebook > header {
+    flex-direction: column;
+  }
+  .notebook header > div:last-child {
+    flex-wrap: wrap;
+  }
+  .notebook li {
+    grid-template-columns: 1fr;
+  }
+  .reflections > div {
+    display: grid;
+  }
+  .reflections > div span {
+    margin: 0;
+  }
+}

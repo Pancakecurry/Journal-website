@@ -4,9 +4,9 @@ Campus Atelier Journal is the working codename for a private, playful, local-fri
 
 ## Project status
 
-**Current phase:** Phase 1 — Architecture & Foundation (Tasks 001–006)
+**Current phase:** Phase 2 — Daily Journal Experience (Tasks 007–013)
 
-The repository now contains a runnable responsive application shell, Campus Atelier design-system foundations, validated Day-centered domain models, versioned IndexedDB persistence, an outbox sync engine, Supabase PostgreSQL/Auth/private Storage migrations and RLS policies, and automated verification. It deliberately does **not** contain the finished Today timeline, Quick Capture, journal editor, reflections, Calendar, trackers, games, or AI features.
+The repository now contains the first complete ordinary-Day loop: a responsive accumulating Today, fast text/photo capture, mood, autosaving long-form writing, optional morning/evening reflections, private local media, and read-first editable historical Days. Every core Phase 2 write lands in IndexedDB first and enters the existing outbox protocol. The full Calendar, search, tracker system, My World, games, and AI remain later work.
 
 Future contributors and coding agents must read [AGENTS.md](AGENTS.md) before making changes.
 
@@ -71,5 +71,6 @@ npm run test:e2e
 - [Roadmap](docs/ROADMAP.md)
 - [Architecture decision log](docs/architecture/DECISION_LOG.md)
 - [Engineering foundation](docs/architecture/ENGINEERING_FOUNDATION.md)
+- [Phase 2 daily journal implementation](docs/architecture/PHASE_2_DAILY_JOURNAL.md)
 
 Meaningful changes to product or architecture must update the relevant source-of-truth document and, for lasting technical choices, add or supersede an ADR.

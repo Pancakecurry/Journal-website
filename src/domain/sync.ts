@@ -1,7 +1,14 @@
 import { z } from "zod";
 import { EntityIdSchema, IsoTimestampSchema } from "@/domain/shared";
 
-export const SyncEntitySchema = z.enum(["day", "moment", "journal_entry", "media", "preferences"]);
+export const SyncEntitySchema = z.enum([
+  "day",
+  "moment",
+  "journal_entry",
+  "media",
+  "reflection",
+  "preferences",
+]);
 export const SyncActionSchema = z.enum(["upsert", "delete"]);
 export const OutboxStatusSchema = z.enum(["pending", "syncing", "failed", "conflict"]);
 

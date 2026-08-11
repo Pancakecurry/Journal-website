@@ -39,7 +39,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <Link className={styles.add} href="/today#foundation-capture">
+          <Link className={styles.add} href="/today#quick-capture">
             + Add to Today
           </Link>
           <div className={styles.statusArea}>

@@ -31,15 +31,15 @@ Tasks 001–006 establish the durable technical base without building the comple
 
 Tasks 007–013 prove that recording one ordinary day feels unusually enjoyable.
 
-| Task | Outcome          |
-| ---- | ---------------- |
-| 007  | Today            |
-| 008  | Quick Capture    |
-| 009  | Images and media |
-| 010  | Journal writing  |
-| 011  | Morning check-in |
-| 012  | Evening wrap-up  |
-| 013  | Historical day   |
+| Task | Outcome          | Status   |
+| ---- | ---------------- | -------- |
+| 007  | Today            | Complete |
+| 008  | Quick Capture    | Complete |
+| 009  | Images and media | Complete |
+| 010  | Journal writing  | Complete |
+| 011  | Morning check-in | Complete |
+| 012  | Evening wrap-up  | Complete |
+| 013  | Historical day   | Complete |
 
 MVP scope and acceptance boundaries are defined in [MVP Scope](product/MVP_SCOPE.md).
 
@@ -98,4 +98,4 @@ Hardening tasks deepen continuous responsibilities; they do not defer accessibil
 
 ## Current gate
 
-The next recommended work is **Phase 2 — The Daily Journal Experience**. It must not begin without separate authorization.
+The next recommended work is **Phase 3 — Personal History & Organization**. It must not begin without separate authorization.

@@ -1,0 +1,153 @@
+.dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  width: min(42rem, calc(100% - 2rem));
+  color: var(--ink-900);
+}
+.dialog::backdrop {
+  background: rgb(37 43 42 / 48%);
+  backdrop-filter: blur(2px);
+}
+.paper {
+  background: var(--paper-warm);
+  box-shadow: var(--shadow-lift);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: var(--radius-paper);
+  border-top: 8px solid var(--powder);
+}
+.topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--ink-500);
+  font-size: 0.78rem;
+  font-family: var(--font-numeric);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.close {
+  border: 0;
+  background: transparent;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.paper h2 {
+  font: 2.2rem/1.05 var(--font-editorial);
+  margin: 0.75rem 0 1.25rem;
+}
+.types {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.types button {
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+}
+.types button[aria-pressed="true"] {
+  background: var(--powder);
+  border-color: var(--ink-700);
+}
+.field {
+  display: grid;
+  gap: 0.45rem;
+  font-weight: 650;
+}
+.field span {
+  font-weight: 400;
+  color: var(--ink-500);
+}
+.field textarea,
+.field input {
+  resize: vertical;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--rule-strong);
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 1.9rem,
+    var(--rule) 1.95rem
+  );
+  padding: 0.6rem 0.2rem;
+  font: 1.1rem/1.75 var(--font-reading);
+  color: var(--ink-900);
+}
+.photoFields {
+  display: grid;
+  gap: 1rem;
+}
+.file {
+  min-height: 7rem;
+  border: 1px dashed var(--rule-strong);
+  background: var(--paper-cool);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  text-align: center;
+}
+.file input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+}
+.help {
+  color: var(--ink-500);
+  font-size: 0.84rem;
+  margin: 0;
+}
+.error {
+  color: var(--danger);
+  font-weight: 650;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.actions button {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+.nevermind {
+  border: 0;
+  background: transparent;
+  color: var(--ink-700);
+}
+.save {
+  background: var(--ink-900);
+  color: var(--paper-warm);
+  border: 0;
+  border-radius: var(--radius-control);
+}
+.save:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+@media (max-width: 42rem) {
+  .dialog {
+    width: 100%;
+    max-width: none;
+    margin: auto 0 0;
+  }
+  .paper {
+    border-radius: 16px 16px 0 0;
+    max-height: 88dvh;
+    overflow: auto;
+  }
+  .actions {
+    position: sticky;
+    bottom: 0;
+    background: var(--paper-warm);
+    padding-top: 0.75rem;
+  }
+}

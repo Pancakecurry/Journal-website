@@ -1,0 +1,120 @@
+.paper {
+  min-height: 100%;
+  max-width: 58rem;
+  margin: 0 auto;
+  background: var(--paper-cool);
+  box-shadow: var(--shadow-paper);
+  padding: clamp(1rem, 4vw, 3rem);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1rem;
+  font-size: 0.82rem;
+}
+.toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.toolbar span {
+  color: var(--ink-500);
+  font-family: var(--font-numeric);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.toolbar button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.toolbar .delete {
+  color: var(--danger);
+}
+.editor {
+  padding: clamp(2rem, 7vw, 5rem) 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  max-width: 44rem;
+  width: 100%;
+  margin: auto;
+}
+.editor input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink-900);
+  font: clamp(2.2rem, 5vw, 4rem)/1.05 var(--font-editorial);
+  padding: 0 0 1.2rem;
+}
+.editor textarea {
+  width: 100%;
+  min-height: 55vh;
+  resize: none;
+  border: 0;
+  outline: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 1.94rem,
+    rgb(159 167 159 / 28%) 2rem
+  );
+  color: var(--ink-900);
+  font: 1.18rem/2rem var(--font-reading);
+  padding: 0;
+}
+.reading {
+  max-width: 44rem;
+  margin: auto;
+  width: 100%;
+  padding: clamp(2rem, 7vw, 5rem) 0;
+}
+.reading h1 {
+  font: clamp(2.4rem, 5vw, 4rem)/1.05 var(--font-editorial);
+  margin: 0 0 2rem;
+}
+.reading p {
+  font: 1.18rem/1.8 var(--font-reading);
+  margin: 0.2rem 0;
+  white-space: pre-wrap;
+}
+.reading .blank,
+.message {
+  color: var(--ink-500);
+  font-style: italic;
+}
+.paper footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--ink-500);
+  font: 0.75rem var(--font-numeric);
+}
+@media (max-width: 38rem) {
+  .paper {
+    min-height: calc(100dvh - 5.5rem);
+    box-shadow: none;
+  }
+  .toolbar {
+    align-items: flex-start;
+  }
+  .toolbar > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .editor textarea {
+    min-height: 60vh;
+  }
+  .paper footer {
+    padding-right: 4.5rem;
+  }
+}

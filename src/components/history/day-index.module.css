@@ -1,0 +1,65 @@
+.calendar {
+  max-width: 65rem;
+  margin: auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  min-height: 100%;
+  background: var(--paper-cream);
+  box-shadow: var(--shadow-paper);
+}
+.calendar header {
+  border-bottom: 3px double var(--rule-strong);
+  padding-bottom: 2rem;
+}
+.calendar header p {
+  font: 0.72rem var(--font-numeric);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-500);
+}
+.calendar h1 {
+  font: clamp(2.4rem, 6vw, 4.5rem)/1 var(--font-editorial);
+  margin: 0.5rem 0;
+}
+.calendar header span {
+  color: var(--ink-700);
+}
+.list {
+  display: grid;
+  margin-top: 2rem;
+}
+.list a {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5rem;
+  gap: 1rem;
+  padding: 1.3rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+}
+.list a:hover {
+  background: rgb(255 255 255 / 35%);
+}
+.list time {
+  font-family: var(--font-reading);
+}
+.list span {
+  color: var(--ink-500);
+}
+.list i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--sage);
+  align-self: center;
+}
+@media (max-width: 38rem) {
+  .list a {
+    grid-template-columns: 1fr auto;
+  }
+  .list span {
+    grid-row: 2;
+  }
+  .list i {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}

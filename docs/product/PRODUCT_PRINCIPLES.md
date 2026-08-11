@@ -41,3 +41,7 @@ Optional play belongs in My World and must not compete with journaling. When use
 ## 10. Depth over placeholders
 
 Meaningful product slices include persistence, responsive behavior, empty/loading/failure states, offline implications, accessibility, reduced motion, privacy, testing, maintainability, and visual polish where applicable.
+
+## 11. Sound like a normal person
+
+Interface language is candid, short, and lightly playful. It can admit that a day was ordinary, weird, quiet, or mostly about lunch. Avoid forced introspection, therapy-speak, solemn diary clichés, productivity language, and institutional questionnaire copy. Humor must never mock a difficult feeling or weaken privacy and recovery messages.

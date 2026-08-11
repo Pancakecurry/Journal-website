@@ -90,3 +90,7 @@ Status should be understandable and calm. Offline or sync state must not be repr
 ## Navigation evolution
 
 The five primary areas and near-global capture action are canonical information architecture, not a frozen navigation widget. Future UX work may adapt placement by device and research, provided the Day remains primary and all changes update the [screen map](SCREEN_MAP.md) and relevant product documentation.
+
+## Product voice
+
+Campus Atelier speaks plainly and with a little everyday wit. “What happened?”, “Nothing here yet. Totally legal.”, and “Lunch absolutely counts.” are representative: direct, relaxed, and never trying to turn an ordinary moment into a life lesson. Saving, deletion, offline, privacy, and failure messages become more literal—not more playful—when trust is at stake. See [Product Principles](../product/PRODUCT_PRINCIPLES.md#11-sound-like-a-normal-person).

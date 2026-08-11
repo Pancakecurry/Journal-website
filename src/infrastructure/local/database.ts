@@ -4,6 +4,7 @@ import type { JournalEntry } from "@/domain/journal-entry";
 import type { LocalMedia } from "@/domain/media";
 import type { Moment } from "@/domain/moment";
 import type { UserPreferences } from "@/domain/preferences";
+import type { Reflection } from "@/domain/reflection";
 import type { OutboxOperation, SyncMeta } from "@/domain/sync";
 
 export class JournalDatabase extends Dexie {
@@ -11,6 +12,7 @@ export class JournalDatabase extends Dexie {
   moments!: EntityTable<Moment, "id">;
   journalEntries!: EntityTable<JournalEntry, "id">;
   media!: EntityTable<LocalMedia, "id">;
+  reflections!: EntityTable<Reflection, "id">;
   preferences!: EntityTable<UserPreferences, "userId">;
   outbox!: EntityTable<OutboxOperation, "operationId">;
   syncMeta!: EntityTable<SyncMeta, "userId">;
@@ -44,6 +46,30 @@ export class JournalDatabase extends Dexie {
             moment.deletedAt ??= null;
             moment.updatedAt ??= moment.createdAt;
             moment.occurredAt ??= moment.createdAt;
+          });
+      });
+
+    this.version(3)
+      .stores({
+        days: "id,[userId+localDate],userId,updatedAt,syncState",
+        moments: "id,[userId+dayId],dayId,userId,occurredAt,syncState",
+        journalEntries: "id,[userId+dayId],dayId,userId,updatedAt,syncState",
+        media: "id,[userId+dayId],dayId,userId,status,updatedAt,syncState",
+        reflections: "id,[userId+dayId],[userId+dayId+period],dayId,userId,updatedAt,syncState",
+        preferences: "userId,updatedAt,syncState",
+        outbox: "operationId,status,entityType,createdAt,nextAttemptAt",
+        syncMeta: "userId",
+      })
+      .upgrade(async (transaction) => {
+        await transaction
+          .table<LocalMedia, string>("media")
+          .toCollection()
+          .modify((media) => {
+            media.width ??= 1;
+            media.height ??= 1;
+            media.caption ??= "";
+            media.uploadAttempts ??= 0;
+            media.lastError ??= null;
           });
       });
   }

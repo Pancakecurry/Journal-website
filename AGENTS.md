@@ -15,6 +15,7 @@ Before making product, UX, or implementation changes, read `README.md` and the r
 9. Introduce dependencies only with clear, documented justification. Do not make premature stack choices.
 10. Record meaningful architecture decisions in `docs/architecture/DECISION_LOG.md` and keep affected source-of-truth documents consistent.
 11. Before handing off implementation work, run the relevant commands documented in `README.md`; database policy verification is not interchangeable with application unit tests.
+12. Write product copy like a candid, good-humored person: plain, brief, and specific. Avoid therapy-speak, forced profundity, institutional survey language, and jokes that make private moments feel trivial.
 
 If an instruction conflicts with the canonical product direction, pause and surface the conflict rather than silently redefining the product.
 

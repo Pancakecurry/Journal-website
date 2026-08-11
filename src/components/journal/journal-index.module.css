@@ -1,0 +1,72 @@
+.notebook {
+  max-width: 65rem;
+  margin: auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  min-height: 100%;
+  background: var(--paper-cream);
+  box-shadow: var(--shadow-paper);
+}
+.notebook header {
+  border-bottom: 3px double var(--rule-strong);
+  padding-bottom: 2rem;
+}
+.notebook header p {
+  font: 0.72rem var(--font-numeric);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-500);
+}
+.notebook h1 {
+  font: clamp(2.5rem, 6vw, 4.8rem)/1 var(--font-editorial);
+  margin: 0.5rem 0;
+}
+.notebook header span {
+  color: var(--ink-700);
+}
+.notebook ol {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+}
+.notebook li {
+  display: grid;
+  grid-template-columns: 8rem 1fr auto;
+  gap: 1.5rem;
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.notebook li > span {
+  font: 0.75rem var(--font-numeric);
+  color: var(--ink-500);
+}
+.notebook li h2 {
+  font: 1.45rem var(--font-editorial);
+  margin: 0;
+}
+.notebook li p {
+  color: var(--ink-700);
+  font-family: var(--font-reading);
+}
+.notebook li > a {
+  font-size: 0.82rem;
+}
+.empty {
+  margin-top: 2rem;
+  padding: 3rem;
+  border: 1px dashed var(--rule-strong);
+  text-align: center;
+}
+.empty h2 {
+  font: 1.8rem var(--font-editorial);
+}
+@media (max-width: 40rem) {
+  .notebook li {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .empty {
+    padding: 2rem 1rem;
+  }
+}

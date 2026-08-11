@@ -44,7 +44,7 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
   - Read-first timeline
   - Edit and backfill
   - Occurrence and later-edit provenance where appropriate
-- Monthly recap *(later)*
+- Monthly recap _(later)_
 
 ## Journal
 
@@ -65,7 +65,7 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
   - Authored history and accumulated objects
 - Customization
 - Keepsakes
-- Mini-games *(future)*
+- Mini-games _(future)_
   - Doodle/sketchbook
   - Tiny garden, memory cards, fishing, or desk toys as later possibilities
   - Meaningful artifacts attachable to days where appropriate

@@ -14,5 +14,16 @@ Before making product, UX, or implementation changes, read `README.md` and the r
 8. Add or update tests for meaningful behavior changes. Report the exact verification commands and results, and explicitly disclose anything that could not be verified.
 9. Introduce dependencies only with clear, documented justification. Do not make premature stack choices.
 10. Record meaningful architecture decisions in `docs/architecture/DECISION_LOG.md` and keep affected source-of-truth documents consistent.
+11. Before handing off implementation work, run the relevant commands documented in `README.md`; database policy verification is not interchangeable with application unit tests.
 
 If an instruction conflicts with the canonical product direction, pause and surface the conflict rather than silently redefining the product.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

@@ -6,13 +6,13 @@ The Day is the primary experiential container. Today is the active Day; historic
 
 The primary question is “What happened today?” Secondary areas answer narrower retrieval questions:
 
-| Area | Primary question | Experience intensity |
-| --- | --- | --- |
-| Today | What happened today? | Expressive / Desk |
-| Calendar | When did this happen? | Organized / Notebook |
-| Journal | What have I written? | Organized / Notebook; Paper while writing |
-| My World | What has my personal space become? | Expressive / Desk |
-| Me | How does this private environment work for me? | Organized / Notebook |
+| Area     | Primary question                               | Experience intensity                      |
+| -------- | ---------------------------------------------- | ----------------------------------------- |
+| Today    | What happened today?                           | Expressive / Desk                         |
+| Calendar | When did this happen?                          | Organized / Notebook                      |
+| Journal  | What have I written?                           | Organized / Notebook; Paper while writing |
+| My World | What has my personal space become?             | Expressive / Desk                         |
+| Me       | How does this private environment work for me? | Organized / Notebook                      |
 
 `+ Add to Today` is a near-global action. Global search, offline/sync status, and relevant preferences support every area without becoming primary destinations.
 

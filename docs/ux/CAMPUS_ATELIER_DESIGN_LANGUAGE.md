@@ -10,11 +10,11 @@ The design is **quietly expressive**: calm, prepared, warm, optimistic, polished
 
 ## Design intensity: Desk → Notebook → Paper
 
-| Mode | Use | Character |
-| --- | --- | --- |
-| Expressive / Desk | Today, My World, onboarding, monthly recaps, playful browsing | Environmental composition, layered materials, one or two meaningful objects |
-| Organized / Notebook | Calendar, Journal library, trackers, search, categorized settings | Tabs, grids, rules, labels, and restrained structure |
-| Focused / Paper | Journal writing, reflection, editing, focused reading | Decoration recedes; typography, content, and concentration lead |
+| Mode                 | Use                                                               | Character                                                                   |
+| -------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Expressive / Desk    | Today, My World, onboarding, monthly recaps, playful browsing     | Environmental composition, layered materials, one or two meaningful objects |
+| Organized / Notebook | Calendar, Journal library, trackers, search, categorized settings | Tabs, grids, rules, labels, and restrained structure                        |
+| Focused / Paper      | Journal writing, reflection, editing, focused reading             | Decoration recedes; typography, content, and concentration lead             |
 
 The more concentration a task requires, the quieter the interface becomes. Modes should feel related, as though moving closer to the paper on the same desk.
 

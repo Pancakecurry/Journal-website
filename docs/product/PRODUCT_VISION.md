@@ -32,4 +32,4 @@ The system must never imply that a day is incomplete because the user did not wr
 
 ## Long-term promise
 
-The environment begins beautifully organized and relatively clean. Through authored content and meaningful use—not an unlock economy—it gradually becomes *their* beautifully organized environment. See [Product Principles](PRODUCT_PRINCIPLES.md), [UX Architecture](../ux/UX_ARCHITECTURE.md), and the [Campus Atelier design language](../ux/CAMPUS_ATELIER_DESIGN_LANGUAGE.md).
+The environment begins beautifully organized and relatively clean. Through authored content and meaningful use—not an unlock economy—it gradually becomes _their_ beautifully organized environment. See [Product Principles](PRODUCT_PRINCIPLES.md), [UX Architecture](../ux/UX_ARCHITECTURE.md), and the [Campus Atelier design language](../ux/CAMPUS_ATELIER_DESIGN_LANGUAGE.md).

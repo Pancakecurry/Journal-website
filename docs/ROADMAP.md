@@ -1,37 +1,35 @@
 # Product Roadmap
 
-This roadmap expresses intended sequencing, not immutable numbering. Later evidence or architecture decisions may insert, split, merge, or reorder work, provided dependencies and canonical documentation are updated deliberately.
+This roadmap groups the original detailed Task 000–038 sequence into six major implementation phases. The granular milestones remain authoritative planning units. Later evidence may insert, split, merge, or reorder tasks when dependencies and canonical documentation are updated deliberately.
 
-## Definition of done for future implementation tasks
+## Definition of done for implementation work
 
-Applicable feature work should normally address:
+Applicable feature work should normally address functional correctness, persistence, mobile and desktop behavior, empty/loading/failure/recovery states, offline and sync implications, keyboard accessibility, reduced motion, privacy boundaries, tests, maintainability, documentation, and Campus Atelier visual polish.
 
-- Functional correctness and robust persistence
-- Mobile and desktop behavior
-- Empty, loading, failure, and recovery states
-- Offline behavior and sync implications where applicable
-- Keyboard use and accessibility
-- Reduced motion
-- Privacy and data boundaries
-- Automated and manual tests
-- Maintainability and meaningful documentation
-- Visual polish consistent with Campus Atelier
+Features should be deep coherent slices, not superficial placeholders. Every implementation report states exact verification commands/results and discloses anything not verified.
 
-Features should be delivered as deep, coherent slices rather than superficial placeholders. Each implementation report should state exact verification commands and results and disclose anything not verified.
+## Product constitution
 
-## Stage A — Definition and foundation
+| Task | Outcome | Status |
+| --- | --- | --- |
+| 000 | Product and UX source of truth | Complete |
 
-| Task | Outcome |
-| --- | --- |
-| 000 | Product and UX source of truth |
-| 001 | Technical architecture and stack decision |
-| 002 | Repository and engineering foundation |
-| 003 | Campus Atelier design-system foundation |
-| 004 | App shell and navigation |
-| 005 | Local-first data foundation |
-| 006 | Identity, privacy, and sync foundation |
+## Phase 1 — Architecture & Foundation
 
-## Stage B — The ordinary Day MVP
+Tasks 001–006 establish the durable technical base without building the complete journal experience.
+
+| Task | Outcome | Status |
+| --- | --- | --- |
+| 001 | Technical architecture and stack decision | Complete |
+| 002 | Repository and engineering foundation | Complete |
+| 003 | Campus Atelier design-system foundation | Complete |
+| 004 | App shell and navigation | Complete |
+| 005 | Local-first data foundation | Complete |
+| 006 | Identity, privacy, and sync foundation | Foundation implemented; live project configuration remains environment-specific |
+
+## Phase 2 — Daily Journal Experience
+
+Tasks 007–013 prove that recording one ordinary day feels unusually enjoyable.
 
 | Task | Outcome |
 | --- | --- |
@@ -42,62 +40,62 @@ Features should be delivered as deep, coherent slices rather than superficial pl
 | 011 | Morning check-in |
 | 012 | Evening wrap-up |
 | 013 | Historical day |
+
+MVP scope and acceptance boundaries are defined in [MVP Scope](product/MVP_SCOPE.md).
+
+## Phase 3 — Personal History & Organization
+
+| Task | Outcome |
+| --- | --- |
 | 014 | Calendar |
 | 015 | Journal library |
 | 016 | Search |
 | 017 | Backfilling and editing history |
-
-This stage must prove that recording and revisiting one ordinary day feels unusually enjoyable. MVP scope and acceptance boundaries are defined in [MVP Scope](product/MVP_SCOPE.md).
-
-## Stage C — Personal notation and reflection
-
-| Task | Outcome |
-| --- | --- |
 | 018 | Tracker foundation |
 | 019 | Tracker visualization |
 | 020 | Monthly recap |
-| 021 | Personalization |
 
-Trackers remain open-ended, notebook-like, and non-judgmental. Recaps and personalization reflect authored history rather than productivity or engagement scores.
+Trackers remain open-ended, notebook-like, and non-judgmental. Calendar and recaps communicate that something lives on a Day, not that it was productive.
 
-## Stage D — My World and play
+## Phase 4 — Personal World
 
 | Task | Outcome |
 | --- | --- |
+| 021 | Personalization |
 | 022 | My World |
 | 023 | Keepsakes |
 | 024 | Doodle system |
 | 025 | Mini-game framework |
 | 026 | Initial mini-games |
+| 027 | Memory resurfacing |
 
-Play stays inside My World, does not compete with journaling, and should produce meaningful journal artifacts where possible. No unlock economy.
+Personality emerges from authorship and accumulated use. Play stays inside My World, creates meaningful artifacts when possible, and never introduces an unlock economy.
 
-## Stage E — Memory and optional intelligence
+## Phase 5 — Intelligence, Privacy & Hardening
 
 | Task | Outcome |
 | --- | --- |
-| 027 | Memory resurfacing |
 | 028 | Semantic memory |
 | 029 | Optional journal assistant |
 | 030 | AI privacy controls |
-
-Core journaling remains fully useful without AI. AI-related work requires transparent processing boundaries and meaningful user control before broad access to private content.
-
-## Stage F — Ownership, hardening, and delivery
-
-| Task | Outcome |
-| --- | --- |
 | 031 | Export and data ownership |
 | 032 | Accessibility hardening |
 | 033 | Performance hardening |
 | 034 | Security review |
+
+Core journaling remains fully useful without AI. AI work requires transparent processing boundaries and meaningful user control before access to private content.
+
+## Phase 6 — Installability & Release Polish
+
+| Task | Outcome |
+| --- | --- |
 | 035 | PWA and installability |
 | 036 | Native packaging evaluation |
 | 037 | Beta |
 | 038 | Final polish |
 
-Hardening tasks deepen continuous responsibilities; they do not defer accessibility, performance, privacy, security, or ownership considerations from earlier feature work.
+Hardening tasks deepen continuous responsibilities; they do not defer accessibility, performance, privacy, security, or ownership from earlier work.
 
 ## Current gate
 
-Task 000 defines the product. The next recommended task is **Task 001 — Technical Architecture & Stack Decision**, which must not begin without separate authorization.
+The next recommended work is **Phase 2 — The Daily Journal Experience**. It must not begin without separate authorization.

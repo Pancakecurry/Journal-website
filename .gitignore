@@ -1,0 +1,26 @@
+# dependencies and builds
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+
+# local environment and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# local Supabase runtime
+supabase/.branches/
+supabase/.temp/
+
+# editors and operating systems
+.DS_Store
+*.log
+*.tsbuildinfo
+
+# Codex working areas
+work/
+outputs/

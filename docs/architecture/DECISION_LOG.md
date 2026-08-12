@@ -66,6 +66,7 @@ How will the decision be validated, reviewed, or revisited?
 - [ADR-007: Styling, design system, and motion](adr/007-design-system-and-motion.md)
 - [ADR-008: Testing and continuous verification](adr/008-testing-and-ci.md)
 - [ADR-009: Deployment and future packaging](adr/009-deployment-and-packaging.md)
+- [ADR-010: Derived local history indexes](adr/010-derived-local-history-indexes.md)
 
 ## Decision criteria used in Phase 1
 

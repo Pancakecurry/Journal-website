@@ -7,8 +7,23 @@
   box-shadow: var(--shadow-paper);
 }
 .notebook header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
   border-bottom: 3px double var(--rule-strong);
   padding-bottom: 2rem;
+}
+.notebook header label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 700;
+}
+.notebook header input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--coral);
 }
 .notebook header p {
   font: 0.72rem var(--font-numeric);
@@ -37,9 +52,36 @@
   border-bottom: 1px solid var(--rule);
   align-items: start;
 }
-.notebook li > span {
+.notebook li > time {
   font: 0.75rem var(--font-numeric);
   color: var(--ink-500);
+}
+.actions {
+  display: grid;
+  justify-items: end;
+  gap: 0.75rem;
+}
+.actions button,
+.more {
+  min-height: 2.75rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--ink-500);
+  background: transparent;
+  color: var(--ink-900);
+  font-weight: 700;
+  cursor: pointer;
+}
+.actions button[aria-pressed="true"] {
+  background: var(--butter);
+}
+.more {
+  display: block;
+  margin: 1.5rem auto;
+  background: var(--paper-warm);
+}
+.loading {
+  padding: 2rem;
+  background: var(--paper-warm);
 }
 .notebook li h2 {
   font: 1.45rem var(--font-editorial);
@@ -62,9 +104,18 @@
   font: 1.8rem var(--font-editorial);
 }
 @media (max-width: 40rem) {
+  .notebook header {
+    align-items: start;
+    flex-direction: column;
+  }
   .notebook li {
     grid-template-columns: 1fr;
     gap: 0.5rem;
+  }
+  .actions {
+    grid-auto-flow: column;
+    justify-content: start;
+    justify-items: start;
   }
   .empty {
     padding: 2rem 1rem;

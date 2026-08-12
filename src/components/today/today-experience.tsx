@@ -8,6 +8,7 @@ import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { currentDayContext, LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib/journal-session";
 import { QuickCapture } from "./quick-capture";
 import styles from "./today-experience.module.css";
+import { PinnedTrackers } from "@/components/trackers/pinned-trackers";
 
 const MOODS = [
   ["bright", "Great", "☀"],
@@ -254,6 +255,14 @@ export function TodayExperience() {
             </ol>
           )}
         </section>
+        <PinnedTrackers
+          userId={LOCAL_FOUNDATION_USER_ID}
+          {...context}
+          onSaved={async () => {
+            setStatus("Tracker noted. No points awarded.");
+            await load();
+          }}
+        />
         <p className={styles.status} role="status" aria-live="polite">
           {status}
         </p>
@@ -283,5 +292,5 @@ function Photo({ blob, alt }: { blob: Blob; alt: string }) {
   }, [source]);
   // IndexedDB object URLs are local-only and cannot use the remote Next image optimizer.
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={source} alt={alt} />;
+  return <img src={source} alt={alt} loading="lazy" decoding="async" />;
 }

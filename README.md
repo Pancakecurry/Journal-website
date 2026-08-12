@@ -4,9 +4,9 @@ Campus Atelier Journal is the working codename for a private, playful, local-fri
 
 ## Project status
 
-**Current phase:** Phase 2 — Daily Journal Experience (Tasks 007–013)
+**Current phase:** Phase 3 — Personal History & Organization (Tasks 014–020)
 
-The repository now contains the first complete ordinary-Day loop: a responsive accumulating Today, fast text/photo capture, mood, autosaving long-form writing, optional morning/evening reflections, private local media, and read-first editable historical Days. Every core Phase 2 write lands in IndexedDB first and enters the existing outbox protocol. The full Calendar, search, tracker system, My World, games, and AI remain later work.
+The repository now contains the complete ordinary-Day loop plus a real month planner, paginated Journal Library, conventional on-device search, polished historical backfill, flexible Day-based trackers, notebook-like visible-range history, and monthly recaps with autosaved personal reflection. Core writes land in IndexedDB first and enter the outbox protocol. My World, games, semantic memory, and AI remain later work.
 
 Future contributors and coding agents must read [AGENTS.md](AGENTS.md) before making changes.
 
@@ -72,5 +72,7 @@ npm run test:e2e
 - [Architecture decision log](docs/architecture/DECISION_LOG.md)
 - [Engineering foundation](docs/architecture/ENGINEERING_FOUNDATION.md)
 - [Phase 2 daily journal implementation](docs/architecture/PHASE_2_DAILY_JOURNAL.md)
+- [Phase 3 history and organization](docs/architecture/PHASE_3_HISTORY_ORGANIZATION.md)
+- [Performance strategy](docs/architecture/PERFORMANCE_STRATEGY.md)
 
 Meaningful changes to product or architecture must update the relevant source-of-truth document and, for lasting technical choices, add or supersede an ADR.

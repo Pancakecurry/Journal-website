@@ -101,6 +101,21 @@
     transform var(--motion-place) var(--ease-lift),
     box-shadow var(--motion-place);
 }
+.search {
+  margin-top: 1rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--ink-700);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.search b {
+  font: inherit;
+}
+.search:hover {
+  background: rgb(251 247 235 / 48%);
+  color: var(--ink-900);
+}
 
 .add:hover {
   box-shadow: var(--shadow-lift);
@@ -154,6 +169,19 @@
 
   .brand,
   .statusArea {
+    display: none;
+  }
+  .search {
+    position: fixed;
+    z-index: 34;
+    right: 0.8rem;
+    top: 0.7rem;
+    margin: 0;
+    border: 1px solid rgb(49 44 37 / 25%);
+    background: var(--paper-warm);
+    box-shadow: var(--shadow-paper);
+  }
+  .search b {
     display: none;
   }
 

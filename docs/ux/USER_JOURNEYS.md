@@ -72,11 +72,25 @@ Search is retrieval, not a new content hierarchy.
 2. Offline status is clear but not alarming.
 3. The user writes, records moments, edits available entries, uses check-ins, browses available days, and attaches locally available photos where feasible.
 4. The interface communicates what is safely stored locally and what, if anything, awaits synchronization.
-5. Reconnection resolves through a future, explicitly designed sync/conflict strategy.
+5. Reconnection uses the outbox and explicit conflict boundary; live remote sync still depends on configured identity and infrastructure.
 
-Task 000 defines the desired experience but does not choose its technical implementation.
+## 9. Track an ordinary thing
 
-## 9. Shape My World over time
+1. The user names what they care about and chooses an appropriate value shape.
+2. The tracker can be kept in its notebook, pinned to Today, or archived without losing history.
+3. An entry is attached to the Day when it happened, including backfilled Days.
+4. Visible-range history uses simple marks and an accessible textual summary.
+
+There are no targets, streaks, scores, or claims about what the pattern means.
+
+## 10. Look back at a month
+
+1. The user opens a recap from Calendar.
+2. A few restrained counts provide orientation, followed by meaningful Days and tracker presence.
+3. The user may write an optional candid note about the month; it autosaves locally.
+4. The recap never grades the month or invents a narrative.
+
+## 11. Shape My World over time
 
 1. A new user begins with a clean, prepared environment and a restrained chosen accent.
 2. Authored days, photographs, bookmarks, keepsakes, and organizational choices create traces of use.

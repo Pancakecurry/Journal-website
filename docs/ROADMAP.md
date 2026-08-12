@@ -45,15 +45,15 @@ MVP scope and acceptance boundaries are defined in [MVP Scope](product/MVP_SCOPE
 
 ## Phase 3 — Personal History & Organization
 
-| Task | Outcome                         |
-| ---- | ------------------------------- |
-| 014  | Calendar                        |
-| 015  | Journal library                 |
-| 016  | Search                          |
-| 017  | Backfilling and editing history |
-| 018  | Tracker foundation              |
-| 019  | Tracker visualization           |
-| 020  | Monthly recap                   |
+| Task | Outcome                         | Status   |
+| ---- | ------------------------------- | -------- |
+| 014  | Calendar                        | Complete |
+| 015  | Journal library                 | Complete |
+| 016  | Search                          | Complete |
+| 017  | Backfilling and editing history | Complete |
+| 018  | Tracker foundation              | Complete |
+| 019  | Tracker visualization           | Complete |
+| 020  | Monthly recap                   | Complete |
 
 Trackers remain open-ended, notebook-like, and non-judgmental. Calendar and recaps communicate that something lives on a Day, not that it was productive.
 
@@ -98,4 +98,4 @@ Hardening tasks deepen continuous responsibilities; they do not defer accessibil
 
 ## Current gate
 
-The next recommended work is **Phase 3 — Personal History & Organization**. It must not begin without separate authorization.
+The next recommended work is **Phase 4 — Personal World**. It must not begin without separate authorization.

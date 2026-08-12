@@ -1,0 +1,12 @@
+begin;
+select plan(8);
+select has_table('public', 'bookmarks', 'bookmarks exists');
+select has_table('public', 'tracker_definitions', 'tracker definitions exist');
+select has_table('public', 'tracker_entries', 'tracker entries exist');
+select has_table('public', 'monthly_reflections', 'monthly reflections exist');
+select policies_are('public', 'bookmarks', array['bookmarks_owner_all'], 'bookmarks has owner policy');
+select policies_are('public', 'tracker_definitions', array['tracker_definitions_owner_all'], 'tracker definitions have owner policy');
+select policies_are('public', 'tracker_entries', array['tracker_entries_owner_all'], 'tracker entries have owner policy');
+select policies_are('public', 'monthly_reflections', array['monthly_reflections_owner_all'], 'monthly reflections have owner policy');
+select * from finish();
+rollback;

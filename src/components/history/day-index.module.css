@@ -1,65 +1,191 @@
 .calendar {
-  max-width: 65rem;
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 3.5rem);
+  background: #e9e1d2;
+  color: var(--ink-900);
+}
+.calendar > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
   margin: auto;
-  padding: clamp(1rem, 4vw, 3rem);
-  min-height: 100%;
-  background: var(--paper-cream);
-  box-shadow: var(--shadow-paper);
+  align-items: end;
 }
-.calendar header {
-  border-bottom: 3px double var(--rule-strong);
-  padding-bottom: 2rem;
-}
-.calendar header p {
-  font: 0.72rem var(--font-numeric);
+.calendar header p,
+.preview > p {
+  margin: 0 0 0.5rem;
+  color: var(--ink-700);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-500);
 }
 .calendar h1 {
-  font: clamp(2.4rem, 6vw, 4.5rem)/1 var(--font-editorial);
-  margin: 0.5rem 0;
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-size: clamp(2rem, 5vw, 3.6rem);
 }
 .calendar header span {
+  display: block;
+  max-width: 35rem;
+  margin-top: 0.5rem;
   color: var(--ink-700);
 }
-.list {
+.calendar a {
+  color: var(--ink-900);
+  font-weight: 750;
+}
+.monthControls {
   display: grid;
-  margin-top: 2rem;
+  grid-template-columns: 3rem 1fr 3rem;
+  align-items: center;
+  max-width: 72rem;
+  margin: 2.5rem auto 0.8rem;
+  border-bottom: 1px solid #797063;
 }
-.list a {
+.monthControls h2 {
+  text-align: center;
+  font-family: var(--font-editorial);
+}
+.monthControls button,
+.day,
+.close {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.weekdays,
+.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5rem;
-  gap: 1rem;
-  padding: 1.3rem 0.5rem;
-  border-bottom: 1px solid var(--rule);
-  text-decoration: none;
+  grid-template-columns: repeat(7, 1fr);
+  max-width: 72rem;
+  margin: auto;
 }
-.list a:hover {
-  background: rgb(255 255 255 / 35%);
+.weekdays span {
+  padding: 0.5rem;
+  color: var(--ink-700);
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-align: center;
+  text-transform: uppercase;
 }
-.list time {
-  font-family: var(--font-reading);
+.grid {
+  overflow: hidden;
+  border: 1px solid #b9af9f;
+  border-radius: 0.35rem;
+  background: var(--paper-warm);
+  box-shadow: var(--shadow-paper);
 }
-.list span {
-  color: var(--ink-500);
+.day,
+.blank {
+  min-height: 8rem;
+  border-right: 1px solid #d8d0c3;
+  border-bottom: 1px solid #d8d0c3;
 }
-.list i {
-  width: 0.55rem;
-  height: 0.55rem;
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.75rem;
+  text-align: left;
+  transition: background var(--motion-quick);
+}
+.day:hover,
+.day:focus-visible {
+  background: #f4eddc;
+}
+.today time {
+  display: grid;
+  width: 1.9rem;
+  height: 1.9rem;
+  place-items: center;
   border-radius: 50%;
-  background: var(--sage);
-  align-self: center;
+  background: var(--coral);
+  color: #241f1a;
+  font-weight: 800;
 }
-@media (max-width: 38rem) {
-  .list a {
-    grid-template-columns: 1fr auto;
+.marks {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.marks i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--powder-blue);
+}
+.marks i[data-mark="photo"] {
+  border-radius: 1px;
+  background: var(--sage);
+}
+.marks i[data-mark="journal"] {
+  background: var(--lavender);
+}
+.marks i[data-mark="note"] {
+  background: var(--butter);
+}
+.loading {
+  max-width: 72rem;
+  min-height: 20rem;
+  margin: auto;
+  padding: 2rem;
+  background: var(--paper-warm);
+}
+.preview {
+  position: fixed;
+  z-index: 20;
+  right: clamp(1rem, 4vw, 3rem);
+  bottom: 2rem;
+  width: min(24rem, calc(100vw - 2rem));
+  padding: 1.5rem;
+  border: 1px solid #aea391;
+  background: var(--paper-warm);
+  box-shadow: var(--shadow-lift);
+}
+.preview h2 {
+  margin: 0.2rem 0 0.8rem;
+  font-family: var(--font-editorial);
+}
+.preview strong,
+.preview span {
+  display: block;
+  margin: 0.7rem 0;
+}
+.close {
+  position: absolute;
+  right: 0.4rem;
+  top: 0.3rem;
+  font-size: 1.5rem;
+}
+@media (max-width: 800px) {
+  .calendar {
+    padding: 1rem 1rem 7rem;
   }
-  .list span {
-    grid-row: 2;
+  .calendar > header {
+    align-items: start;
+    flex-direction: column;
   }
-  .list i {
-    grid-row: 1;
-    grid-column: 2;
+  .day,
+  .blank {
+    min-height: 4.7rem;
+  }
+  .day {
+    padding: 0.4rem;
+  }
+  .weekdays span {
+    font-size: 0.6rem;
+    padding: 0.3rem;
+  }
+  .preview {
+    bottom: 6rem;
+  }
+  .calendar header > a {
+    align-self: flex-start;
   }
 }

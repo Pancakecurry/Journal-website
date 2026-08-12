@@ -39,6 +39,11 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
+          {pathname.startsWith("/journal/") || pathname.startsWith("/reflection/") ? null : (
+            <Link className={styles.search} href="/search" aria-label="Search your journal">
+              <span aria-hidden="true">⌕</span> <b>Search your journal</b>
+            </Link>
+          )}
           <Link className={styles.add} href="/today#quick-capture">
             + Add to Today
           </Link>

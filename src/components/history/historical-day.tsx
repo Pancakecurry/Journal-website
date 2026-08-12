@@ -220,7 +220,7 @@ function HistoricalPhoto({ blob, alt }: { blob: Blob; alt: string }) {
   }, [src]);
   // IndexedDB object URLs are local-only and cannot use the remote Next image optimizer.
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt={alt} />;
+  return <img src={src} alt={alt} loading="lazy" decoding="async" />;
 }
 
 function photoMediaId(moment: Moment): string {

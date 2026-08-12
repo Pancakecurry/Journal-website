@@ -1,58 +1,114 @@
 "use client";
-
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import type { Day } from "@/domain/day";
-import type { JournalEntry } from "@/domain/journal-entry";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import type { JournalSummary } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
-import { LocalJournalRepository } from "@/infrastructure/local/journal-repository";
+import { LocalHistoryRepository } from "@/infrastructure/local/history-repository";
 import { LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib/journal-session";
 import styles from "./journal-index.module.css";
-
+const PAGE_SIZE = 20;
 export function JournalIndex() {
-  const repository = useMemo(() => new LocalJournalRepository(getApplicationDatabase()), []);
-  const [items, setItems] = useState<Array<{ entry: JournalEntry; day: Day }> | null>(null);
+  const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
+  const [items, setItems] = useState<JournalSummary[] | null>(null);
+  const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const load = useCallback(
+    async () =>
+      setItems(
+        await repository.journals(LOCAL_FOUNDATION_USER_ID, {
+          limit: PAGE_SIZE,
+          bookmarked: bookmarkedOnly,
+        }),
+      ),
+    [bookmarkedOnly, repository],
+  );
   useEffect(() => {
-    void repository.listJournals(LOCAL_FOUNDATION_USER_ID).then(setItems);
-  }, [repository]);
+    const task = window.setTimeout(() => void load(), 0);
+    return () => window.clearTimeout(task);
+  }, [load]);
+  async function more() {
+    if (!items?.length) return;
+    setLoadingMore(true);
+    const rows = await repository.journals(LOCAL_FOUNDATION_USER_ID, {
+      cursor: items.at(-1)!.updatedAt,
+      limit: PAGE_SIZE,
+      bookmarked: bookmarkedOnly,
+    });
+    setItems([...items, ...rows.filter((row) => !items.some((item) => item.id === row.id))]);
+    setLoadingMore(false);
+  }
+  async function bookmark(item: JournalSummary) {
+    const value = await repository.toggleBookmark(LOCAL_FOUNDATION_USER_ID, item.id);
+    setItems(
+      (current) =>
+        current?.map((row) => (row.id === item.id ? { ...row, bookmarked: value } : row)) ?? null,
+    );
+  }
   return (
     <section className={styles.notebook}>
       <header>
-        <p>Journal · notebook</p>
-        <h1>The longer stuff.</h1>
-        <span>Every page still belongs to its Day.</span>
+        <div>
+          <p>Journal · notebook</p>
+          <h1>The longer stuff.</h1>
+          <span>Previews stay light. Full pages open only when you ask.</span>
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={bookmarkedOnly}
+            onChange={(event) => setBookmarkedOnly(event.target.checked)}
+          />{" "}
+          Bookmarked
+        </label>
       </header>
       {items === null ? (
-        <p>Finding your pages…</p>
+        <p className={styles.loading}>Finding your pages…</p>
       ) : items.length === 0 ? (
         <div className={styles.empty}>
-          <h2>No big entries yet.</h2>
-          <p>{"Start one from Today whenever a one-liner won't cut it."}</p>
+          <h2>{bookmarkedOnly ? "No bookmarks yet." : "No big entries yet."}</h2>
+          <p>
+            {bookmarkedOnly
+              ? "Mark a page you want handy."
+              : "Start one from Today whenever a one-liner won't cut it."}
+          </p>
           <Link href="/today#quick-capture">Go to Today</Link>
         </div>
       ) : (
-        <ol>
-          {items.map(({ entry, day }) => (
-            <li key={entry.id}>
-              <span>
-                {readableDate(day.localDate, { month: "short", day: "numeric", year: "numeric" })}
-              </span>
-              <div>
-                <h2>
-                  <Link href={`/journal/${entry.id}`}>
-                    {entry.title || "Untitled, which is fine"}
-                  </Link>
-                </h2>
-                <p>
-                  {entry.body
-                    ? `${entry.body.slice(0, 220)}${entry.body.length > 220 ? "…" : ""}`
-                    : "Blank page. Still counts as a page."}
-                </p>
-              </div>
-              <Link href={`/day/${day.localDate}`}>See the Day</Link>
-            </li>
-          ))}
-        </ol>
+        <>
+          <ol>
+            {items.map((entry) => (
+              <li key={entry.id}>
+                <time>
+                  {readableDate(entry.localDate, {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+                <div>
+                  <h2>
+                    <Link href={`/journal/${entry.id}`}>
+                      {entry.title || "Untitled, which is fine"}
+                    </Link>
+                  </h2>
+                  <p>{entry.preview || "Blank page. Still counts as a page."}</p>
+                  <small>{entry.wordCount} words</small>
+                </div>
+                <div className={styles.actions}>
+                  <button onClick={() => void bookmark(entry)} aria-pressed={entry.bookmarked}>
+                    {entry.bookmarked ? "Bookmarked" : "Bookmark"}
+                  </button>
+                  <Link href={`/day/${entry.localDate}`}>See the Day</Link>
+                </div>
+              </li>
+            ))}
+          </ol>
+          {items.length >= PAGE_SIZE ? (
+            <button className={styles.more} disabled={loadingMore} onClick={() => void more()}>
+              {loadingMore ? "Getting more pages…" : "More pages"}
+            </button>
+          ) : null}
+        </>
       )}
     </section>
   );

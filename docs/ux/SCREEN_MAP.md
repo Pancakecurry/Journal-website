@@ -44,7 +44,10 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
   - Read-first timeline
   - Edit and backfill
   - Occurrence and later-edit provenance where appropriate
-- Monthly recap _(later)_
+- Monthly recap
+  - Bounded month highlights and counts
+  - Autosaved authored reflection
+  - Reserved cover hook for later personalization
 
 ## Journal
 
@@ -74,6 +77,8 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
 
 - Preferences
 - Trackers
+  - Definition, pin, archive, and open-ended value type
+  - Visible-range notebook history with textual summary
 - Reflection preferences
 - Privacy and data controls
 - App lock

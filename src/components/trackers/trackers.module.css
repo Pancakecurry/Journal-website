@@ -1,0 +1,192 @@
+.notebook {
+  max-width: 68rem;
+  min-height: 100vh;
+  margin: auto;
+  padding: clamp(1rem, 4vw, 3.5rem);
+  background: var(--paper-cream);
+  box-shadow: var(--shadow-paper);
+}
+.notebook > header {
+  position: relative;
+  padding-bottom: 2rem;
+  border-bottom: 3px double var(--rule-strong);
+}
+.notebook header p {
+  color: var(--ink-500);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.notebook h1 {
+  margin: 0.5rem 0;
+  font: clamp(2.4rem, 6vw, 4.8rem)/1 var(--font-editorial);
+}
+.notebook header span {
+  color: var(--ink-700);
+}
+.notebook header button {
+  position: absolute;
+  right: 0;
+  bottom: 1.5rem;
+}
+.notebook button,
+.notebook select,
+.notebook input {
+  min-height: 2.75rem;
+}
+.notebook button {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--ink-900);
+  background: var(--ink-900);
+  color: var(--paper-warm);
+  font-weight: 750;
+  cursor: pointer;
+}
+.form,
+.entryForm {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+  background: var(--paper-warm);
+}
+.form label,
+.entryForm label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.form input,
+.form select,
+.entryForm input,
+.entryForm select {
+  padding: 0.5rem;
+  border: 1px solid var(--rule-strong);
+  background: #fffdf6;
+}
+.list {
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+}
+.list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.list h2 {
+  margin: 0.2rem 0;
+  font: 1.5rem var(--font-editorial);
+}
+.list span {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+.list button[aria-pressed="true"] {
+  background: var(--butter);
+  color: var(--ink-900);
+}
+.history {
+  margin-top: 2.5rem;
+}
+.history h2 {
+  font: 2rem var(--font-editorial);
+}
+.history ol {
+  padding: 0;
+  list-style: none;
+}
+.history li {
+  display: grid;
+  grid-template-columns: 6rem minmax(2rem, 1fr) 7rem 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.history li > span {
+  height: 0.65rem;
+  width: calc(var(--amount) * 1%);
+  max-width: 100%;
+  background: var(--sage);
+}
+.empty {
+  padding: 2rem;
+  border: 1px dashed var(--rule-strong);
+}
+.archive {
+  margin-top: 2rem;
+}
+.notebook a {
+  color: var(--ink-900);
+  font-weight: 750;
+}
+.pinned {
+  margin: 1.5rem 0;
+  padding: 1.2rem;
+  border: 1px solid var(--rule);
+  background: #eef0e6;
+}
+.pinned > div:last-of-type {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+}
+.pinned p {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+.pinned h2 {
+  margin: 0.25rem 0 1rem;
+  font: 1.5rem var(--font-editorial);
+}
+.pinned article {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  border: 1px solid #bdc4b0;
+  background: var(--paper-warm);
+}
+.pinned article div,
+.pinned form {
+  display: flex;
+  gap: 0.4rem;
+}
+.pinned input {
+  min-width: 0;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .notebook {
+    padding-bottom: 7rem;
+  }
+  .notebook header button {
+    position: static;
+    margin-top: 1rem;
+  }
+  .form,
+  .entryForm {
+    grid-template-columns: 1fr;
+  }
+  .list li {
+    align-items: start;
+    flex-direction: column;
+  }
+  .history li {
+    grid-template-columns: 5rem 1fr 5rem;
+  }
+  .history li small {
+    grid-column: 2/-1;
+  }
+  .pinned > div:last-of-type {
+    grid-template-columns: 1fr;
+  }
+}

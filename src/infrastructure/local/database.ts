@@ -6,6 +6,16 @@ import type { Moment } from "@/domain/moment";
 import type { UserPreferences } from "@/domain/preferences";
 import type { Reflection } from "@/domain/reflection";
 import type { OutboxOperation, SyncMeta } from "@/domain/sync";
+import type {
+  Bookmark,
+  DaySummary,
+  JournalSummary,
+  MonthlyReflection,
+  SearchDocument,
+  SearchTerm,
+  TrackerDefinition,
+  TrackerEntry,
+} from "@/domain/history";
 
 export class JournalDatabase extends Dexie {
   days!: EntityTable<Day, "id">;
@@ -16,6 +26,14 @@ export class JournalDatabase extends Dexie {
   preferences!: EntityTable<UserPreferences, "userId">;
   outbox!: EntityTable<OutboxOperation, "operationId">;
   syncMeta!: EntityTable<SyncMeta, "userId">;
+  daySummaries!: EntityTable<DaySummary, "id">;
+  journalSummaries!: EntityTable<JournalSummary, "id">;
+  searchDocuments!: EntityTable<SearchDocument, "id">;
+  searchTerms!: EntityTable<SearchTerm, "id">;
+  bookmarks!: EntityTable<Bookmark, "id">;
+  trackerDefinitions!: EntityTable<TrackerDefinition, "id">;
+  trackerEntries!: EntityTable<TrackerEntry, "id">;
+  monthlyReflections!: EntityTable<MonthlyReflection, "id">;
 
   constructor(name = "campus-atelier-journal") {
     super(name);
@@ -72,6 +90,26 @@ export class JournalDatabase extends Dexie {
             media.lastError ??= null;
           });
       });
+
+    this.version(4).stores({
+      days: "id,[userId+localDate],userId,updatedAt,syncState",
+      moments: "id,[userId+dayId],dayId,userId,occurredAt,syncState",
+      journalEntries: "id,[userId+dayId],dayId,userId,updatedAt,syncState",
+      media: "id,[userId+dayId],dayId,userId,status,updatedAt,syncState",
+      reflections: "id,[userId+dayId],[userId+dayId+period],dayId,userId,updatedAt,syncState",
+      preferences: "userId,updatedAt,syncState",
+      outbox: "operationId,status,entityType,createdAt,nextAttemptAt",
+      syncMeta: "userId",
+      daySummaries: "id,[userId+localDate],userId,updatedAt",
+      journalSummaries: "id,[userId+updatedAt],[userId+localDate],userId,dayId,bookmarked",
+      searchDocuments: "id,[userId+localDate],[userId+kind],userId,entityId,updatedAt",
+      searchTerms: "id,[userId+token],documentId",
+      bookmarks: "id,[userId+journalEntryId],userId,createdAt",
+      trackerDefinitions: "id,[userId+name],userId,pinned,archivedAt,updatedAt",
+      trackerEntries:
+        "id,[userId+trackerId+localDate],[userId+localDate],userId,trackerId,dayId,updatedAt",
+      monthlyReflections: "id,[userId+month],userId,updatedAt",
+    });
   }
 }
 

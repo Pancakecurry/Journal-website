@@ -9,6 +9,7 @@ import { newEntityId, nowIso, type LocalDate } from "@/domain/shared";
 import type { OutboxOperation } from "@/domain/sync";
 import { OutboxOperationSchema } from "@/domain/sync";
 import type { JournalDatabase } from "@/infrastructure/local/database";
+import { refreshDayDerived } from "@/infrastructure/local/derived-indexes";
 
 export interface DayWithMoments {
   day: Day | null;
@@ -58,7 +59,7 @@ export class LocalJournalRepository {
     timeZone: string;
     content: MomentContent;
   }): Promise<{ day: Day; moment: Moment }> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.days, this.database.moments, this.database.outbox],
       async () => {
@@ -73,6 +74,8 @@ export class LocalJournalRepository {
         return { day, moment };
       },
     );
+    await refreshDayDerived(this.database, input.userId, result.day.id);
+    return result;
   }
 
   async setMood(input: {
@@ -81,7 +84,7 @@ export class LocalJournalRepository {
     timeZone: string;
     mood: "bright" | "good" | "okay" | "off" | "rough";
   }): Promise<Moment> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.days, this.database.moments, this.database.outbox],
       async () => {
@@ -113,6 +116,8 @@ export class LocalJournalRepository {
         return created;
       },
     );
+    await refreshDayDerived(this.database, input.userId, result.dayId);
+    return result;
   }
 
   async addPhoto(input: {
@@ -125,7 +130,7 @@ export class LocalJournalRepository {
     height: number;
     caption: string;
   }): Promise<{ media: LocalMedia; moment: Moment }> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.days, this.database.moments, this.database.media, this.database.outbox],
       async () => {
@@ -146,6 +151,8 @@ export class LocalJournalRepository {
         return { media, moment };
       },
     );
+    await refreshDayDerived(this.database, input.userId, result.moment.dayId);
+    return result;
   }
 
   async createJournal(input: {
@@ -153,7 +160,7 @@ export class LocalJournalRepository {
     localDate: LocalDate;
     timeZone: string;
   }): Promise<JournalEntry> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [
         this.database.days,
@@ -178,6 +185,8 @@ export class LocalJournalRepository {
         return journal;
       },
     );
+    await refreshDayDerived(this.database, input.userId, result.dayId);
+    return result;
   }
 
   async getJournal(id: string): Promise<JournalEntry | undefined> {
@@ -202,7 +211,7 @@ export class LocalJournalRepository {
   }
 
   async saveJournal(id: string, title: string, body: string): Promise<JournalEntry> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.journalEntries, this.database.outbox],
       async () => {
@@ -221,6 +230,8 @@ export class LocalJournalRepository {
         return updated;
       },
     );
+    await refreshDayDerived(this.database, result.userId, result.dayId);
+    return result;
   }
 
   async saveReflection(input: {
@@ -232,7 +243,7 @@ export class LocalJournalRepository {
     currentQuestion: number;
     complete: boolean;
   }): Promise<Reflection> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.days, this.database.reflections, this.database.outbox],
       async () => {
@@ -263,6 +274,8 @@ export class LocalJournalRepository {
         return record;
       },
     );
+    await refreshDayDerived(this.database, input.userId, result.dayId);
+    return result;
   }
 
   async deleteEntity(
@@ -277,6 +290,7 @@ export class LocalJournalRepository {
           : type === "media"
             ? this.database.media
             : this.database.reflections;
+    let owner: { userId: string; dayId?: string } | undefined;
     await this.database.transaction("rw", [table, this.database.outbox], async () => {
       const current = (await table.get(id)) as
         | {
@@ -289,6 +303,7 @@ export class LocalJournalRepository {
           }
         | undefined;
       if (!current) return;
+      owner = current as typeof current & { dayId?: string };
       const timestamp = nowIso();
       await table.update(id, {
         deletedAt: timestamp,
@@ -298,10 +313,11 @@ export class LocalJournalRepository {
       });
       await this.database.outbox.add(this.deleteOperationFor(type, current));
     });
+    if (owner?.dayId) await refreshDayDerived(this.database, owner.userId, owner.dayId);
   }
 
   async updateTextMoment(id: string, text: string): Promise<Moment> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.moments, this.database.outbox],
       async () => {
@@ -320,6 +336,8 @@ export class LocalJournalRepository {
         return updated;
       },
     );
+    await refreshDayDerived(this.database, result.userId, result.dayId);
+    return result;
   }
 
   async deleteJournal(id: string): Promise<void> {
@@ -382,7 +400,7 @@ export class LocalJournalRepository {
     timeZone: string;
     text: string;
   }): Promise<{ day: Day; moment: Moment }> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [this.database.days, this.database.moments, this.database.outbox],
       async () => {
@@ -403,6 +421,8 @@ export class LocalJournalRepository {
         return { day, moment };
       },
     );
+    await refreshDayDerived(this.database, input.userId, result.day.id);
+    return result;
   }
 
   private operationFor(

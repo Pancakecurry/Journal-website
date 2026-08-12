@@ -43,6 +43,8 @@ Morning and evening reflection are conversational, gradual, and skippable rather
 
 Calendar is a refined planner/index, not an analytics heatmap. Subtle marks can indicate that content, photographs, or mood “live here,” without implying productivity or quality.
 
+The month planner loads one visible month and adapts cell density for mobile. Selecting a populated date opens a small preview before the read-first Day. Monthly recap remains a reflective desk surface: modest counts provide orientation, while authored memories and an optional autosaved note carry the meaning.
+
 Historical days are read-first but editable. Users can backfill old memories. Where appropriate, the system distinguishes:
 
 - **Occurred on:** the Day to which the memory belongs
@@ -57,6 +59,8 @@ Journal is a chronological route into longer writing, reflections, and relevant 
 ## Trackers
 
 Trackers are open-ended personal notation—coffee, sleep, called home, headaches, movies, exercise, a good hair day, or anything else. The product does not decide what deserves tracking. Notebook-like visualization is preferred over business analytics; trackers must not create scores, streak pressure, or a productivity hierarchy.
+
+Search is a near-global utility, not a sixth primary product area. It searches locally available words and dates with conventional matching, clear empty states, and Day-preserving results. It never implies semantic understanding.
 
 ## My World
 

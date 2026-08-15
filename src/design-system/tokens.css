@@ -1,24 +1,25 @@
 :root {
   color-scheme: light;
 
-  --paper-warm: #fbf7eb;
-  --paper-cream: #f5eedc;
-  --paper-cool: #f9faf7;
-  --desk-oak: #cbb99f;
-  --desk-shadow: #9b8871;
-  --ink-900: #252b2a;
-  --ink-700: #4c5552;
-  --ink-500: #58615d;
-  --ink-600: #555e5a;
-  --rule: #c7cbc2;
-  --rule-strong: #9fa79f;
-  --powder: #a9c8da;
-  --sage: #a9bda4;
-  --lavender: #bbb1cf;
-  --butter: #e8d28a;
-  --peach: #e8b99e;
-  --coral: #d98772;
-  --mint: #a9cdbf;
+  --paper-warm: #fffaf0;
+  --paper-cream: #f6efdf;
+  --paper-cool: #fbfcf8;
+  --paper-shadow: #e6dcc9;
+  --desk-oak: #c8b59a;
+  --desk-shadow: #8d7860;
+  --ink-900: #242a28;
+  --ink-700: #48514e;
+  --ink-600: #59615e;
+  --ink-500: #69716d;
+  --rule: #c9c7bc;
+  --rule-strong: #989f98;
+  --powder: #a8c9dc;
+  --sage: #aabda4;
+  --lavender: #beb4d3;
+  --butter: #ead38b;
+  --peach: #eabca0;
+  --coral: #dc8d78;
+  --mint: #aad1c1;
   --highlight-butter: #f1dc85aa;
   --danger: #8f3c36;
   --focus-ring: #365f78;
@@ -37,23 +38,29 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4rem;
+  --space-9: 5.5rem;
+  --space-10: 7rem;
 
-  --radius-paper: 3px;
-  --radius-control: 8px;
-  --shadow-paper: 0 1px 2px rgb(55 46 34 / 12%), 0 14px 36px rgb(55 46 34 / 12%);
-  --shadow-lift: 0 3px 5px rgb(55 46 34 / 14%), 0 18px 42px rgb(55 46 34 / 18%);
+  --radius-paper: 5px;
+  --radius-control: 10px;
+  --radius-soft: 16px;
+  --border-hairline: 1px solid rgb(54 57 52 / 14%);
+  --shadow-paper:
+    0 1px 1px rgb(55 46 34 / 8%), 0 10px 26px rgb(55 46 34 / 10%), 0 30px 70px rgb(55 46 34 / 6%);
+  --shadow-lift:
+    0 2px 3px rgb(55 46 34 / 12%), 0 16px 36px rgb(55 46 34 / 15%), 0 34px 76px rgb(55 46 34 / 8%);
   --layer-base: 0;
   --layer-paper: 10;
   --layer-nav: 30;
   --layer-dialog: 50;
 
-  --motion-quick: 120ms;
-  --motion-place: 220ms;
-  --motion-turn: 340ms;
-  --ease-place: cubic-bezier(0.2, 0.75, 0.25, 1);
-  --ease-lift: cubic-bezier(0.2, 0.65, 0.3, 1);
+  --motion-quick: 140ms;
+  --motion-place: 260ms;
+  --motion-turn: 420ms;
+  --ease-place: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-lift: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --content-max: 76rem;
+  --content-max: 78rem;
   --reading-max: 44rem;
   --accent: var(--powder);
   --active-paper: var(--paper-warm);

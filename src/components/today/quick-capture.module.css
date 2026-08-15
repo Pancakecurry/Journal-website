@@ -6,8 +6,8 @@
   color: var(--ink-900);
 }
 .dialog::backdrop {
-  background: rgb(37 43 42 / 48%);
-  backdrop-filter: blur(2px);
+  background: rgb(37 43 42 / 52%);
+  backdrop-filter: blur(5px);
 }
 .paper {
   background: var(--paper-warm);
@@ -15,6 +15,18 @@
   padding: clamp(1.25rem, 4vw, 2.5rem);
   border-radius: var(--radius-paper);
   border-top: 8px solid var(--powder);
+  animation: capture-unfold var(--motion-turn) var(--ease-place) both;
+  transform-origin: 50% 100%;
+}
+@keyframes capture-unfold {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .topline {
   display: flex;
@@ -24,7 +36,7 @@
   font-size: 0.78rem;
   font-family: var(--font-numeric);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.07em;
 }
 .close {
   border: 0;
@@ -46,7 +58,7 @@
 .types button {
   border: 1px solid var(--rule-strong);
   background: transparent;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   padding: 0.55rem 0.8rem;
   cursor: pointer;
 }
@@ -92,6 +104,7 @@
   cursor: pointer;
   padding: 1rem;
   text-align: center;
+  border-radius: var(--radius-control);
 }
 .file input {
   position: absolute;
@@ -149,5 +162,11 @@
     bottom: 0;
     background: var(--paper-warm);
     padding-top: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper {
+    animation: none;
   }
 }

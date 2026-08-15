@@ -40,7 +40,7 @@ export function DataControls() {
     <main className={styles.dataPage}>
       <header>
         <p>Data controls · careful bit</p>
-        <h1>Your journal has an exit—and an eraser.</h1>
+        <h1>Your journal has an exit. And an eraser.</h1>
         <span>Export first if there’s anything you may want later.</span>
       </header>
       <section>

@@ -11,32 +11,33 @@
   gap: 3rem;
   align-items: end;
   padding: clamp(1.5rem, 5vw, 4.5rem);
-  border: 1px solid var(--rule-strong);
+  border: var(--border-hairline);
   background: linear-gradient(
     130deg,
     var(--paper-warm),
     color-mix(in srgb, var(--accent) 16%, var(--paper-warm))
   );
-  box-shadow: 0 20px 55px rgb(55 43 31 / 10%);
+  box-shadow: var(--shadow-paper);
 }
 .mePage header p {
   margin: 0 0 0.9rem;
   color: var(--ink-500);
   font-size: 0.72rem;
   font-weight: 750;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 .mePage h1 {
   max-width: 12ch;
   margin: 0;
-  font: 500 clamp(2.5rem, 6vw, 5.5rem)/0.93 var(--font-editorial);
-  letter-spacing: -0.055em;
+  font: 500 clamp(2.65rem, 5.2vw, 4.75rem)/0.95 var(--font-editorial);
+  letter-spacing: -0.04em;
 }
 .mePage header aside {
   padding: 1.2rem;
   border: 1px solid var(--rule);
   background: rgb(255 255 255 / 48%);
+  border-radius: var(--radius-control);
 }
 .mePage header aside span {
   display: inline-block;
@@ -61,7 +62,7 @@
   margin: 1.4rem 1rem 0;
   border: 1px solid #8e7a61;
   background: #a99172;
-  box-shadow: 0 26px 46px rgb(61 44 27 / 16%);
+  box-shadow: var(--shadow-lift);
 }
 .cabinetLabel {
   display: flex;
@@ -94,7 +95,7 @@
 }
 .drawers > a {
   display: grid;
-  grid-template-columns: 2.5rem 3rem 1fr auto;
+  grid-template-columns: 3rem 1fr auto;
   gap: 1rem;
   align-items: center;
   min-height: 6.5rem;
@@ -103,8 +104,9 @@
   color: inherit;
   text-decoration: none;
   transition:
-    transform 200ms var(--ease-lift),
-    filter 200ms;
+    transform var(--motion-place) var(--ease-lift),
+    filter var(--motion-place),
+    box-shadow var(--motion-place) var(--ease-place);
 }
 .drawers > a:hover {
   position: relative;
@@ -132,10 +134,6 @@
 }
 .drawers > a[data-tone="quiet"] {
   background: var(--paper-cool);
-}
-.index {
-  color: var(--ink-500);
-  font: 0.7rem var(--font-numeric);
 }
 .drawers i {
   display: grid;
@@ -198,7 +196,7 @@
     max-width: none;
   }
   .drawers > a {
-    grid-template-columns: 2rem 2.6rem 1fr;
+    grid-template-columns: 2.6rem 1fr;
     min-height: 7.5rem;
     padding: 0.85rem;
   }

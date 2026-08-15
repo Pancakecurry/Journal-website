@@ -15,7 +15,7 @@ const drawers = [
     href: "/me/privacy",
     mark: "P",
     title: "Privacy & AI",
-    detail: "AI is off by default. Choose exactly what it may read—or leave it alone.",
+    detail: "AI is off by default. Choose exactly what it may read, or leave it alone.",
     tone: "ink",
   },
   {
@@ -82,9 +82,8 @@ export default function MePage() {
           <small>Filed by you</small>
         </div>
         <div className={styles.drawers}>
-          {drawers.map((item, index) => (
+          {drawers.map((item) => (
             <Link href={item.href} key={item.href} data-tone={item.tone}>
-              <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
               <i aria-hidden="true">{item.mark}</i>
               <div>
                 <h2>{item.title}</h2>

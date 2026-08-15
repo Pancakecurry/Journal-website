@@ -1,9 +1,11 @@
 .search {
-  max-width: 65rem;
+  max-width: 68rem;
   min-height: 100vh;
   margin: auto;
   padding: clamp(1rem, 4vw, 3.5rem);
-  background: var(--paper-cream);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 10rem),
+    var(--paper-cream);
   box-shadow: var(--shadow-paper);
 }
 .search header {
@@ -14,12 +16,12 @@
   color: var(--ink-500);
   font-size: 0.72rem;
   font-weight: 750;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 .search h1 {
   margin: 0.4rem 0;
-  font: clamp(2.4rem, 6vw, 4.8rem)/1 var(--font-editorial);
+  font: clamp(2.6rem, 5.2vw, 4.45rem)/1 var(--font-editorial);
 }
 .search header span {
   color: var(--ink-700);
@@ -37,6 +39,14 @@
   background: var(--paper-warm);
   color: var(--ink-900);
   font: 1rem var(--font-ui);
+  box-shadow: inset 0 1px 2px rgb(55 46 34 / 5%);
+  transition:
+    border-color var(--motion-quick),
+    box-shadow var(--motion-place) var(--ease-place);
+}
+.search > input:focus {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 4px rgb(54 95 120 / 12%);
 }
 .status {
   color: var(--ink-700);
@@ -92,6 +102,13 @@
   gap: 1.2rem;
   padding: 1.25rem 0.5rem;
   border-bottom: 1px solid var(--rule);
+  transition:
+    background-color var(--motion-quick),
+    transform var(--motion-place) var(--ease-lift);
+}
+.search li:hover {
+  background: rgb(255 255 255 / 32%);
+  transform: translateX(0.25rem);
 }
 .search li > span {
   text-transform: uppercase;

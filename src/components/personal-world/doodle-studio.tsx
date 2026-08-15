@@ -137,7 +137,7 @@ export function DoodleStudio({ fresh = false }: { fresh?: boolean }) {
         <div>
           <p>Doodle pad · focused paper</p>
           <h1>{id ? "Back to this scribble." : "Draw something small."}</h1>
-          <span>Mouse, finger, stylus—whatever is already in your hand.</span>
+          <span>Mouse, finger, stylus. Whatever is already in your hand.</span>
         </div>
         <Link href="/my-world/doodles">Close sketchbook</Link>
       </header>

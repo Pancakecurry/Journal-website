@@ -12,6 +12,7 @@
   padding: 1.5rem;
   background: var(--paper-warm);
   box-shadow: var(--shadow-paper);
+  border-radius: var(--radius-paper);
 }
 .shelf > header::before {
   content: "";
@@ -32,7 +33,7 @@
 }
 .shelf h1 {
   margin: 0.3rem 0;
-  font: clamp(2.8rem, 7vw, 5rem)/0.95 var(--font-editorial);
+  font: clamp(2.65rem, 5.2vw, 4.6rem)/0.96 var(--font-editorial);
 }
 .shelf header span {
   display: block;
@@ -64,6 +65,10 @@
   text-align: left;
   box-shadow: 5px 7px 0 rgb(70 52 33 / 15%);
   cursor: pointer;
+  border-radius: var(--radius-control);
+  transition:
+    transform var(--motion-place) var(--ease-lift),
+    box-shadow var(--motion-place) var(--ease-place);
 }
 .gameChoices > button::before {
   content: "";
@@ -107,6 +112,7 @@
   border: 1px solid #9a896f;
   background: linear-gradient(135deg, var(--paper-warm), var(--paper-cream));
   box-shadow: var(--shadow-paper);
+  border-radius: var(--radius-paper);
 }
 .gameIntro {
   display: flex;
@@ -133,6 +139,8 @@
   width: fit-content;
   margin: 1rem 0;
   border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  overflow: hidden;
 }
 .sizePicker button {
   display: grid;
@@ -174,6 +182,7 @@
   border: 1px solid var(--ink-900);
   background: var(--paper-cool);
   cursor: pointer;
+  border-radius: var(--radius-control);
 }
 .cardGrid {
   display: grid;
@@ -198,6 +207,7 @@
   font: 2rem var(--font-editorial);
   cursor: pointer;
   transition: transform var(--motion-place) var(--ease-place);
+  border-radius: var(--radius-control);
 }
 .cardGrid button::before {
   content: "";

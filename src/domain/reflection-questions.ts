@@ -39,7 +39,7 @@ export const REFLECTION_QUESTIONS: Record<ReflectionPeriod, readonly ReflectionQ
     {
       id: "difficult",
       prompt: "Anything kind of hard?",
-      placeholder: "You can keep this short—or skip it.",
+      placeholder: "Keep this short if you like. Or skip it.",
     },
     {
       id: "remember",

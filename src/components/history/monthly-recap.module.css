@@ -1,7 +1,13 @@
 .recap {
   min-height: 100vh;
   padding: clamp(1rem, 5vw, 4rem);
-  background: #d8c9ae;
+  background:
+    radial-gradient(
+      circle at 88% 7%,
+      color-mix(in srgb, var(--accent) 20%, transparent),
+      transparent 24rem
+    ),
+    #d8c9ae;
   color: var(--ink-900);
 }
 .recap > header,
@@ -17,17 +23,18 @@
   border: 1px solid #afa18b;
   background: var(--paper-warm);
   box-shadow: var(--shadow-paper);
+  border-radius: var(--radius-paper);
 }
 .recap header p,
 .pages p {
   font-size: 0.72rem;
   font-weight: 750;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 .recap h1 {
   margin: 0.4rem 0;
-  font: clamp(3rem, 8vw, 6.5rem)/0.9 var(--font-editorial);
+  font: clamp(2.8rem, 6vw, 5.35rem)/0.94 var(--font-editorial);
   overflow-wrap: anywhere;
 }
 .recap header a {
@@ -43,6 +50,8 @@
   margin-top: 1.5rem !important;
   border: 1px solid #afa18b;
   background: #eee5d4;
+  border-radius: var(--radius-control);
+  overflow: hidden;
 }
 .stats div {
   padding: 1.5rem;
@@ -80,6 +89,14 @@
   color: inherit;
   text-decoration: none;
   box-shadow: 2px 3px 0 #bcae96;
+  border-radius: var(--radius-control);
+  transition:
+    transform var(--motion-place) var(--ease-lift),
+    box-shadow var(--motion-place) var(--ease-place);
+}
+.pages > a:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-paper);
 }
 .pages time {
   font: 1.5rem var(--font-numeric);

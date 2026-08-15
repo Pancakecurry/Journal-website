@@ -19,7 +19,7 @@ const LABELS: Record<TrackerType, string> = {
   yes_no: "Yes / no",
   count: "Count",
   number: "Number",
-  scale: "1–5 scale",
+  scale: "1-5 scale",
   duration: "Duration (minutes)",
   short_text: "Short text",
   single_select: "One choice",
@@ -106,7 +106,7 @@ export function TrackerIndex() {
       ) : trackers.length === 0 ? (
         <div className={styles.empty}>
           <h2>Nothing tracked. Also fine.</h2>
-          <p>Make one when curiosity strikes—not because an app told you to.</p>
+          <p>Make one when curiosity strikes, not because an app told you to.</p>
         </div>
       ) : (
         <ol className={styles.list}>

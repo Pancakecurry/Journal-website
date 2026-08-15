@@ -20,7 +20,8 @@
   padding: 1.4rem;
   border: 1px solid rgb(72 57 40 / 20%);
   background: rgb(248 242 229 / 72%);
-  box-shadow: 0 14px 34px rgb(60 44 28 / 9%);
+  box-shadow: var(--shadow-paper);
+  border-radius: var(--radius-paper);
 }
 .studio header p,
 .library header p {
@@ -28,12 +29,12 @@
   color: var(--ink-700);
   font: 700 0.7rem var(--font-numeric);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.07em;
 }
 .studio h1,
 .library h1 {
   margin: 0.3rem 0;
-  font: clamp(2.6rem, 7vw, 5rem)/0.95 var(--font-editorial);
+  font: clamp(2.6rem, 5.2vw, 4.55rem)/0.96 var(--font-editorial);
 }
 .studio header span,
 .library header span {
@@ -55,6 +56,8 @@
   gap: 0.55rem;
   border: 1px solid #8f806b;
   background: var(--paper-cream);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-paper);
 }
 .tools::before {
   content: "TOOLS";
@@ -70,6 +73,7 @@
   background: var(--paper-cool);
   padding: 0.45rem 0.7rem;
   cursor: pointer;
+  border-radius: var(--radius-control);
 }
 .tools button[aria-pressed="true"] {
   background: var(--accent);
@@ -115,6 +119,7 @@
   padding: 1rem;
   border: 1px solid #a79579;
   background: var(--paper-cream);
+  border-radius: var(--radius-control);
 }
 .details label {
   display: grid;
@@ -138,6 +143,7 @@
   border: 1px solid var(--ink-900);
   background: var(--paper-warm);
   cursor: pointer;
+  border-radius: var(--radius-control);
 }
 .saveRow .save {
   background: var(--ink-900);
@@ -166,6 +172,14 @@
   box-shadow: var(--shadow-paper);
   color: inherit;
   text-decoration: none;
+  border-radius: var(--radius-paper);
+  transition:
+    transform var(--motion-place) var(--ease-lift),
+    box-shadow var(--motion-place) var(--ease-place);
+}
+.library li a:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px) rotate(-0.2deg);
 }
 .library img {
   width: 100%;

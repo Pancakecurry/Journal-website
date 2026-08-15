@@ -7,6 +7,7 @@
   padding: clamp(1rem, 4vw, 3rem);
   display: grid;
   grid-template-rows: auto 1fr auto;
+  border-radius: var(--radius-paper);
 }
 .toolbar {
   display: flex;
@@ -25,7 +26,7 @@
   color: var(--ink-500);
   font-family: var(--font-numeric);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.055em;
 }
 .toolbar button {
   border: 0;
@@ -50,7 +51,8 @@
   border: 0;
   background: transparent;
   color: var(--ink-900);
-  font: clamp(2.2rem, 5vw, 4rem)/1.05 var(--font-editorial);
+  font: clamp(2.2rem, 4.6vw, 3.75rem)/1.06 var(--font-editorial);
+  border-radius: 0;
   padding: 0 0 1.2rem;
 }
 .editor textarea {
@@ -68,6 +70,7 @@
   color: var(--ink-900);
   font: 1.18rem/2rem var(--font-reading);
   padding: 0;
+  border-radius: 0;
 }
 .reading {
   max-width: 44rem;

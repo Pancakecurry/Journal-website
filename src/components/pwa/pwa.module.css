@@ -12,6 +12,7 @@
   border: 1px solid var(--ink-900);
   background: var(--paper-warm);
   box-shadow: var(--shadow-lift);
+  border-radius: var(--radius-control);
 }
 .update div {
   display: grid;
@@ -29,6 +30,7 @@
   color: var(--paper-warm);
   padding: 0.6rem 0.85rem;
   cursor: pointer;
+  border-radius: var(--radius-control);
 }
 .update button:last-child {
   background: transparent;
@@ -37,19 +39,21 @@
 .page {
   min-height: 100vh;
   padding: clamp(1.2rem, 4vw, 4rem);
-  background: var(--paper-warm);
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 34rem),
+    var(--paper-warm);
 }
 .page > header {
   max-width: 52rem;
 }
 .page header > p {
   font: 700 0.68rem var(--font-ui);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 .page h1 {
   margin: 0.6rem 0;
-  font: clamp(2.2rem, 6vw, 4.8rem)/0.96 var(--font-editorial);
+  font: clamp(2.5rem, 5.2vw, 4.4rem)/0.96 var(--font-editorial);
 }
 .page header span,
 .page article span {
@@ -65,6 +69,7 @@
   border: 1px solid rgb(49 44 37 / 20%);
   background: white;
   box-shadow: 0.8rem 0.8rem 0 color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: var(--radius-paper);
 }
 .iconPreview img {
   width: 100%;
@@ -76,6 +81,7 @@
   background: var(--ink-900);
   color: white;
   padding: 0.8rem 1rem;
+  border-radius: var(--radius-control);
 }
 .storageGrid {
   display: grid;
@@ -84,6 +90,8 @@
   margin: 3rem 0 2rem;
   background: rgb(49 44 37 / 18%);
   border: 1px solid rgb(49 44 37 / 18%);
+  border-radius: var(--radius-control);
+  overflow: hidden;
 }
 .storageGrid article {
   display: grid;

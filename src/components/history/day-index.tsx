@@ -51,7 +51,7 @@ export function DayIndex() {
         <div>
           <p>Calendar · notebook</p>
           <h1>When was that again?</h1>
-          <span>Marks mean something lives there—not that you won the day.</span>
+          <span>Marks mean something lives there. They are not a score.</span>
         </div>
         <Link href={`/calendar/${cursor}/recap`}>Open monthly recap</Link>
       </header>

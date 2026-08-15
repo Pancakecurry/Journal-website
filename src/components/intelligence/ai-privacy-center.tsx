@@ -18,7 +18,7 @@ const scopeCopy: { kind: AiSourceKind; title: string; detail: string }[] = [
   {
     kind: "photo_caption",
     title: "Photo captions",
-    detail: "Caption text only—never the photograph",
+    detail: "Caption text only. Never the photograph.",
   },
   { kind: "tracker", title: "Tracker notes", detail: "Names, text values, and notes where useful" },
   {
@@ -230,7 +230,7 @@ export function AiPrivacyCenter() {
           )}
           {!providerStatus?.available ? (
             <p>
-              Server keys and private identity are not configured. That’s fine—journaling stays
+              Server keys and private identity are not configured. That’s fine. Journaling stays
               fully available.
             </p>
           ) : null}

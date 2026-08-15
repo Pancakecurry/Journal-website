@@ -13,7 +13,7 @@ import { PinnedTrackers } from "@/components/trackers/pinned-trackers";
 const MOODS = [
   ["bright", "Great", "☀"],
   ["good", "Pretty good", "◡"],
-  ["okay", "Okay-ish", "—"],
+  ["okay", "Okay-ish", "·"],
   ["off", "A bit off", "∿"],
   ["rough", "Rough", "☂"],
 ] as const;
@@ -74,7 +74,7 @@ export function TodayExperience() {
 
   async function setMood(value: (typeof MOODS)[number][0]) {
     await repository.setMood({ ...context, userId: LOCAL_FOUNDATION_USER_ID, mood: value });
-    setStatus("Mood noted. That's it—no score attached.");
+    setStatus("Mood noted. That's it. No score attached.");
     await load();
   }
 
@@ -185,7 +185,7 @@ export function TodayExperience() {
           ) : contentMoments.length === 0 ? (
             <div className={styles.empty}>
               <strong>Nothing here yet. Totally legal.</strong>
-              <p>{"Add one line, a photo, a whole journal entry—or don't."}</p>
+              <p>{"Add one line, a photo, a whole journal entry. Or don't."}</p>
               <button onClick={() => setCaptureOpen(true)}>Add the first thing</button>
             </div>
           ) : (

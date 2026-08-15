@@ -5,7 +5,12 @@
   padding: clamp(1rem, 5vw, 4rem);
   background:
     linear-gradient(90deg, transparent 49.8%, rgb(52 47 40 / 7%) 50%, transparent 50.2%),
-    var(--desk-surface);
+    radial-gradient(
+      circle at 82% 10%,
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 24rem
+    ),
+    var(--desk-oak);
 }
 .paper {
   width: min(100%, 34rem);
@@ -15,16 +20,17 @@
   box-shadow:
     0.75rem 0.9rem 0 rgb(91 111 130 / 14%),
     var(--shadow-lift);
+  border-radius: var(--radius-paper);
 }
 .eyebrow {
   font: 700 0.68rem var(--font-ui);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
 }
 .paper h1 {
   max-width: 11ch;
   margin: 0.7rem 0 1rem;
-  font: clamp(2.2rem, 7vw, 4.6rem)/0.95 var(--font-editorial);
+  font: clamp(2.4rem, 5.5vw, 4.25rem)/0.96 var(--font-editorial);
 }
 .paper > p {
   color: var(--ink-700);
@@ -49,6 +55,7 @@
   padding: 0.7rem 0.8rem;
   color: var(--ink-900);
   font: inherit;
+  border-radius: var(--radius-control) var(--radius-control) 0 0;
 }
 .primary {
   display: grid;
@@ -61,6 +68,7 @@
   font: 750 0.86rem var(--font-ui);
   text-decoration: none;
   cursor: pointer;
+  border-radius: var(--radius-control);
 }
 .primary:disabled {
   opacity: 0.62;

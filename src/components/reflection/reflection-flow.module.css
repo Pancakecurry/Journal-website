@@ -1,7 +1,13 @@
 .backdrop {
   min-height: 100%;
   padding: clamp(1rem, 5vw, 4rem);
-  background: var(--desk-oak);
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 24rem
+    ),
+    var(--desk-oak);
   display: grid;
   place-items: center;
 }
@@ -13,6 +19,7 @@
   padding: clamp(1.2rem, 5vw, 3.5rem);
   display: grid;
   grid-template-rows: auto auto 1fr auto;
+  border-radius: var(--radius-paper);
 }
 .paper header {
   display: flex;
@@ -24,7 +31,7 @@
 .paper header span {
   font-family: var(--font-numeric);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.055em;
 }
 .progress {
   display: flex;
@@ -53,7 +60,7 @@
   text-transform: uppercase;
 }
 .paper h1 {
-  font: clamp(2.3rem, 6vw, 4.3rem)/1.03 var(--font-editorial);
+  font: clamp(2.35rem, 5.2vw, 4rem)/1.03 var(--font-editorial);
   letter-spacing: -0.025em;
   margin: 0.75rem 0 2rem;
 }
@@ -72,6 +79,7 @@
   padding: 0;
   min-height: 14rem;
   color: var(--ink-900);
+  border-radius: 0;
 }
 .actions {
   display: flex;

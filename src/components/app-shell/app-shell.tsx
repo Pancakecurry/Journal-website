@@ -12,11 +12,11 @@ import { WelcomeBack } from "./welcome-back";
 import styles from "./app-shell.module.css";
 
 const destinations = [
-  ["Today", "/today", "01"],
-  ["Calendar", "/calendar", "02"],
-  ["Journal", "/journal", "03"],
-  ["My World", "/my-world", "04"],
-  ["Me", "/me", "05"],
+  ["Today", "/today"],
+  ["Calendar", "/calendar"],
+  ["Journal", "/journal"],
+  ["My World", "/my-world"],
+  ["Me", "/me"],
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -36,14 +36,13 @@ export function AppShell({ children }: { children: ReactNode }) {
             <small>private journal</small>
           </Link>
           <nav className={styles.nav} aria-label="Primary">
-            {destinations.map(([label, href, index]) => (
+            {destinations.map(([label, href]) => (
               <Link
                 key={href}
                 className={`${styles.navLink} ${pathname.startsWith(href) ? styles.navLinkActive : ""}`}
                 href={href}
                 aria-current={pathname.startsWith(href) ? "page" : undefined}
               >
-                <small aria-hidden="true">{index}</small>
                 <span>{label}</span>
                 {pathname.startsWith(href) ? (
                   <motion.i
@@ -56,7 +55,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </nav>
           {pathname.startsWith("/journal/") || pathname.startsWith("/reflection/") ? null : (
             <Link className={styles.search} href="/search" aria-label="Search your journal">
-              <span aria-hidden="true">⌕</span> <b>Search your journal</b>
+              <span aria-hidden="true">⌕</span> <b>Find something</b>
             </Link>
           )}
           <Link className={styles.add} href="/today#quick-capture">
@@ -73,9 +72,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           className={styles.content}
           id="main-content"
           tabIndex={-1}
-          initial={{ y: 12, scale: 0.996 }}
+          initial={{ y: 14, scale: 0.998 }}
           animate={{ y: 0, scale: 1 }}
-          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
         >
           {children}
         </motion.main>

@@ -22,9 +22,9 @@
   gap: 3rem;
   align-items: end;
   padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid rgb(66 53 38 / 24%);
+  border: var(--border-hairline);
   background: rgb(247 240 225 / 68%);
-  box-shadow: 0 18px 40px rgb(65 48 30 / 10%);
+  box-shadow: var(--shadow-paper);
 }
 .world > header aside {
   padding-bottom: 0.2rem;
@@ -35,7 +35,7 @@
   margin: 0 0 0.6rem;
   color: var(--ink-700);
   font: 700 0.72rem var(--font-numeric);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
 }
 .world h1,
@@ -43,8 +43,8 @@
 .archive h1 {
   max-width: 13ch;
   margin: 0.2rem 0 0.75rem;
-  font: clamp(2.7rem, 7vw, 5.6rem)/0.92 var(--font-editorial);
-  letter-spacing: -0.045em;
+  font: clamp(2.7rem, 5.6vw, 4.9rem)/0.94 var(--font-editorial);
+  letter-spacing: -0.04em;
   overflow-wrap: anywhere;
 }
 .world header aside > span,
@@ -89,7 +89,9 @@
   border: 1px solid rgb(66 53 38 / 25%);
   overflow: hidden;
   background: linear-gradient(90deg, rgb(255 255 255 / 8%), transparent 40%), #b79c7b;
-  box-shadow: inset 0 0 50px rgb(60 45 27 / 10%);
+  box-shadow:
+    inset 0 0 50px rgb(60 45 27 / 10%),
+    var(--shadow-lift);
 }
 .deskScene::after {
   content: "";
@@ -265,6 +267,7 @@
 }
 .deskScene a:hover,
 .deskScene a:focus-visible {
+  z-index: 5;
   transform: translateY(-3px);
   box-shadow: var(--shadow-lift);
 }
@@ -439,7 +442,13 @@
   min-height: 100vh;
   display: grid;
   place-items: center;
-  background: var(--desk-oak);
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--accent) 16%, transparent),
+      transparent 22rem
+    ),
+    var(--desk-oak);
 }
 
 .preferences {
@@ -463,22 +472,22 @@
   align-items: end;
   margin-bottom: 2rem;
   padding: clamp(1.5rem, 4vw, 3.2rem);
-  border: 1px solid #aa9a80;
+  border: var(--border-hairline);
   background: rgb(245 238 225 / 72%);
-  box-shadow: 0 20px 50px rgb(65 49 31 / 10%);
+  box-shadow: var(--shadow-paper);
 }
 .preferences > header p {
   margin: 0 0 0.8rem;
   color: var(--ink-500);
   font: 700 0.7rem var(--font-numeric);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
 }
 .preferences > header h1 {
   max-width: 12ch;
   margin: 0;
-  font: 500 clamp(2.6rem, 6vw, 5.3rem)/0.92 var(--font-editorial);
-  letter-spacing: -0.055em;
+  font: 500 clamp(2.65rem, 5.2vw, 4.75rem)/0.95 var(--font-editorial);
+  letter-spacing: -0.04em;
 }
 .preferences > header > span {
   padding-bottom: 0.3rem;
@@ -497,7 +506,8 @@
   padding: 1rem;
   border: 1px solid #9e8c73;
   background: #bca486;
-  box-shadow: 0 22px 45px rgb(65 47 29 / 16%);
+  box-shadow: var(--shadow-lift);
+  border-radius: var(--radius-paper);
 }
 .previewDesk {
   position: relative;
@@ -648,7 +658,8 @@
   padding: 1.45rem;
   border: 1px solid #aa9d87;
   background: var(--paper-warm);
-  box-shadow: 0 10px 24px rgb(65 49 31 / 7%);
+  box-shadow: var(--shadow-paper);
+  border-radius: var(--radius-paper);
 }
 .choices legend,
 .memorySettings legend {
@@ -678,6 +689,7 @@
   border: 1px solid var(--rule);
   background: var(--paper-cool);
   cursor: pointer;
+  border-radius: var(--radius-control);
   transition:
     transform 180ms var(--ease-place),
     box-shadow 180ms,
@@ -765,6 +777,7 @@
   padding: 0.9rem;
   border: 1px solid var(--rule);
   background: var(--paper-cool);
+  border-radius: var(--radius-control);
 }
 .memorySettings label b,
 .memorySettings label small {
@@ -801,6 +814,7 @@
   padding: 1rem;
   border: 1px solid #aa9d87;
   background: rgb(245 238 225 / 82%);
+  border-radius: var(--radius-control);
 }
 .preferenceActions > p {
   margin: 0;
@@ -816,6 +830,7 @@
   border: 1px solid var(--ink-900);
   background: var(--paper-warm);
   cursor: pointer;
+  border-radius: var(--radius-control);
 }
 .preferenceActions .primary {
   background: var(--ink-900);

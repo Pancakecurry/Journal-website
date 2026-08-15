@@ -1,0 +1,255 @@
+.exportPage,
+.dataPage {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+  padding: clamp(1.2rem, 4vw, 4rem);
+  color: var(--ink-900);
+}
+.exportPage > header,
+.dataPage > header {
+  position: relative;
+  padding: clamp(2rem, 7vw, 5.5rem);
+  overflow: hidden;
+  border: 1px solid var(--rule-strong);
+  background: linear-gradient(
+    135deg,
+    var(--paper-cream) 0 64%,
+    color-mix(in srgb, var(--accent) 22%, var(--paper-warm)) 64%
+  );
+}
+.exportPage > header::after {
+  content: "PRIVATE COPY";
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  padding: 0.5rem 0.7rem;
+  rotate: -4deg;
+  border: 2px solid color-mix(in srgb, var(--accent) 70%, var(--ink-900));
+  color: color-mix(in srgb, var(--accent) 60%, var(--ink-900));
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+.exportPage header > p,
+.dataPage header > p,
+.dataPage section > div > p {
+  margin: 0 0 0.8rem;
+  color: var(--ink-500);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.exportPage h1,
+.dataPage h1 {
+  max-width: 13ch;
+  margin: 0;
+  font: 500 clamp(2.4rem, 6vw, 5.6rem)/0.94 var(--font-editorial);
+  letter-spacing: -0.05em;
+}
+.exportPage header > span,
+.dataPage header > span {
+  display: block;
+  max-width: 36rem;
+  margin-top: 1.3rem;
+  color: var(--ink-700);
+  line-height: 1.6;
+}
+.exportShelf {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+  align-items: stretch;
+}
+.exportShelf article {
+  display: flex;
+  flex-direction: column;
+  min-height: 20rem;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+  background: var(--paper-cool);
+  box-shadow: 0 12px 28px rgb(53 43 34 / 7%);
+}
+.exportShelf article[data-featured="true"] {
+  color: var(--paper-cool);
+  background: color-mix(in srgb, var(--ink-900) 93%, var(--accent));
+  transform: translateY(-0.35rem);
+}
+.exportShelf article > span {
+  color: var(--ink-700);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+.exportShelf h2 {
+  max-width: 10ch;
+  margin: 3rem 0 0.7rem;
+  font: 520 1.8rem/1 var(--font-editorial);
+}
+.exportShelf p {
+  margin: 0 0 1.5rem;
+  color: var(--ink-700);
+  line-height: 1.55;
+}
+.exportShelf article[data-featured="true"] p {
+  color: rgb(255 255 255 / 86%);
+}
+.exportShelf article[data-featured="true"] > span {
+  color: color-mix(in srgb, var(--accent) 55%, white);
+}
+.exportShelf button {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 3rem;
+  margin-top: auto;
+  padding: 0.8rem;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+.exportShelf button:hover:not(:disabled) i {
+  transform: translate(3px, 3px);
+}
+.exportShelf button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.exportShelf i {
+  font-style: normal;
+  transition: transform 180ms var(--ease-place);
+}
+.progress {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-left: 4px solid var(--accent);
+  background: var(--paper-warm);
+}
+.progress > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.progress progress {
+  width: 100%;
+  margin: 0.8rem 0;
+  accent-color: var(--accent);
+}
+.progress button {
+  min-height: 2.75rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+}
+.message {
+  min-height: 1.5rem;
+  color: var(--ink-600);
+}
+.exportNote {
+  max-width: 45rem;
+  margin: 3rem 0 0 auto;
+  padding: 1.5rem;
+  border-top: 1px solid var(--rule-strong);
+}
+.exportNote p {
+  margin: 0.5rem 0 0;
+  color: var(--ink-600);
+  line-height: 1.65;
+}
+.links {
+  display: flex;
+  gap: 1.4rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.dataPage > section {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.dataPage section > div {
+  padding: clamp(1.3rem, 3vw, 2.2rem);
+  border: 1px solid var(--rule);
+  background: var(--paper-cool);
+}
+.dataPage h2 {
+  margin: 0.4rem 0 0.8rem;
+  font: 520 1.8rem var(--font-editorial);
+}
+.dataPage section span {
+  display: block;
+  color: var(--ink-600);
+  line-height: 1.65;
+}
+.dataPage section a {
+  display: inline-block;
+  margin-top: 1.4rem;
+  color: inherit;
+  font-weight: 750;
+}
+.dataPage .deleteCard {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--rule));
+  background: color-mix(in srgb, var(--danger) 5%, var(--paper-warm));
+}
+.deleteCard label {
+  display: block;
+  margin-top: 1.7rem;
+  line-height: 1.5;
+}
+.deleteCard input {
+  width: 100%;
+  min-height: 3rem;
+  margin-top: 0.6rem;
+  padding: 0.7rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-cool);
+  color: inherit;
+  font: inherit;
+}
+.deleteCard button {
+  min-height: 3rem;
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--danger);
+  background: var(--danger);
+  color: white;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+.deleteCard button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+@media (max-width: 760px) {
+  .exportPage,
+  .dataPage {
+    padding: 0.8rem;
+  }
+  .exportShelf,
+  .dataPage > section {
+    grid-template-columns: 1fr;
+  }
+  .exportShelf article {
+    min-height: 15rem;
+  }
+  .exportShelf article[data-featured="true"] {
+    transform: none;
+  }
+  .exportPage > header::after {
+    position: static;
+    display: inline-block;
+    margin-top: 2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exportShelf i {
+    transition: none;
+  }
+}

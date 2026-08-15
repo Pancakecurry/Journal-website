@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { EntityIdSchema, IsoTimestampSchema, SyncStateSchema } from "@/domain/shared";
+import { AiContentScopesSchema, DEFAULT_AI_SCOPES } from "@/domain/intelligence";
 
 export const AccentSchema = z.enum([
   "powder",
@@ -24,6 +25,9 @@ export const UserPreferencesSchema = z.object({
   reducedMotionOverride: z.enum(["system", "reduce", "full"]),
   memoryResurfacingEnabled: z.boolean().default(true),
   memoryRangeYears: z.number().int().min(1).max(10).default(5),
+  aiEnabled: z.boolean().default(false),
+  aiExternalProcessingConsent: z.boolean().default(false),
+  aiContentScopes: AiContentScopesSchema.default(DEFAULT_AI_SCOPES),
   createdAt: IsoTimestampSchema,
   updatedAt: IsoTimestampSchema,
   version: z.number().int().nonnegative().default(0),

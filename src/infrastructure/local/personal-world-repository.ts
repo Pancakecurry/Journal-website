@@ -29,6 +29,17 @@ export const DEFAULT_PREFERENCES = {
   reducedMotionOverride: "system",
   memoryResurfacingEnabled: true,
   memoryRangeYears: 5,
+  aiEnabled: false,
+  aiExternalProcessingConsent: false,
+  aiContentScopes: {
+    moment: false,
+    journal: false,
+    reflection: false,
+    photo_caption: false,
+    tracker: false,
+    monthly_reflection: false,
+    doodle: false,
+  },
 } as const;
 
 export class LocalPersonalWorldRepository {
@@ -61,6 +72,9 @@ export class LocalPersonalWorldRepository {
         | "reducedMotionOverride"
         | "memoryResurfacingEnabled"
         | "memoryRangeYears"
+        | "aiEnabled"
+        | "aiExternalProcessingConsent"
+        | "aiContentScopes"
       >
     >,
   ): Promise<UserPreferences> {

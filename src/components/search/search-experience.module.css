@@ -42,6 +42,45 @@
   color: var(--ink-700);
   font-size: 0.85rem;
 }
+.researchNote {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+  margin: 1.2rem 0 2rem;
+  padding: 1.1rem 1.3rem;
+  border-left: 4px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--paper-cool));
+}
+.researchNote span,
+.researchNote b {
+  display: block;
+}
+.researchNote span {
+  margin-bottom: 0.25rem;
+  color: var(--ink-500);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.researchNote a {
+  display: flex;
+  gap: 1.2rem;
+  color: inherit;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.researchNote i {
+  font-style: normal;
+}
+@media (max-width: 600px) {
+  .researchNote {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
 .search ol {
   margin: 2rem 0;
   padding: 0;

@@ -82,7 +82,7 @@ describe("LocalJournalRepository", () => {
     const migrated = new JournalDatabase(name);
     await migrated.open();
     const moment = await migrated.moments.get("bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb");
-    expect(migrated.verno).toBe(5);
+    expect(migrated.verno).toBe(6);
     expect(moment?.content).toEqual({ kind: "text", text: "Legacy note" });
     expect(moment?.syncState).toBe("pending");
     expect(moment?.occurredAt).toBe("2026-08-12T08:05:00.000Z");

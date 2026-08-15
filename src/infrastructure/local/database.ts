@@ -17,6 +17,7 @@ import type {
   TrackerEntry,
 } from "@/domain/history";
 import type { Doodle, HiddenMemory, Keepsake } from "@/domain/personal-world";
+import type { SemanticChunk, SemanticIndexState } from "@/domain/intelligence";
 
 export class JournalDatabase extends Dexie {
   days!: EntityTable<Day, "id">;
@@ -38,6 +39,8 @@ export class JournalDatabase extends Dexie {
   keepsakes!: EntityTable<Keepsake, "id">;
   doodles!: EntityTable<Doodle, "id">;
   hiddenMemories!: EntityTable<HiddenMemory, "id">;
+  semanticChunks!: EntityTable<SemanticChunk, "id">;
+  semanticIndexState!: EntityTable<SemanticIndexState, "userId">;
 
   constructor(name = "campus-atelier-journal") {
     super(name);
@@ -150,6 +153,52 @@ export class JournalDatabase extends Dexie {
             preference.memoryResurfacingEnabled ??= true;
             preference.memoryRangeYears ??= 5;
             preference.version ??= 0;
+          });
+      });
+
+    this.version(6)
+      .stores({
+        days: "id,[userId+localDate],userId,updatedAt,syncState",
+        moments: "id,[userId+dayId],dayId,userId,occurredAt,syncState",
+        journalEntries: "id,[userId+dayId],dayId,userId,updatedAt,syncState",
+        media: "id,[userId+dayId],dayId,userId,status,updatedAt,syncState",
+        reflections: "id,[userId+dayId],[userId+dayId+period],dayId,userId,updatedAt,syncState",
+        preferences: "userId,updatedAt,syncState",
+        outbox: "operationId,status,entityType,createdAt,nextAttemptAt",
+        syncMeta: "userId",
+        daySummaries: "id,[userId+localDate],userId,updatedAt",
+        journalSummaries: "id,[userId+updatedAt],[userId+localDate],userId,dayId,bookmarked",
+        searchDocuments: "id,[userId+localDate],[userId+kind],userId,entityId,updatedAt",
+        searchTerms: "id,[userId+token],documentId",
+        bookmarks: "id,[userId+journalEntryId],userId,createdAt",
+        trackerDefinitions: "id,[userId+name],userId,pinned,archivedAt,updatedAt",
+        trackerEntries:
+          "id,[userId+trackerId+localDate],[userId+localDate],userId,trackerId,dayId,updatedAt",
+        monthlyReflections: "id,[userId+month],userId,updatedAt",
+        keepsakes:
+          "id,[userId+createdAt],[userId+sourceType],[userId+sourceId],userId,dayId,deletedAt",
+        doodles: "id,[userId+localDate],[userId+updatedAt],userId,dayId,deletedAt",
+        hiddenMemories: "id,[userId+entityId],[userId+dayId],userId,deletedAt",
+        semanticChunks:
+          "id,[userId+sourceKind],[userId+sourceId],userId,sourceId,sourceUpdatedAt,indexedAt",
+        semanticIndexState: "userId,status,lastIndexedAt",
+      })
+      .upgrade(async (transaction) => {
+        await transaction
+          .table<UserPreferences, string>("preferences")
+          .toCollection()
+          .modify((preference) => {
+            preference.aiEnabled ??= false;
+            preference.aiExternalProcessingConsent ??= false;
+            preference.aiContentScopes ??= {
+              moment: false,
+              journal: false,
+              reflection: false,
+              photo_caption: false,
+              tracker: false,
+              monthly_reflection: false,
+              doodle: false,
+            };
           });
       });
   }

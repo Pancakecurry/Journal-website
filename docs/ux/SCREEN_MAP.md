@@ -68,10 +68,11 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
   - Authored history and accumulated objects
 - Customization
 - Keepsakes
-- Mini-games _(future)_
-  - Doodle/sketchbook
-  - Tiny garden, memory cards, fishing, or desk toys as later possibilities
-  - Meaningful artifacts attachable to days where appropriate
+- Doodle library and new/reopened doodle
+- Desk-break drawer
+  - Memory Flip
+  - Tiny Fishing
+- Same-date memory card and suppression controls
 
 ## Me
 

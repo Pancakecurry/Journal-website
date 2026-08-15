@@ -49,6 +49,10 @@ Honor system and in-product reduced-motion settings as described in [Motion Lang
 
 User-selected colors, textures, accumulated objects, and future customization must remain within accessible constraints. Offer safe defaults and prevent personalization from hiding navigation, reducing essential contrast, or overwhelming focused Paper modes.
 
+Personalization choices use text labels, pressed states, and a live preview that is not the only indication of selection. Paper patterns and accents never carry meaning alone. A reduced-motion choice can request stillness but cannot force motion against an operating-system preference.
+
+My World objects remain semantic links in a readable source order even when the desktop composition becomes spatial. Doodle controls use native buttons, labels, Pointer Events, and keyboard-operable undo/redo; saved previews have authored fallback descriptions. Games use buttons rather than gesture-only controls, contain errors, keep sound off, and clean up timers. Resurfaced memories include plain-language source links and separate item/Day suppression buttons.
+
 ## Verification expectation
 
 Future feature tasks should define applicable accessibility acceptance criteria, add automated checks where valuable, and include manual verification for interactions automation cannot establish. Any unverified requirement must be disclosed.

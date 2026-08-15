@@ -1,0 +1,13 @@
+begin;
+select plan(9);
+select has_table('public', 'keepsakes', 'keepsakes exists');
+select has_table('public', 'doodles', 'doodles exists');
+select has_table('public', 'hidden_memories', 'hidden memories exists');
+select policies_are('public', 'keepsakes', array['keepsakes_owner_all'], 'keepsakes has owner policy');
+select policies_are('public', 'doodles', array['doodles_owner_all'], 'doodles have owner policy');
+select policies_are('public', 'hidden_memories', array['hidden_memories_owner_all'], 'hidden memories have owner policy');
+select col_not_null('public', 'user_preferences', 'paper', 'paper preference is required');
+select col_not_null('public', 'user_preferences', 'memory_resurfacing_enabled', 'resurfacing preference is required');
+select col_not_null('public', 'doodles', 'strokes', 'editable stroke data is required');
+select * from finish();
+rollback;

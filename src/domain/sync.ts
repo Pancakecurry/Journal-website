@@ -12,6 +12,9 @@ export const SyncEntitySchema = z.enum([
   "tracker_definition",
   "tracker_entry",
   "monthly_reflection",
+  "keepsake",
+  "doodle",
+  "hidden_memory",
 ]);
 export const SyncActionSchema = z.enum(["upsert", "delete"]);
 export const OutboxStatusSchema = z.enum(["pending", "syncing", "failed", "conflict"]);

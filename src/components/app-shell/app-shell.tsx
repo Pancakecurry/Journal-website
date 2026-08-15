@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { motion } from "motion/react";
 import { NetworkStatus } from "./network-status";
 import styles from "./app-shell.module.css";
 
@@ -52,9 +53,17 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div className={styles.status}>Remote sync not configured</div>
           </div>
         </aside>
-        <main className={styles.content} id="main-content" tabIndex={-1}>
+        <motion.main
+          key={pathname}
+          className={styles.content}
+          id="main-content"
+          tabIndex={-1}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
+        >
           {children}
-        </main>
+        </motion.main>
       </div>
     </>
   );

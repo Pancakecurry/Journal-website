@@ -79,7 +79,7 @@
 }
 
 .navLinkActive {
-  border-left-color: var(--coral);
+  border-left-color: var(--accent);
   background: var(--paper-warm);
   color: var(--ink-900);
   box-shadow: 0 2px 8px rgb(56 45 32 / 9%);
@@ -150,6 +150,7 @@
 
 .content {
   min-width: 0;
+  width: 100%;
 }
 
 @media (max-width: 800px) {
@@ -201,7 +202,7 @@
   }
 
   .navLinkActive {
-    border-top-color: var(--coral);
+    border-top-color: var(--accent);
     box-shadow: none;
   }
 

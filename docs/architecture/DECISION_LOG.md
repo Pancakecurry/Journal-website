@@ -67,6 +67,7 @@ How will the decision be validated, reviewed, or revisited?
 - [ADR-008: Testing and continuous verification](adr/008-testing-and-ci.md)
 - [ADR-009: Deployment and future packaging](adr/009-deployment-and-packaging.md)
 - [ADR-010: Derived local history indexes](adr/010-derived-local-history-indexes.md)
+- [ADR-011: Personal-world references and structured doodles](adr/011-personal-world-references-and-doodles.md)
 
 ## Decision criteria used in Phase 1
 

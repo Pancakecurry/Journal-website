@@ -24,6 +24,7 @@ const emptyBundle: DayWithMoments = {
   journals: [],
   media: [],
   reflections: [],
+  doodles: [],
 };
 
 export function TodayExperience() {
@@ -69,6 +70,7 @@ export function TodayExperience() {
   const contentMoments = bundle.moments.filter((item) => item.content.kind !== "mood");
   const mediaById = new Map(bundle.media.map((item) => [item.id, item]));
   const journalsById = new Map(bundle.journals.map((item) => [item.id, item]));
+  const doodlesById = new Map(bundle.doodles.map((item) => [item.id, item]));
 
   async function setMood(value: (typeof MOODS)[number][0]) {
     await repository.setMood({ ...context, userId: LOCAL_FOUNDATION_USER_ID, mood: value });
@@ -247,6 +249,26 @@ export function TodayExperience() {
                       <Link href={`/journal/${entry.id}`}>
                         {entry.body ? "Read / edit" : "Start writing"}
                       </Link>
+                    </li>
+                  );
+                }
+                if (moment.content.kind === "doodle") {
+                  const doodle = doodlesById.get(moment.content.doodleId);
+                  if (!doodle) return null;
+                  return (
+                    <li key={moment.id} className={styles.doodle}>
+                      <time>{time}</time>
+                      <p className={styles.sectionMark}>Doodle pad</p>
+                      {doodle.previewDataUrl ? (
+                        // Generated locally from structured strokes; never sent to an optimizer.
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={doodle.previewDataUrl}
+                          alt={doodle.description || doodle.title || "Saved doodle"}
+                        />
+                      ) : null}
+                      <h3>{doodle.title || "Untitled doodle"}</h3>
+                      <Link href={`/my-world/doodles/${doodle.id}`}>Open sketchbook</Link>
                     </li>
                   );
                 }

@@ -91,9 +91,11 @@ test("reflection is gradual, skippable, and retains partial answers", async ({ p
   await expect(page.getByText("1 of 5")).toBeVisible();
   await page.getByLabel("Your answer").fill("The walk home.");
   await page.getByRole("button", { name: "Save & next" }).click();
+  await expect(page.getByText("2 of 5")).toBeVisible();
   await page.getByRole("button", { name: "Skip this one" }).click();
   await expect(page.getByText("3 of 5")).toBeVisible();
   await page.getByRole("link", { name: "← Leave for now" }).click();
+  await expect(page).toHaveURL(/\/today$/);
   await page.goto(`/reflection/evening?date=${today()}`);
   await expect(page.getByText("3 of 5")).toBeVisible();
 });

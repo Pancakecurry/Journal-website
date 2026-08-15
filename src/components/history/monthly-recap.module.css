@@ -28,6 +28,7 @@
 .recap h1 {
   margin: 0.4rem 0;
   font: clamp(3rem, 8vw, 6.5rem)/0.9 var(--font-editorial);
+  overflow-wrap: anywhere;
 }
 .recap header a {
   position: absolute;
@@ -124,7 +125,18 @@
 }
 @media (max-width: 700px) {
   .recap {
-    padding-bottom: 7rem;
+    padding: 0.75rem 0.75rem 7rem;
+  }
+  .recap > header,
+  .recap > section,
+  .recap > footer {
+    min-width: 0;
+  }
+  .recap > header {
+    padding: 1.2rem;
+  }
+  .recap h1 {
+    font-size: clamp(2.8rem, 18vw, 4.6rem);
   }
   .recap header a {
     position: static;

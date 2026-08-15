@@ -64,7 +64,7 @@ Search is a near-global utility, not a sixth primary product area. It searches l
 
 ## My World
 
-My World is the most expressive accumulated personal space. It may eventually include covers, dividers, bookmarks, photos, keepsakes, stationery, plants, doodles, subtle desk objects, and small games.
+My World is the most expressive accumulated personal space. It currently uses notebook identity, Days, photo counts, keepsakes, trackers, doodles, and two tucked-away desk games to form a useful desk composition.
 
 Personality emerges through actual use and authorship:
 
@@ -74,7 +74,7 @@ Personality emerges through actual use and authorship:
 - Month 3: meaningful bookmarks, photographs, and organization
 - Month 6: clearly inhabited by this person
 
-This progression reflects content and choices, not purchased or gamified unlocks. Mini-games are post-MVP, live inside My World, and should create journal artifacts when appropriate.
+This progression reflects content and choices, not purchased or gamified unlocks. Mini-games live inside My World, remain isolated from journal data, and create artifacts only when a future game genuinely benefits from it.
 
 ## Cross-cutting state model
 

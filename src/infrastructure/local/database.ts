@@ -16,6 +16,7 @@ import type {
   TrackerDefinition,
   TrackerEntry,
 } from "@/domain/history";
+import type { Doodle, HiddenMemory, Keepsake } from "@/domain/personal-world";
 
 export class JournalDatabase extends Dexie {
   days!: EntityTable<Day, "id">;
@@ -34,6 +35,9 @@ export class JournalDatabase extends Dexie {
   trackerDefinitions!: EntityTable<TrackerDefinition, "id">;
   trackerEntries!: EntityTable<TrackerEntry, "id">;
   monthlyReflections!: EntityTable<MonthlyReflection, "id">;
+  keepsakes!: EntityTable<Keepsake, "id">;
+  doodles!: EntityTable<Doodle, "id">;
+  hiddenMemories!: EntityTable<HiddenMemory, "id">;
 
   constructor(name = "campus-atelier-journal") {
     super(name);
@@ -110,6 +114,44 @@ export class JournalDatabase extends Dexie {
         "id,[userId+trackerId+localDate],[userId+localDate],userId,trackerId,dayId,updatedAt",
       monthlyReflections: "id,[userId+month],userId,updatedAt",
     });
+
+    this.version(5)
+      .stores({
+        days: "id,[userId+localDate],userId,updatedAt,syncState",
+        moments: "id,[userId+dayId],dayId,userId,occurredAt,syncState",
+        journalEntries: "id,[userId+dayId],dayId,userId,updatedAt,syncState",
+        media: "id,[userId+dayId],dayId,userId,status,updatedAt,syncState",
+        reflections: "id,[userId+dayId],[userId+dayId+period],dayId,userId,updatedAt,syncState",
+        preferences: "userId,updatedAt,syncState",
+        outbox: "operationId,status,entityType,createdAt,nextAttemptAt",
+        syncMeta: "userId",
+        daySummaries: "id,[userId+localDate],userId,updatedAt",
+        journalSummaries: "id,[userId+updatedAt],[userId+localDate],userId,dayId,bookmarked",
+        searchDocuments: "id,[userId+localDate],[userId+kind],userId,entityId,updatedAt",
+        searchTerms: "id,[userId+token],documentId",
+        bookmarks: "id,[userId+journalEntryId],userId,createdAt",
+        trackerDefinitions: "id,[userId+name],userId,pinned,archivedAt,updatedAt",
+        trackerEntries:
+          "id,[userId+trackerId+localDate],[userId+localDate],userId,trackerId,dayId,updatedAt",
+        monthlyReflections: "id,[userId+month],userId,updatedAt",
+        keepsakes:
+          "id,[userId+createdAt],[userId+sourceType],[userId+sourceId],userId,dayId,deletedAt",
+        doodles: "id,[userId+localDate],[userId+updatedAt],userId,dayId,deletedAt",
+        hiddenMemories: "id,[userId+entityId],[userId+dayId],userId,deletedAt",
+      })
+      .upgrade(async (transaction) => {
+        await transaction
+          .table<UserPreferences, string>("preferences")
+          .toCollection()
+          .modify((preference) => {
+            preference.paper ??= "clean";
+            preference.notebookCover ??= "canvas";
+            preference.environmentDensity ??= "standard";
+            preference.memoryResurfacingEnabled ??= true;
+            preference.memoryRangeYears ??= 5;
+            preference.version ??= 0;
+          });
+      });
   }
 }
 

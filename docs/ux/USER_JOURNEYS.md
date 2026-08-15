@@ -95,6 +95,23 @@ There are no targets, streaks, scores, or claims about what the pattern means.
 1. A new user begins with a clean, prepared environment and a restrained chosen accent.
 2. Authored days, photographs, bookmarks, keepsakes, and organizational choices create traces of use.
 3. The environment becomes recognizably personal over months.
-4. Optional future games remain tucked inside My World and may create attachable journal artifacts.
+4. Keepsakes reopen their canonical Days, writing, photos, or doodles; removing one does not erase the original.
+5. Memory resurfacing is local, optional, and individually suppressible.
+6. Two tiny games remain tucked inside My World, reset when closed, and never score journal behavior.
 
 Accumulation never depends on XP, currency, streaks, or engagement pressure.
+
+## 12. Draw something small
+
+1. Open the sketchbook from My World.
+2. Draw with a pointer, finger, or stylus; keyboard-operable tools provide undo, redo, and clear.
+3. Add an optional candid title or description and save.
+4. The editable strokes and preview stay local-first and the doodle appears on its actual Day.
+5. Reopen, change, keep, or delete it without creating duplicate Day moments.
+
+## 13. Meet an old memory without pressure
+
+1. My World may show one eligible same-date memory from a prior year.
+2. Open the original Day or artifact when wanted.
+3. Hide that item, hide the whole Day, or disable resurfacing in preferences.
+4. Nothing is pushed, scored, or interpreted by AI.

@@ -15,6 +15,7 @@ export const MomentContentSchema = z.discriminatedUnion("kind", [
   }),
   z.object({ kind: z.literal("photo"), mediaId: EntityIdSchema }),
   z.object({ kind: z.literal("journal"), journalEntryId: EntityIdSchema }),
+  z.object({ kind: z.literal("doodle"), doodleId: EntityIdSchema }),
 ]);
 
 export const MomentSchema = z.object({

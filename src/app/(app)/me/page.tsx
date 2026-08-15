@@ -12,6 +12,7 @@ export default function MePage() {
       emptyTitle="Pick a divider"
       emptyDescription="Track the odd little things you care about, or leave everything alone."
     >
+      <Link href="/me/personalization">Choose stationery and memory preferences</Link>
       <Link href="/me/trackers">Open trackers</Link>
     </FoundationScreen>
   );

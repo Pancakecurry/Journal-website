@@ -143,7 +143,7 @@ export function MonthlyRecap({ month }: { month: string }) {
         </p>
       </section>
       <footer>
-        <span>Cover hook reserved for Phase 4 personalization.</span>
+        <span>Filed with the cover you picked.</span>
       </footer>
     </article>
   );

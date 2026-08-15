@@ -1,0 +1,182 @@
+.studio,
+.library {
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: #c9b69a;
+}
+.studio > header,
+.library > header {
+  display: flex;
+  max-width: 68rem;
+  margin: 0 auto 1.2rem;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.studio header p,
+.library header p {
+  margin: 0;
+  color: var(--ink-700);
+  font: 700 0.7rem var(--font-numeric);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.studio h1,
+.library h1 {
+  margin: 0.3rem 0;
+  font: clamp(2.6rem, 7vw, 5rem)/0.95 var(--font-editorial);
+}
+.studio header span,
+.library header span {
+  color: var(--ink-700);
+}
+.library header div {
+  display: flex;
+  gap: 0.7rem;
+}
+.tools {
+  display: flex;
+  max-width: 68rem;
+  margin: auto;
+  padding: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid #a79579;
+  background: var(--paper-cream);
+}
+.tools button,
+.tools select {
+  min-height: 2.6rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-cool);
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+}
+.tools button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--ink-900);
+}
+.tools label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.canvas {
+  display: block;
+  width: min(100%, 68rem);
+  height: min(62vh, 42rem);
+  min-height: 24rem;
+  margin: 0 auto;
+  border: 1px solid #a69b88;
+  background: var(--paper-warm);
+  background-image: var(--paper-pattern);
+  box-shadow: var(--shadow-paper);
+  touch-action: none;
+  cursor: crosshair;
+}
+.details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  max-width: 68rem;
+  margin: 1rem auto 0;
+  gap: 0.8rem;
+}
+.details label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 700;
+}
+.details input {
+  min-height: 2.8rem;
+  padding: 0.6rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-warm);
+}
+.saveRow {
+  display: flex;
+  max-width: 68rem;
+  margin: 1rem auto 0;
+  gap: 0.7rem;
+}
+.saveRow button {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ink-900);
+  background: var(--paper-warm);
+  cursor: pointer;
+}
+.saveRow .save {
+  background: var(--ink-900);
+  color: var(--paper-warm);
+}
+.studio > p {
+  max-width: 68rem;
+  min-height: 1.25rem;
+  margin: 1rem auto;
+  color: var(--ink-700);
+}
+.library > ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  max-width: 68rem;
+  margin: 2rem auto;
+  padding: 0;
+  gap: 1rem;
+  list-style: none;
+}
+.library li a {
+  display: grid;
+  height: 100%;
+  padding: 0.75rem;
+  background: var(--paper-warm);
+  box-shadow: var(--shadow-paper);
+  color: inherit;
+  text-decoration: none;
+}
+.library img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  background: var(--paper-cream);
+}
+.library strong {
+  margin-top: 0.7rem;
+  font: 1.3rem var(--font-editorial);
+}
+.library time {
+  color: var(--ink-500);
+  font: 0.68rem var(--font-numeric);
+}
+.library > section {
+  max-width: 42rem;
+  margin: 4rem auto;
+  padding: 2rem;
+  border: 1px dashed #998a74;
+  background: var(--paper-warm);
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .studio,
+  .library {
+    padding: 1rem 1rem 7rem;
+  }
+  .studio > header,
+  .library > header {
+    align-items: start;
+    flex-direction: column;
+  }
+  .studio h1,
+  .library h1 {
+    font-size: 3rem;
+  }
+  .canvas {
+    min-height: 21rem;
+    height: 48vh;
+  }
+  .details {
+    grid-template-columns: 1fr;
+  }
+  .tools label {
+    width: 100%;
+  }
+}

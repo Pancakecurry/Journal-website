@@ -10,6 +10,7 @@ import type { OutboxOperation } from "@/domain/sync";
 import { OutboxOperationSchema } from "@/domain/sync";
 import type { JournalDatabase } from "@/infrastructure/local/database";
 import { refreshDayDerived } from "@/infrastructure/local/derived-indexes";
+import type { Doodle } from "@/domain/personal-world";
 
 export interface DayWithMoments {
   day: Day | null;
@@ -17,6 +18,7 @@ export interface DayWithMoments {
   journals: JournalEntry[];
   media: LocalMedia[];
   reflections: Reflection[];
+  doodles: Doodle[];
 }
 
 export class LocalJournalRepository {
@@ -27,8 +29,9 @@ export class LocalJournalRepository {
       .where("[userId+localDate]")
       .equals([userId, localDate])
       .first();
-    if (!day) return { day: null, moments: [], journals: [], media: [], reflections: [] };
-    const [moments, journals, media, reflections] = await Promise.all([
+    if (!day)
+      return { day: null, moments: [], journals: [], media: [], reflections: [], doodles: [] };
+    const [moments, journals, media, reflections, doodles] = await Promise.all([
       this.database.moments
         .where("[userId+dayId]")
         .equals([userId, day.id])
@@ -49,8 +52,13 @@ export class LocalJournalRepository {
         .equals([userId, day.id])
         .filter(active)
         .sortBy("updatedAt"),
+      this.database.doodles
+        .where("[userId+localDate]")
+        .equals([userId, localDate])
+        .filter(active)
+        .sortBy("updatedAt"),
     ]);
-    return { day, moments, journals, media, reflections };
+    return { day, moments, journals, media, reflections, doodles };
   }
 
   async addMoment(input: {

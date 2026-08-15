@@ -59,15 +59,15 @@ Trackers remain open-ended, notebook-like, and non-judgmental. Calendar and reca
 
 ## Phase 4 — Personal World
 
-| Task | Outcome             |
-| ---- | ------------------- |
-| 021  | Personalization     |
-| 022  | My World            |
-| 023  | Keepsakes           |
-| 024  | Doodle system       |
-| 025  | Mini-game framework |
-| 026  | Initial mini-games  |
-| 027  | Memory resurfacing  |
+| Task | Outcome             | Status   |
+| ---- | ------------------- | -------- |
+| 021  | Personalization     | Complete |
+| 022  | My World            | Complete |
+| 023  | Keepsakes           | Complete |
+| 024  | Doodle system       | Complete |
+| 025  | Mini-game framework | Complete |
+| 026  | Initial mini-games  | Complete |
+| 027  | Memory resurfacing  | Complete |
 
 Personality emerges from authorship and accumulated use. Play stays inside My World, creates meaningful artifacts when possible, and never introduces an unlock economy.
 
@@ -98,4 +98,4 @@ Hardening tasks deepen continuous responsibilities; they do not defer accessibil
 
 ## Current gate
 
-The next recommended work is **Phase 4 — Personal World**. It must not begin without separate authorization.
+The next recommended work is **Phase 5 — Intelligence, Privacy & Hardening**. It must not begin without separate authorization, and optional intelligence must not get ahead of consent, export, or security boundaries.

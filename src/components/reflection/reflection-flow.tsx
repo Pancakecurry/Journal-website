@@ -29,6 +29,7 @@ export function ReflectionFlow() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<ReflectionAnswer[]>([]);
   const [value, setValue] = useState("");
+  const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("Optional means optional. Promise.");
   const question = questions[index];
 
@@ -49,29 +50,36 @@ export function ReflectionFlow() {
   }, [localDate, period, questions, repository]);
 
   async function advance(skipped: boolean) {
-    if (!question) return;
+    if (!question || busy) return;
+    setBusy(true);
     const nextAnswers = [
       ...answers.filter((item) => item.questionId !== question.id),
       { questionId: question.id, answer: skipped ? "" : value.trim(), skipped },
     ];
     const final = index === questions.length - 1;
-    await repository.saveReflection({
-      userId: LOCAL_FOUNDATION_USER_ID,
-      localDate,
-      timeZone: current.timeZone,
-      period,
-      answers: nextAnswers,
-      currentQuestion: final ? index : index + 1,
-      complete: final,
-    });
-    setAnswers(nextAnswers);
-    if (final) {
-      router.push(localDate === current.localDate ? "/today" : `/day/${localDate}`);
-      return;
+    try {
+      await repository.saveReflection({
+        userId: LOCAL_FOUNDATION_USER_ID,
+        localDate,
+        timeZone: current.timeZone,
+        period,
+        answers: nextAnswers,
+        currentQuestion: final ? index : index + 1,
+        complete: final,
+      });
+      setAnswers(nextAnswers);
+      if (final) {
+        router.push(localDate === current.localDate ? "/today" : `/day/${localDate}`);
+        return;
+      }
+      setIndex((position) => position + 1);
+      setValue("");
+      setStatus(skipped ? "Skipped. Easy." : "Saved. Next one.");
+    } catch {
+      setStatus("Couldn't save that yet. Your answer is still right here.");
+    } finally {
+      setBusy(false);
     }
-    setIndex((position) => position + 1);
-    setValue("");
-    setStatus(skipped ? "Skipped. Easy." : "Saved. Next one.");
   }
 
   return (
@@ -111,15 +119,17 @@ export function ReflectionFlow() {
               />
             </label>
             <div className={styles.actions}>
-              <button className={styles.skip} onClick={() => void advance(true)}>
+              <button className={styles.skip} disabled={busy} onClick={() => void advance(true)}>
                 Skip this one
               </button>
-              <button className={styles.next} onClick={() => void advance(false)}>
-                {index === questions.length - 1
-                  ? "That's enough for today"
-                  : value.trim()
-                    ? "Save & next"
-                    : "Nothing to add · next"}
+              <button className={styles.next} disabled={busy} onClick={() => void advance(false)}>
+                {busy
+                  ? "Saving…"
+                  : index === questions.length - 1
+                    ? "That's enough for today"
+                    : value.trim()
+                      ? "Save & next"
+                      : "Nothing to add · next"}
               </button>
             </div>
           </section>

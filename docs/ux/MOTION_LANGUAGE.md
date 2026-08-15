@@ -47,3 +47,5 @@ An item is bookmarked, filed, or placed away while leaving a clear sense of wher
 Honor platform and in-product reduced-motion preferences. Replace large movement, page turns, parallax, and spring effects with immediate state changes or subtle crossfades where appropriate. Essential feedback must remain visible and understandable without motion.
 
 Specific durations, easing curves, and implementation techniques are design-system and architecture decisions for later tasks.
+
+Phase 4 uses Place/Lift for desk objects, Unfold for game and memory panels, and a short incoming page settle for navigation. Outgoing route content is removed immediately so motion never leaves duplicate interactive controls. Ambient desk movement stays tiny, stops under reduced motion, and never blocks interaction.

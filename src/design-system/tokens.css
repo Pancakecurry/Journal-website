@@ -53,4 +53,41 @@
 
   --content-max: 76rem;
   --reading-max: 44rem;
+  --accent: var(--powder);
+  --active-paper: var(--paper-warm);
+  --paper-pattern: none;
+}
+
+:root[data-accent="sage"] {
+  --accent: var(--sage);
+}
+:root[data-accent="lavender"] {
+  --accent: var(--lavender);
+}
+:root[data-accent="butter"] {
+  --accent: var(--butter);
+}
+:root[data-accent="peach"] {
+  --accent: var(--peach);
+}
+:root[data-accent="coral"] {
+  --accent: var(--coral);
+}
+:root[data-accent="mint"] {
+  --accent: var(--mint);
+}
+:root[data-paper="ruled"] {
+  --paper-pattern: repeating-linear-gradient(
+    transparent 0,
+    transparent 1.72rem,
+    rgb(104 119 121 / 13%) 1.76rem
+  );
+}
+:root[data-paper="dot"] {
+  --paper-pattern: radial-gradient(circle, rgb(76 85 82 / 17%) 1px, transparent 1.2px);
+}
+:root[data-paper="grid"] {
+  --paper-pattern:
+    linear-gradient(rgb(76 85 82 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(76 85 82 / 10%) 1px, transparent 1px);
 }

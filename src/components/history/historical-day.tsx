@@ -10,9 +10,17 @@ import { LocalJournalRepository } from "@/infrastructure/local/journal-repositor
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib/journal-session";
 import { QuickCapture } from "@/components/today/quick-capture";
+import { KeepsakeButton } from "@/components/personal-world/keepsake-button";
 import styles from "./historical-day.module.css";
 
-const empty: DayWithMoments = { day: null, moments: [], journals: [], media: [], reflections: [] };
+const empty: DayWithMoments = {
+  day: null,
+  moments: [],
+  journals: [],
+  media: [],
+  reflections: [],
+  doodles: [],
+};
 
 export function HistoricalDay() {
   const params = useParams<{ date: string }>();
@@ -62,6 +70,7 @@ export function HistoricalDay() {
     );
   const media = new Map(bundle.media.map((item) => [item.id, item]));
   const journals = new Map(bundle.journals.map((item) => [item.id, item]));
+  const doodles = new Map(bundle.doodles.map((item) => [item.id, item]));
   const mood = bundle.moments.find((item) => item.content.kind === "mood");
   return (
     <div className={styles.desk}>
@@ -80,6 +89,16 @@ export function HistoricalDay() {
           <div>
             <button onClick={() => setCapture(true)}>+ Add a memory</button>
             <button onClick={() => router.push("/calendar")}>Calendar</button>
+            {bundle.day ? (
+              <KeepsakeButton
+                sourceType="day"
+                sourceId={bundle.day.id}
+                dayId={bundle.day.id}
+                localDate={localDate}
+                title={readableDate(localDate)}
+                preview="A whole Day kept within easy reach."
+              />
+            ) : null}
           </div>
         </header>
         <section aria-labelledby="day-pieces">
@@ -117,6 +136,14 @@ export function HistoricalDay() {
                         <div>
                           <p>{moment.content.text}</p>
                           <div className={styles.controls}>
+                            <KeepsakeButton
+                              sourceType="moment"
+                              sourceId={moment.id}
+                              dayId={moment.dayId}
+                              localDate={localDate}
+                              title="A small moment"
+                              preview={moment.content.text}
+                            />
                             <button
                               onClick={() => {
                                 setEditing(moment.id);
@@ -147,6 +174,16 @@ export function HistoricalDay() {
                           Added {new Intl.DateTimeFormat().format(new Date(moment.createdAt))}
                         </small>
                         <div className={styles.controls}>
+                          {media.get(moment.content.mediaId) ? (
+                            <KeepsakeButton
+                              sourceType="photo"
+                              sourceId={moment.content.mediaId}
+                              dayId={moment.dayId}
+                              localDate={localDate}
+                              title={media.get(moment.content.mediaId)?.caption || "A photo"}
+                              preview="Photo kept with its original Day."
+                            />
+                          ) : null}
                           <button onClick={() => void removePhoto(moment.id, photoMediaId(moment))}>
                             Delete photo
                           </button>
@@ -168,10 +205,43 @@ export function HistoricalDay() {
                             <Link href={`/journal/${moment.content.journalEntryId}`}>
                               Read / edit
                             </Link>
+                            <KeepsakeButton
+                              sourceType="journal"
+                              sourceId={moment.content.journalEntryId}
+                              dayId={moment.dayId}
+                              localDate={localDate}
+                              title={
+                                journals.get(moment.content.journalEntryId)?.title ||
+                                "Untitled journal page"
+                              }
+                              preview={journals
+                                .get(moment.content.journalEntryId)
+                                ?.body.slice(0, 280)}
+                            />
                           </>
                         ) : (
                           <p>This journal page was deleted.</p>
                         )}
+                      </div>
+                    ) : null}
+                    {moment.content.kind === "doodle" ? (
+                      <div>
+                        {doodles.get(moment.content.doodleId)?.previewDataUrl ? (
+                          // Generated locally from structured strokes.
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={doodles.get(moment.content.doodleId)!.previewDataUrl}
+                            alt={
+                              doodles.get(moment.content.doodleId)?.description ||
+                              doodles.get(moment.content.doodleId)?.title ||
+                              "Saved doodle"
+                            }
+                          />
+                        ) : null}
+                        <h3>{doodles.get(moment.content.doodleId)?.title || "Untitled doodle"}</h3>
+                        <Link href={`/my-world/doodles/${moment.content.doodleId}`}>
+                          Open sketchbook
+                        </Link>
                       </div>
                     ) : null}
                   </li>

@@ -35,3 +35,12 @@ For every history feature:
 6. capture Web Vitals in a configured deployment when representative devices and persistence are available.
 
 No performance number is claimed as a production guarantee from this local environment.
+
+## Phase 4 budgets
+
+- My World uses indexed counts and renders only objects earned by real records; it does not hydrate lifetime entries or media blobs.
+- Keepsake browsing is capped at 200 references and validates canonical sources before display.
+- Same-date resurfacing performs at most one indexed Day lookup per configured year (one to ten, five by default), then reads only that Day's candidates.
+- Doodles keep normalized structured strokes for editing, draw pointer-move segments incrementally, cap canvas device-pixel ratio at two, and store one bounded JPEG preview.
+- Games are dynamically imported only when their drawer is opened. Timers are cleared on exit/unmount and game state is discarded rather than persisted into the journal.
+- The Phase 4 long-term fixture verifies 720 indexed Days without changing My World's query shape. Browser performance remains subject to representative-device profiling in Phase 5 hardening.

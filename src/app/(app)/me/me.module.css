@@ -1,82 +1,79 @@
 .mePage {
   width: min(100%, 76rem);
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: clamp(1.2rem, 4vw, 4rem);
+  min-height: 100dvh;
+  margin: auto;
+  padding: clamp(1rem, 4vw, 3.5rem);
   color: var(--ink-900);
 }
 .mePage > header {
   display: grid;
-  grid-template-columns: 1fr minmax(15rem, 24rem);
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem);
   gap: 3rem;
   align-items: end;
-  padding: clamp(1.5rem, 5vw, 4.5rem);
+  padding: clamp(1.5rem, 5vw, 4rem);
   border: var(--border-hairline);
-  background: linear-gradient(
-    130deg,
-    var(--paper-warm),
-    color-mix(in srgb, var(--accent) 16%, var(--paper-warm))
-  );
+  background:
+    radial-gradient(
+      circle at 88% 10%,
+      color-mix(in srgb, var(--accent) 32%, transparent),
+      transparent 28%
+    ),
+    var(--paper-warm);
   box-shadow: var(--shadow-paper);
 }
 .mePage header p {
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.75rem;
   color: var(--ink-500);
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.07em;
+  font: 750 0.72rem var(--font-numeric);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .mePage h1 {
-  max-width: 12ch;
+  max-width: 11ch;
   margin: 0;
-  font: 500 clamp(2.65rem, 5.2vw, 4.75rem)/0.95 var(--font-editorial);
-  letter-spacing: -0.04em;
+  font: 500 clamp(2.75rem, 5.5vw, 4.9rem)/0.93 var(--font-editorial);
+  letter-spacing: -0.045em;
 }
 .mePage header aside {
   padding: 1.2rem;
-  border: 1px solid var(--rule);
-  background: rgb(255 255 255 / 48%);
-  border-radius: var(--radius-control);
+  border-left: 1px solid var(--rule);
 }
 .mePage header aside span {
   display: inline-block;
-  padding: 0.4rem 0.65rem;
-  border: 2px solid color-mix(in srgb, var(--accent) 70%, var(--ink-900));
-  color: color-mix(in srgb, var(--accent) 62%, var(--ink-900));
-  font-size: 0.66rem;
-  font-weight: 850;
+  padding: 0.35rem 0.55rem;
+  border: 2px solid color-mix(in srgb, var(--accent) 62%, var(--ink-900));
+  color: color-mix(in srgb, var(--accent) 55%, var(--ink-900));
+  font: 850 0.64rem var(--font-numeric);
   letter-spacing: 0.14em;
-  rotate: -3deg;
+  rotate: -2deg;
 }
 .mePage header aside p {
-  margin: 1.2rem 0 0;
+  margin: 1rem 0 0;
   color: var(--ink-700);
-  font: 1rem/1.6 var(--font-reading);
+  font: 1rem/1.55 var(--font-reading);
   letter-spacing: 0;
   text-transform: none;
 }
 .cabinet {
   display: grid;
-  grid-template-columns: 12rem 1fr;
-  margin: 1.4rem 1rem 0;
-  border: 1px solid #8e7a61;
-  background: #a99172;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  margin: 1.2rem 0.8rem 0;
+  border: 1px solid #806b51;
+  background: #9b8162;
   box-shadow: var(--shadow-lift);
 }
 .cabinetLabel {
   display: flex;
-  min-height: 30rem;
-  padding: 1.4rem;
-  border-right: 1px solid #7f6c54;
+  min-height: 36rem;
+  padding: 1.25rem;
+  border-right: 1px solid #765f46;
   flex-direction: column;
-  background: linear-gradient(160deg, #ad9474, #897155);
-  color: #f8efe1;
+  background: linear-gradient(155deg, #aa8f6c, #7e664b);
+  color: #fff7e9;
 }
 .cabinetLabel span {
-  font-size: 0.63rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font: 800 0.6rem var(--font-numeric);
+  letter-spacing: 0.15em;
 }
 .cabinetLabel b {
   max-width: 5ch;
@@ -85,86 +82,98 @@
 }
 .cabinetLabel small {
   margin-top: 0.6rem;
-  opacity: 0.72;
+  opacity: 0.76;
 }
 .drawers {
   display: grid;
   gap: 1px;
-  padding: 1px;
-  background: #8e7a61;
+  background: #806b51;
 }
-.drawers > a {
+.drawerGroup {
   display: grid;
-  grid-template-columns: 3rem 1fr auto;
-  gap: 1rem;
-  align-items: center;
-  min-height: 6.5rem;
-  padding: 1rem 1.3rem;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  background: var(--paper-warm);
+}
+.drawerGroup > h2 {
+  margin: 0;
+  padding: 1.25rem 1rem;
+  border-right: 1px solid var(--rule);
+  color: var(--ink-700);
+  font: 750 0.72rem/1.4 var(--font-numeric);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.drawerGroup > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+}
+.drawerGroup a {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  gap: 0.8rem;
+  align-items: start;
+  min-height: 10rem;
+  padding: 1rem;
   background: var(--paper-warm);
   color: inherit;
   text-decoration: none;
   transition:
     transform var(--motion-place) var(--ease-lift),
-    filter var(--motion-place),
-    box-shadow var(--motion-place) var(--ease-place);
+    box-shadow var(--motion-place),
+    filter var(--motion-quick);
 }
-.drawers > a:hover {
+.drawerGroup a:hover {
   position: relative;
   z-index: 1;
-  transform: translateX(-0.5rem);
+  box-shadow: var(--shadow-lift);
   filter: brightness(1.02);
-  box-shadow: 10px 10px 20px rgb(46 34 23 / 18%);
+  transform: translateY(-0.25rem);
 }
-.drawers > a[data-tone="accent"] {
-  background: linear-gradient(
-    95deg,
-    color-mix(in srgb, var(--accent) 24%, var(--paper-warm)),
-    var(--paper-warm) 45%
-  );
+.drawerGroup a[data-tone="accent"] {
+  background: color-mix(in srgb, var(--accent) 16%, var(--paper-warm));
 }
-.drawers > a[data-tone="ink"] {
-  background: linear-gradient(95deg, #d8d9d5, var(--paper-warm) 45%);
+.drawerGroup a[data-tone="ink"] {
+  background: color-mix(in srgb, var(--powder) 22%, var(--paper-warm));
 }
-.drawers > a[data-tone="sage"] {
-  background: linear-gradient(
-    95deg,
-    color-mix(in srgb, var(--sage) 30%, var(--paper-warm)),
-    var(--paper-warm) 45%
-  );
+.drawerGroup a[data-tone="sage"] {
+  background: color-mix(in srgb, var(--sage) 26%, var(--paper-warm));
 }
-.drawers > a[data-tone="quiet"] {
+.drawerGroup a[data-tone="quiet"] {
   background: var(--paper-cool);
 }
-.drawers i {
+.drawerGroup i {
   display: grid;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.35rem;
+  height: 2.35rem;
   place-items: center;
   border: 1px solid var(--rule-strong);
   border-radius: 50%;
-  background: rgb(255 255 255 / 45%);
-  font: normal 700 0.8rem var(--font-ui);
+  background: rgb(255 255 255 / 44%);
+  font: normal 750 0.72rem var(--font-ui);
 }
-.drawers h2 {
-  margin: 0;
-  font: 520 1.35rem var(--font-editorial);
+.drawerGroup a > span {
+  display: grid;
+  gap: 0.4rem;
 }
-.drawers p {
-  margin: 0.25rem 0 0;
+.drawerGroup strong {
+  font: 500 1.25rem/1.05 var(--font-editorial);
+}
+.drawerGroup small {
   color: var(--ink-700);
-  line-height: 1.45;
+  font: 0.82rem/1.45 var(--font-ui);
 }
-.drawers > a > b {
-  font-size: 1.2rem;
+.drawerGroup a > b {
   transition: transform 180ms var(--ease-place);
 }
-.drawers > a:hover > b {
+.drawerGroup a:hover > b {
   transform: translateX(0.25rem);
 }
 .mePage > footer {
   display: flex;
-  justify-content: space-between;
   gap: 2rem;
+  justify-content: space-between;
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--rule);
@@ -174,37 +183,56 @@
   color: inherit;
   font-weight: 750;
 }
-@media (max-width: 720px) {
+@media (max-width: 58rem) {
+  .cabinet {
+    grid-template-columns: 8rem minmax(0, 1fr);
+  }
+  .drawerGroup {
+    grid-template-columns: 8rem minmax(0, 1fr);
+  }
+  .drawerGroup > div {
+    grid-template-columns: 1fr;
+  }
+  .drawerGroup a {
+    min-height: 8rem;
+  }
+}
+@media (max-width: 44rem) {
   .mePage {
-    padding: 0.8rem 0.8rem 7rem;
+    padding: 0.75rem 0.75rem 7rem;
   }
   .mePage > header {
     grid-template-columns: 1fr;
-    gap: 1.4rem;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .mePage header aside {
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+    padding: 1rem 0 0;
   }
   .cabinet {
     grid-template-columns: 1fr;
-    margin-inline: 0.4rem;
+    margin-inline: 0;
   }
   .cabinetLabel {
     min-height: 7rem;
     border-right: 0;
-    border-bottom: 1px solid #7f6c54;
+    border-bottom: 1px solid #765f46;
   }
   .cabinetLabel b {
-    margin-top: 1.5rem;
     max-width: none;
+    margin-top: 1.2rem;
   }
-  .drawers > a {
-    grid-template-columns: 2.6rem 1fr;
-    min-height: 7.5rem;
-    padding: 0.85rem;
+  .drawerGroup {
+    grid-template-columns: 1fr;
   }
-  .drawers > a > b {
-    display: none;
+  .drawerGroup > h2 {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
   }
-  .drawers p {
-    font-size: 0.87rem;
+  .drawerGroup a {
+    min-height: 7.4rem;
   }
   .mePage > footer {
     flex-direction: column;
@@ -212,8 +240,8 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .drawers > a,
-  .drawers > a > b {
+  .drawerGroup a,
+  .drawerGroup a > b {
     transition: none;
   }
 }

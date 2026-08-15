@@ -22,9 +22,9 @@ export function DoodleLibrary() {
   return (
     <main className={styles.library}>
       <header>
-        <p>Sketchbook · desk object</p>
-        <h1>Useful? Not remotely.</h1>
-        <span>Still a perfectly good place for a shape you liked.</span>
+        <p>Your sketchbook</p>
+        <h1>Doodles need absolutely no reason.</h1>
+        <span>Draw a strange chair, a tiny cloud, or whatever your hand decides.</span>
         <div>
           <Link href="/my-world">Back to your desk</Link>
           <Link href="/my-world/doodles/new">+ New doodle</Link>
@@ -57,8 +57,8 @@ export function DoodleLibrary() {
         </ol>
       ) : (
         <section>
-          <h2>Clean page. Suspiciously clean.</h2>
-          <p>Draw the weather, a weird chair, or one excellent potato.</p>
+          <h2>Very clean in here. For now.</h2>
+          <p>Your first masterpiece can be one excellent potato.</p>
           <Link href="/my-world/doodles/new">Open a blank page</Link>
         </section>
       )}

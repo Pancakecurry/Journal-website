@@ -58,9 +58,9 @@ export function ExportCenter() {
   return (
     <main className={styles.exportPage}>
       <header>
-        <p>Data ownership · your exit door</p>
-        <h1>Take the whole notebook with you.</h1>
-        <span>No cloud detour. The archive is assembled here, on this device.</span>
+        <p>Your copy</p>
+        <h1>Pack up the whole notebook.</h1>
+        <span>The archive is made on this device. No mystery cloud detour.</span>
       </header>
       <section className={styles.exportShelf}>
         <ExportCard

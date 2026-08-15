@@ -143,8 +143,8 @@ export function AiPrivacyCenter() {
     <main className={styles.privacyPage}>
       <header className={styles.hero}>
         <div>
-          <p className={styles.kicker}>Privacy desk · AI</p>
-          <h1>Your words don’t wander off by accident.</h1>
+          <p className={styles.kicker}>AI and your journal</p>
+          <h1>Your words do not leave without a clear yes.</h1>
         </div>
         <div className={styles.statusCard} data-on={preferences.aiEnabled}>
           <span>{preferences.aiEnabled ? "AI on" : "AI off"}</span>
@@ -270,7 +270,7 @@ export function AiPrivacyCenter() {
         </Link>
       ) : null}
       <aside className={styles.finePrint}>
-        <h2>The plain-English bit</h2>
+        <h2>The no-nonsense version</h2>
         <p>
           OpenAI is the initial optional processor. Requests are stateless, but provider
           abuse-monitoring retention may apply unless the operator has approved data controls.

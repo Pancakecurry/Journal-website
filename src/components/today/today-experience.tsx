@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import type { DayWithMoments } from "@/infrastructure/local/journal-repository";
 import { LocalJournalRepository } from "@/infrastructure/local/journal-repository";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
@@ -28,6 +29,7 @@ const emptyBundle: DayWithMoments = {
 };
 
 export function TodayExperience() {
+  const reduceMotion = useReducedMotion();
   const [bundle, setBundle] = useState(emptyBundle);
   const [captureOpen, setCaptureOpen] = useState(false);
   const [status, setStatus] = useState("Getting today off your device…");
@@ -36,6 +38,13 @@ export function TodayExperience() {
   const repository = useMemo(() => new LocalJournalRepository(getApplicationDatabase()), []);
   const hour = new Date().getHours();
   const phase = hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
+  const dateParts = useMemo(() => {
+    const date = new Date(`${context.localDate}T12:00:00`);
+    return {
+      day: new Intl.DateTimeFormat(undefined, { day: "2-digit" }).format(date),
+      month: new Intl.DateTimeFormat(undefined, { month: "short" }).format(date),
+    };
+  }, [context.localDate]);
 
   const load = useCallback(async () => {
     setBundle(await repository.getDay(LOCAL_FOUNDATION_USER_ID, context.localDate));
@@ -97,9 +106,14 @@ export function TodayExperience() {
     <div className={`${styles.desk} ${styles[phase]}`}>
       <div className={styles.mat} aria-hidden="true" />
       <article className={styles.daybook}>
-        <header className={styles.header}>
+        <motion.header
+          className={styles.header}
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div>
-            <p className={styles.eyebrow}>Today · {phase}</p>
+            <p className={styles.eyebrow}>Today</p>
             <h1>
               {phase === "morning"
                 ? "Morning. What's up?"
@@ -116,167 +130,192 @@ export function TodayExperience() {
               })}
             </p>
           </div>
-          <button className={styles.addButton} onClick={() => setCaptureOpen(true)}>
-            + Add something
-          </button>
-        </header>
+          <div className={styles.headerActions}>
+            <div className={styles.dateTile} aria-hidden="true">
+              <strong>{dateParts.day}</strong>
+              <span>{dateParts.month}</span>
+              <small>{phase}</small>
+            </div>
+            <button className={styles.addButton} onClick={() => setCaptureOpen(true)}>
+              + Add something
+            </button>
+          </div>
+        </motion.header>
 
-        <section className={styles.mood} aria-labelledby="mood-heading">
-          <div>
-            <p className={styles.sectionMark}>Quick mood</p>
-            <h2 id="mood-heading">How are you, roughly?</h2>
-          </div>
-          <div className={styles.moodOptions}>
-            {MOODS.map(([value, label, mark]) => (
-              <button
-                key={value}
-                aria-pressed={mood?.content.kind === "mood" && mood.content.mood === value}
-                onClick={() => void setMood(value)}
-              >
-                <span aria-hidden="true">{mark}</span>
-                {label}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.reflectionCard}>
-          <div>
-            <p className={styles.sectionMark}>
-              {phase === "morning" ? "Morning check-in" : "Evening wrap-up"}
-            </p>
-            <h2>
-              {reflection?.completedAt
-                ? "Done for now."
-                : phase === "morning"
-                  ? "Got a minute?"
-                  : "Want to wrap this one up?"}
-            </h2>
-            <p>
-              {reflection?.completedAt
-                ? "Your answers are tucked into today."
-                : "A few easy questions. Skip any. Leave whenever."}
-            </p>
-          </div>
-          <Link
-            href={`/reflection/${phase === "morning" ? "morning" : "evening"}?date=${context.localDate}`}
+        <div className={styles.dayLayout}>
+          <motion.aside
+            className={styles.checkInRail}
+            initial={reduceMotion ? false : { opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
-            {reflection ? "Open it again" : "Sure, why not"}
-          </Link>
-          {reflection?.completedAt ? (
-            <span className={styles.stamp}>noted · {context.localDate}</span>
-          ) : null}
-        </section>
+            <section className={styles.mood} aria-labelledby="mood-heading">
+              <div>
+                <p className={styles.sectionMark}>Quick mood</p>
+                <h2 id="mood-heading">How are you, roughly?</h2>
+              </div>
+              <div className={styles.moodOptions}>
+                {MOODS.map(([value, label, mark]) => (
+                  <button
+                    key={value}
+                    aria-label={label}
+                    aria-pressed={mood?.content.kind === "mood" && mood.content.mood === value}
+                    onClick={() => void setMood(value)}
+                  >
+                    <span aria-hidden="true">{mark}</span>
+                    <small>{label}</small>
+                  </button>
+                ))}
+              </div>
+            </section>
 
-        <section className={styles.timeline} aria-labelledby="timeline-title">
-          <div className={styles.timelineHeading}>
-            <div>
-              <p className={styles.sectionMark}>The day so far</p>
-              <h2 id="timeline-title">Stuff that happened</h2>
+            <section className={styles.reflectionCard}>
+              <div>
+                <p className={styles.sectionMark}>
+                  {phase === "morning" ? "Morning check-in" : "Evening wrap-up"}
+                </p>
+                <h2>
+                  {reflection?.completedAt
+                    ? "Done for now."
+                    : phase === "morning"
+                      ? "Got a minute?"
+                      : "Want to wrap this one up?"}
+                </h2>
+                <p>
+                  {reflection?.completedAt
+                    ? "Your answers are tucked into today."
+                    : "A few easy questions. Skip any. Leave whenever."}
+                </p>
+              </div>
+              <Link
+                href={`/reflection/${phase === "morning" ? "morning" : "evening"}?date=${context.localDate}`}
+              >
+                {reflection ? "Open it again" : "Sure, why not"}
+              </Link>
+              {reflection?.completedAt ? (
+                <span className={styles.stamp}>noted · {context.localDate}</span>
+              ) : null}
+            </section>
+          </motion.aside>
+
+          <motion.section
+            className={styles.timeline}
+            aria-labelledby="timeline-title"
+            initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.58, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className={styles.timelineHeading}>
+              <div>
+                <p className={styles.sectionMark}>The day so far</p>
+                <h2 id="timeline-title">Stuff that happened</h2>
+              </div>
+              <span>
+                {contentMoments.length
+                  ? `${contentMoments.length} ${contentMoments.length === 1 ? "thing" : "things"}`
+                  : "no pressure"}
+              </span>
             </div>
-            <span>
-              {contentMoments.length
-                ? `${contentMoments.length} ${contentMoments.length === 1 ? "thing" : "things"}`
-                : "no pressure"}
-            </span>
-          </div>
-          {!ready ? (
-            <p className={styles.empty}>Opening your page…</p>
-          ) : contentMoments.length === 0 ? (
-            <div className={styles.empty}>
-              <strong>Nothing here yet. Totally legal.</strong>
-              <p>{"Add one line, a photo, a whole journal entry. Or don't."}</p>
-              <button onClick={() => setCaptureOpen(true)}>Add the first thing</button>
-            </div>
-          ) : (
-            <ol className={styles.moments}>
-              {contentMoments.map((moment) => {
-                const time = new Intl.DateTimeFormat(undefined, {
-                  hour: "numeric",
-                  minute: "2-digit",
-                }).format(new Date(moment.occurredAt));
-                if (moment.content.kind === "text")
-                  return (
-                    <li key={moment.id} className={styles.note}>
-                      <time>{time}</time>
-                      <p>{moment.content.text}</p>
-                      <button
-                        onClick={() => void remove("moment", moment.id)}
-                        aria-label="Delete this note"
-                      >
-                        Remove
-                      </button>
-                    </li>
-                  );
-                if (moment.content.kind === "photo") {
-                  const media = mediaById.get(moment.content.mediaId);
-                  return (
-                    <li key={moment.id} className={styles.photo}>
-                      <time>{time}</time>
-                      {media?.blob ? (
-                        <Photo blob={media.blob} alt={media.caption || "Photo from today"} />
-                      ) : (
-                        <div className={styles.missingPhoto}>Photo unavailable on this device</div>
-                      )}{" "}
-                      {media?.caption ? <p>{media.caption}</p> : null}
-                      <small>
-                        {media?.status === "failed"
-                          ? "Upload waiting · local copy safe"
-                          : "Saved privately here"}
-                      </small>
-                      <button
-                        onClick={() => media && void removePhoto(moment.id, media.id)}
-                        aria-label="Delete this photo"
-                      >
-                        Remove
-                      </button>
-                    </li>
-                  );
-                }
-                if (moment.content.kind === "journal") {
-                  const entry = journalsById.get(moment.content.journalEntryId);
-                  if (!entry) return null;
-                  return (
-                    <li key={moment.id} className={styles.journal}>
-                      <time>{time}</time>
-                      <p className={styles.sectionMark}>Journal page</p>
-                      <h3>{entry.title || "Untitled, which is fine"}</h3>
-                      <p>
-                        {entry.body
-                          ? `${entry.body.slice(0, 180)}${entry.body.length > 180 ? "…" : ""}`
-                          : "A blank page, ready when you are."}
-                      </p>
-                      <Link href={`/journal/${entry.id}`}>
-                        {entry.body ? "Read / edit" : "Start writing"}
-                      </Link>
-                    </li>
-                  );
-                }
-                if (moment.content.kind === "doodle") {
-                  const doodle = doodlesById.get(moment.content.doodleId);
-                  if (!doodle) return null;
-                  return (
-                    <li key={moment.id} className={styles.doodle}>
-                      <time>{time}</time>
-                      <p className={styles.sectionMark}>Doodle pad</p>
-                      {doodle.previewDataUrl ? (
-                        // Generated locally from structured strokes; never sent to an optimizer.
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={doodle.previewDataUrl}
-                          alt={doodle.description || doodle.title || "Saved doodle"}
-                        />
-                      ) : null}
-                      <h3>{doodle.title || "Untitled doodle"}</h3>
-                      <Link href={`/my-world/doodles/${doodle.id}`}>Open sketchbook</Link>
-                    </li>
-                  );
-                }
-                return null;
-              })}
-            </ol>
-          )}
-        </section>
+            {!ready ? (
+              <p className={styles.empty}>Opening your page…</p>
+            ) : contentMoments.length === 0 ? (
+              <div className={styles.empty}>
+                <strong>Nothing here yet. Totally legal.</strong>
+                <p>{"Add one line, a photo, a whole journal entry. Or don't."}</p>
+                <button onClick={() => setCaptureOpen(true)}>Add the first thing</button>
+              </div>
+            ) : (
+              <ol className={styles.moments}>
+                {contentMoments.map((moment) => {
+                  const time = new Intl.DateTimeFormat(undefined, {
+                    hour: "numeric",
+                    minute: "2-digit",
+                  }).format(new Date(moment.occurredAt));
+                  if (moment.content.kind === "text")
+                    return (
+                      <li key={moment.id} className={styles.note}>
+                        <time>{time}</time>
+                        <p>{moment.content.text}</p>
+                        <button
+                          onClick={() => void remove("moment", moment.id)}
+                          aria-label="Delete this note"
+                        >
+                          Remove
+                        </button>
+                      </li>
+                    );
+                  if (moment.content.kind === "photo") {
+                    const media = mediaById.get(moment.content.mediaId);
+                    return (
+                      <li key={moment.id} className={styles.photo}>
+                        <time>{time}</time>
+                        {media?.blob ? (
+                          <Photo blob={media.blob} alt={media.caption || "Photo from today"} />
+                        ) : (
+                          <div className={styles.missingPhoto}>
+                            Photo unavailable on this device
+                          </div>
+                        )}{" "}
+                        {media?.caption ? <p>{media.caption}</p> : null}
+                        <small>
+                          {media?.status === "failed"
+                            ? "Upload waiting · local copy safe"
+                            : "Saved privately here"}
+                        </small>
+                        <button
+                          onClick={() => media && void removePhoto(moment.id, media.id)}
+                          aria-label="Delete this photo"
+                        >
+                          Remove
+                        </button>
+                      </li>
+                    );
+                  }
+                  if (moment.content.kind === "journal") {
+                    const entry = journalsById.get(moment.content.journalEntryId);
+                    if (!entry) return null;
+                    return (
+                      <li key={moment.id} className={styles.journal}>
+                        <time>{time}</time>
+                        <p className={styles.sectionMark}>Journal page</p>
+                        <h3>{entry.title || "Untitled, which is fine"}</h3>
+                        <p>
+                          {entry.body
+                            ? `${entry.body.slice(0, 180)}${entry.body.length > 180 ? "…" : ""}`
+                            : "A blank page, ready when you are."}
+                        </p>
+                        <Link href={`/journal/${entry.id}`}>
+                          {entry.body ? "Read / edit" : "Start writing"}
+                        </Link>
+                      </li>
+                    );
+                  }
+                  if (moment.content.kind === "doodle") {
+                    const doodle = doodlesById.get(moment.content.doodleId);
+                    if (!doodle) return null;
+                    return (
+                      <li key={moment.id} className={styles.doodle}>
+                        <time>{time}</time>
+                        <p className={styles.sectionMark}>Doodle pad</p>
+                        {doodle.previewDataUrl ? (
+                          // Generated locally from structured strokes; never sent to an optimizer.
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={doodle.previewDataUrl}
+                            alt={doodle.description || doodle.title || "Saved doodle"}
+                          />
+                        ) : null}
+                        <h3>{doodle.title || "Untitled doodle"}</h3>
+                        <Link href={`/my-world/doodles/${doodle.id}`}>Open sketchbook</Link>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+              </ol>
+            )}
+          </motion.section>
+        </div>
         <PinnedTrackers
           userId={LOCAL_FOUNDATION_USER_ID}
           {...context}

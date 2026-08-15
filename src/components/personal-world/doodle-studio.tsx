@@ -135,9 +135,9 @@ export function DoodleStudio({ fresh = false }: { fresh?: boolean }) {
     <main className={styles.studio}>
       <header>
         <div>
-          <p>Doodle pad · focused paper</p>
-          <h1>{id ? "Back to this scribble." : "Draw something small."}</h1>
-          <span>Mouse, finger, stylus. Whatever is already in your hand.</span>
+          <p>Sketchbook open</p>
+          <h1>{id ? "There you are, little scribble." : "Draw something. Anything, really."}</h1>
+          <span>Mouse, finger, stylus. Use whichever one is already nearby.</span>
         </div>
         <Link href="/my-world/doodles">Close sketchbook</Link>
       </header>

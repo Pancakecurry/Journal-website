@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { SearchDocument } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalHistoryRepository } from "@/infrastructure/local/history-repository";
@@ -9,6 +10,7 @@ import { LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib/journal-session";
 import styles from "./search-experience.module.css";
 
 export function SearchExperience() {
+  const reduceMotion = useReducedMotion();
   const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
   const preferencesRepository = useMemo(
     () => new LocalPersonalWorldRepository(getApplicationDatabase()),
@@ -39,27 +41,38 @@ export function SearchExperience() {
   }, [query, repository]);
   return (
     <section className={styles.search}>
-      <header>
-        <p>Search · notebook</p>
+      <motion.header
+        initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <p>Find something</p>
         <h1>Find that thing.</h1>
         <span>Runs on this device. No AI, no remote call, no mysterious remembering.</span>
-      </header>
-      <label htmlFor="journal-search">Search your words and dates</label>
-      <input
-        id="journal-search"
-        autoFocus
-        type="search"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="ramen, 2026-08-12, called home…"
-      />
-      <p className={styles.status} role="status" aria-live="polite">
-        {searched
-          ? `${results.length} ${results.length === 1 ? "match" : "matches"}`
-          : query
-            ? "Looking through local pages…"
-            : "Try a person, place, phrase, or date."}
-      </p>
+      </motion.header>
+      <div className={styles.searchStage}>
+        <div className={styles.searchBox}>
+          <label htmlFor="journal-search">Search your words and dates</label>
+          <input
+            id="journal-search"
+            autoFocus
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="ramen, 2026-08-12, called home…"
+          />
+          <p className={styles.status} role="status" aria-live="polite">
+            {searched
+              ? `${results.length} ${results.length === 1 ? "match" : "matches"}`
+              : query
+                ? "Looking through local pages…"
+                : "Try a person, place, phrase, or date."}
+          </p>
+        </div>
+        <aside className={styles.privateNote}>
+          <span aria-hidden="true">LOCAL</span>
+          <p>Your exact-word search stays on this device.</p>
+        </aside>
+      </div>
       {aiEnabled ? (
         <aside className={styles.researchNote}>
           <div>
@@ -78,28 +91,43 @@ export function SearchExperience() {
         </div>
       ) : (
         <ol>
-          {results.map((item) => (
-            <li key={item.id}>
-              <span>{item.kind}</span>
-              <div>
-                <h2>
-                  <Link
-                    href={
-                      item.kind === "journal"
-                        ? `/journal/${item.entityId}`
-                        : `/day/${item.localDate}`
-                    }
-                  >
-                    {item.title}
-                  </Link>
-                </h2>
-                <p>{highlight(item.preview, query)}</p>
-              </div>
-              <time>
-                {readableDate(item.localDate, { month: "short", day: "numeric", year: "numeric" })}
-              </time>
-            </li>
-          ))}
+          <AnimatePresence initial={false}>
+            {results.map((item, index) => (
+              <motion.li
+                key={item.id}
+                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+                transition={{
+                  duration: 0.32,
+                  delay: reduceMotion ? 0 : Math.min(index, 5) * 0.035,
+                }}
+              >
+                <span>{item.kind}</span>
+                <div>
+                  <h2>
+                    <Link
+                      href={
+                        item.kind === "journal"
+                          ? `/journal/${item.entityId}`
+                          : `/day/${item.localDate}`
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  </h2>
+                  <p>{highlight(item.preview, query)}</p>
+                </div>
+                <time>
+                  {readableDate(item.localDate, {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </ol>
       )}
     </section>

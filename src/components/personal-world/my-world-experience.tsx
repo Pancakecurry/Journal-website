@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import type { ResurfacedMemory, WorldSummary } from "@/domain/personal-world";
 import type { UserPreferences } from "@/domain/preferences";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
@@ -10,6 +11,7 @@ import { currentDayContext, LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib
 import styles from "./personal-world.module.css";
 
 export function MyWorldExperience() {
+  const reduceMotion = useReducedMotion();
   const repository = useMemo(() => new LocalPersonalWorldRepository(getApplicationDatabase()), []);
   const [summary, setSummary] = useState<WorldSummary>();
   const [preferences, setPreferences] = useState<UserPreferences>();
@@ -37,25 +39,38 @@ export function MyWorldExperience() {
   const inhabited = summary.dayCount > 0 || summary.doodleCount > 0 || summary.keepsakeCount > 0;
   return (
     <main className={styles.world} data-cover={preferences.notebookCover}>
-      <header>
+      <motion.header
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
         <div>
-          <p>My World · your desk</p>
+          <p>My World</p>
           <h1>{inhabited ? "Looks like you live here." : "All set. No fake memories included."}</h1>
-        </div>
-        <aside>
           <span>
             {inhabited
               ? "The useful bits showed up because you actually made them."
               : "A notebook, a pen, and plenty of room. That's enough for day one."}
           </span>
+        </div>
+        <aside>
+          <div className={styles.worldLedger} aria-label="Your world at a glance">
+            <span>
+              <b>{summary.dayCount}</b> Days
+            </span>
+            <span>
+              <b>{summary.doodleCount}</b> Doodles
+            </span>
+            <span>
+              <b>{summary.keepsakeCount}</b> Keepsakes
+            </span>
+          </div>
           <Link href="/me/personalization">
             Tune the desk <i aria-hidden="true">→</i>
           </Link>
         </aside>
-      </header>
+      </motion.header>
       <section className={styles.deskScene} aria-label="Your accumulated journal objects">
         <div className={styles.deskBackdrop} aria-hidden="true">
-          <span>CA / PERSONAL DESK</span>
           <i />
           <i />
           <i />

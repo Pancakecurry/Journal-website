@@ -96,7 +96,7 @@ export function JournalEditor() {
           ) : (
             <Link href="/today">← Today</Link>
           )}
-          <span>Private page</span>
+          <span>Your private page</span>
         </div>
         <div>
           <button onClick={() => setEditing((value) => !value)}>
@@ -116,7 +116,7 @@ export function JournalEditor() {
             <input
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              placeholder="A title, if you want one"
+              placeholder="Give it a title, or don't"
               maxLength={240}
             />
           </label>
@@ -126,7 +126,7 @@ export function JournalEditor() {
               autoFocus
               value={body}
               onChange={(event) => setBody(event.target.value)}
-              placeholder="Okay, so here's what happened…"
+              placeholder="Okay, here's what actually happened…"
             />
           </label>
         </div>

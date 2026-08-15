@@ -124,15 +124,19 @@ export function QuickCapture({
           </button>
         </div>
         <h2 id="capture-heading">What happened?</h2>
+        <p className={styles.intro}>One line is plenty. You can sort it out later, or never.</p>
         <div className={styles.types} aria-label="What are you adding?">
           <button type="button" aria-pressed={mode === "text"} onClick={() => setMode("text")}>
-            A note
+            <b>A note</b>
+            <span>Fast and uncategorized</span>
           </button>
           <button type="button" aria-pressed={mode === "photo"} onClick={() => setMode("photo")}>
-            A photo
+            <b>A photo</b>
+            <span>Stored on this device first</span>
           </button>
           <button type="button" onClick={startJournal}>
-            A proper journal
+            <b>A proper journal</b>
+            <span>Open a quiet full page</span>
           </button>
         </div>
         {mode === "text" ? (

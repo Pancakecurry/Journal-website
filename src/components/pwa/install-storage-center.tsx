@@ -31,7 +31,7 @@ export function InstallCenter() {
   return (
     <main className={styles.page}>
       <header>
-        <p>Install · keep it close</p>
+        <p>Keep it close</p>
         <h1>Your notebook, one tap away.</h1>
         <span>
           After the first online visit, core pages and local writing can open without a connection.
@@ -108,9 +108,9 @@ export function StorageCenter() {
   return (
     <main className={styles.page}>
       <header>
-        <p>Storage · this device</p>
+        <p>On this device</p>
         <h1>What’s tucked away here.</h1>
-        <span>Plain numbers, no IndexedDB archaeology required.</span>
+        <span>Just the useful numbers. No browser-storage archaeology.</span>
       </header>
       <section className={styles.storageGrid}>
         <article>

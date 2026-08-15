@@ -16,8 +16,8 @@ export function WelcomeBack() {
   return (
     <aside className={styles.welcome} role="status">
       <div>
-        <b>Welcome back.</b>
-        <span>Your notebook waited. Very professionally.</span>
+        <b>Hey, you are back.</b>
+        <span>Your notebook stayed exactly where you left it.</span>
       </div>
       <button onClick={() => setShow(false)} aria-label="Dismiss welcome back message">
         Okay

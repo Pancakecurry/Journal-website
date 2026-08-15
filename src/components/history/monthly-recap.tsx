@@ -61,7 +61,7 @@ export function MonthlyRecap({ month }: { month: string }) {
   return (
     <article className={styles.recap}>
       <header>
-        <p>Monthly recap · desk</p>
+        <p>This month</p>
         <h1>
           {new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" }).format(date)}
         </h1>
@@ -75,11 +75,11 @@ export function MonthlyRecap({ month }: { month: string }) {
           <section className={styles.stats} aria-label="Month at a glance">
             <div>
               <strong>{days.length}</strong>
-              <span>Days with something</span>
+              <span>Days you left a trace</span>
             </div>
             <div>
               <strong>{totals!.moments}</strong>
-              <span>Little moments</span>
+              <span>Things you jotted down</span>
             </div>
             <div>
               <strong>{totals!.journals}</strong>

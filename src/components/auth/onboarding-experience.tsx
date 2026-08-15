@@ -18,15 +18,15 @@ export function OnboardingExperience() {
   if (identity.loading || !identity.userId)
     return (
       <main className="identity-loading">
-        <p>Preparing a clean notebook…</p>
+        <p>Clearing a spot on the desk…</p>
       </main>
     );
   return (
     <main className={styles.authPage}>
       <section className={styles.paper}>
-        <p className={styles.eyebrow}>A two-minute setup, minus the two minutes</p>
-        <h1>Make it feel like yours.</h1>
-        <p>Pick a stationery accent. Morning and evening questions stay optional either way.</p>
+        <p className={styles.eyebrow}>A very short setup</p>
+        <h1>Pick the version that feels like you.</h1>
+        <p>Choose a color. Check-ins stay optional. You can change all of this later.</p>
         <fieldset>
           <legend>Notebook accent</legend>
           <div className={styles.swatches}>

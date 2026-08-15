@@ -37,7 +37,7 @@ export function HistoricalDay() {
   const load = useCallback(async () => {
     if (!localDate) return;
     setBundle(await repository.getDay(LOCAL_FOUNDATION_USER_ID, localDate));
-    setStatus("Read-first view · you can still change things.");
+    setStatus("Have a look around. You can still change anything.");
   }, [localDate, repository]);
   useEffect(() => {
     if (!localDate) return;
@@ -64,7 +64,7 @@ export function HistoricalDay() {
   if (!localDate)
     return (
       <div className={styles.notebook}>
-        <h1>That date got a little weird.</h1>
+        <h1>That date does not quite exist.</h1>
         <Link href="/today">Back to Today</Link>
       </div>
     );
@@ -102,10 +102,10 @@ export function HistoricalDay() {
           </div>
         </header>
         <section aria-labelledby="day-pieces">
-          <h2 id="day-pieces">What was here</h2>
+          <h2 id="day-pieces">What made it onto the page</h2>
           {bundle.moments.filter((item) => item.content.kind !== "mood").length === 0 ? (
             <div className={styles.empty}>
-              <p>Nothing written down for this one.</p>
+              <p>Nothing here yet. Your memory is still allowed to arrive late.</p>
               <button onClick={() => setCapture(true)}>Backfill something</button>
             </div>
           ) : (

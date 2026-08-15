@@ -59,9 +59,9 @@ export function TrackerIndex() {
   return (
     <section className={styles.notebook}>
       <header>
-        <p>Trackers · notebook</p>
-        <h1>Keep tabs on whatever.</h1>
-        <span>Coffee, headaches, movies, good hair days. Your life, your labels.</span>
+        <p>Your little logs</p>
+        <h1>Notice whatever you feel like.</h1>
+        <span>Coffee, headaches, films, good hair days. Nothing here has to be productive.</span>
         <button onClick={() => setCreating(!creating)}>
           {creating ? "Never mind" : "+ New tracker"}
         </button>
@@ -102,7 +102,7 @@ export function TrackerIndex() {
         </div>
       ) : null}
       {trackers === null ? (
-        <p>Opening the divider…</p>
+        <p>Finding your tracker pages…</p>
       ) : trackers.length === 0 ? (
         <div className={styles.empty}>
           <h2>Nothing tracked. Also fine.</h2>
@@ -165,7 +165,7 @@ export function TrackerDetail({ id }: { id: string }) {
   if (!tracker)
     return (
       <section className={styles.notebook}>
-        <h1>That tracker wandered off.</h1>
+        <h1>That tracker is not here anymore.</h1>
         <Link href="/me/trackers">Back to trackers</Link>
       </section>
     );

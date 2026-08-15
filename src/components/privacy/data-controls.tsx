@@ -39,9 +39,9 @@ export function DataControls() {
   return (
     <main className={styles.dataPage}>
       <header>
-        <p>Data controls · careful bit</p>
-        <h1>Your journal has an exit. And an eraser.</h1>
-        <span>Export first if there’s anything you may want later.</span>
+        <p>Your data</p>
+        <h1>You can take it with you. You can also delete it.</h1>
+        <span>If you might miss anything, export a copy first.</span>
       </header>
       <section>
         <div>

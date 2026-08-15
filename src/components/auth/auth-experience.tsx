@@ -66,8 +66,8 @@ export function AuthExperience({ configured }: { configured: boolean }) {
     return (
       <main className={styles.authPage}>
         <section className={styles.paper}>
-          <p className={styles.eyebrow}>Local development notebook</p>
-          <h1>This is your private space.</h1>
+          <p className={styles.eyebrow}>Local notebook</p>
+          <h1>Your journal is right here.</h1>
           <p>
             Supabase is not configured, so this checkout uses the local-only foundation identity.
             Production builds do not get an account bypass.
@@ -82,8 +82,10 @@ export function AuthExperience({ configured }: { configured: boolean }) {
   return (
     <main className={styles.authPage}>
       <section className={styles.paper}>
-        <p className={styles.eyebrow}>Campus Atelier · private journal</p>
-        <h1>{mode === "create" ? "Make this space yours." : "This is your private space."}</h1>
+        <p className={styles.eyebrow}>Campus Atelier</p>
+        <h1>
+          {mode === "create" ? "Make yourself a little corner." : "Welcome back to your corner."}
+        </h1>
         <p>
           {mode === "recover"
             ? "We’ll send a private recovery link. No dramatic speeches required."
@@ -136,8 +138,10 @@ export function AuthExperience({ configured }: { configured: boolean }) {
         </nav>
       </section>
       <aside className={styles.note} aria-label="Privacy note">
-        <b>Private by default</b>
-        <span>Core writing is kept on this device first. Sync uses your verified account.</span>
+        <b>Your writing starts here</b>
+        <span>
+          New pages save on this device first. Sync only uses the account you signed in with.
+        </span>
       </aside>
     </main>
   );

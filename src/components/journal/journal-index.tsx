@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import type { JournalSummary } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalHistoryRepository } from "@/infrastructure/local/history-repository";
@@ -8,6 +9,7 @@ import { LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib/journal-session";
 import styles from "./journal-index.module.css";
 const PAGE_SIZE = 20;
 export function JournalIndex() {
+  const reduceMotion = useReducedMotion();
   const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
   const [items, setItems] = useState<JournalSummary[] | null>(null);
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
@@ -46,21 +48,27 @@ export function JournalIndex() {
   }
   return (
     <section className={styles.notebook}>
-      <header>
+      <motion.header
+        initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
         <div>
-          <p>Journal · notebook</p>
+          <p>Journal</p>
           <h1>The longer stuff.</h1>
           <span>Previews stay light. Full pages open only when you ask.</span>
         </div>
-        <label>
-          <input
-            type="checkbox"
-            checked={bookmarkedOnly}
-            onChange={(event) => setBookmarkedOnly(event.target.checked)}
-          />{" "}
-          Bookmarked
-        </label>
-      </header>
+        <div className={styles.libraryTools}>
+          <small>{items?.length ?? 0} pages on this shelf</small>
+          <label>
+            <input
+              type="checkbox"
+              checked={bookmarkedOnly}
+              onChange={(event) => setBookmarkedOnly(event.target.checked)}
+            />
+            <span>Bookmarked only</span>
+          </label>
+        </div>
+      </motion.header>
       {items === null ? (
         <p className={styles.loading}>Finding your pages…</p>
       ) : items.length === 0 ? (
@@ -75,9 +83,19 @@ export function JournalIndex() {
         </div>
       ) : (
         <>
-          <ol>
-            {items.map((entry) => (
-              <li key={entry.id}>
+          <ol className={styles.libraryGrid}>
+            {items.map((entry, index) => (
+              <motion.li
+                key={entry.id}
+                initial={
+                  reduceMotion ? false : { opacity: 0, y: 18, rotate: index % 2 ? 0.3 : -0.3 }
+                }
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                transition={{
+                  duration: 0.42,
+                  delay: reduceMotion ? 0 : Math.min(index, 6) * 0.045,
+                }}
+              >
                 <time>
                   {readableDate(entry.localDate, {
                     month: "short",
@@ -100,7 +118,7 @@ export function JournalIndex() {
                   </button>
                   <Link href={`/day/${entry.localDate}`}>See the Day</Link>
                 </div>
-              </li>
+              </motion.li>
             ))}
           </ol>
           {items.length >= PAGE_SIZE ? (

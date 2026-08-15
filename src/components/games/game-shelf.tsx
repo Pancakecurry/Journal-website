@@ -22,10 +22,10 @@ export function GameShelf() {
   return (
     <main className={styles.shelf}>
       <header>
-        <p>Desk-break drawer · local only</p>
+        <p>Desk-break drawer</p>
         <h1>Nothing useful in here.</h1>
         <span>
-          {"That's why it's good. Sound is off. There are no streaks, coins, or leaderboards."}
+          {"That's the point. Take five minutes. There are no streaks, coins, or leaderboards."}
         </span>
         <Link href="/my-world">Back to your desk</Link>
       </header>

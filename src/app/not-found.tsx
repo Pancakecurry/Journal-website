@@ -6,9 +6,9 @@ export default function NotFound() {
     <DeskSurface>
       <FocusPaper>
         <Label>Page not found</Label>
-        <h1>That page is not in this notebook.</h1>
-        <p>No journal data was changed.</p>
-        <Link href="/today">Return to Today</Link>
+        <h1>That page has wandered off.</h1>
+        <p>Your journal is fine. This link just leads nowhere useful.</p>
+        <Link href="/today">Back to today</Link>
       </FocusPaper>
     </DeskSurface>
   );

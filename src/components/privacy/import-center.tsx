@@ -16,8 +16,8 @@ export function ImportCenter() {
   return (
     <main className={styles.importPage}>
       <header>
-        <p>Restore · bring the notebook back</p>
-        <h1>Inspect first. Restore second.</h1>
+        <p>Bring a notebook back</p>
+        <h1>Check the box before unpacking it.</h1>
         <span>
           Existing history is preserved. Conflicting IDs become separate records instead of silent
           overwrites.

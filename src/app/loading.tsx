@@ -4,8 +4,8 @@ export default function Loading() {
   return (
     <DeskSurface>
       <Sheet aria-busy="true" aria-live="polite">
-        <Label>Opening your notebook</Label>
-        <p>Restoring what is available on this device…</p>
+        <Label>Getting your notebook</Label>
+        <p>Putting your local pages back where you left them…</p>
       </Sheet>
     </DeskSurface>
   );

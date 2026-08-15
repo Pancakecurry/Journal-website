@@ -10,6 +10,7 @@ const drawers = [
     title: "Personalization",
     detail: "Paper, cover, color, motion, and how lived-in the desk gets.",
     tone: "accent",
+    group: "Make it yours",
   },
   {
     href: "/me/privacy",
@@ -17,6 +18,7 @@ const drawers = [
     title: "Privacy & AI",
     detail: "AI is off by default. Choose exactly what it may read, or leave it alone.",
     tone: "ink",
+    group: "Privacy and ownership",
   },
   {
     href: "/me/export",
@@ -24,6 +26,7 @@ const drawers = [
     title: "Export my journal",
     detail: "Take a readable copy, structured data, photos, and doodles with you.",
     tone: "paper",
+    group: "Privacy and ownership",
   },
   {
     href: "/me/import",
@@ -31,6 +34,7 @@ const drawers = [
     title: "Restore an archive",
     detail: "Inspect a Campus Atelier backup, then bring it back without silent overwrites.",
     tone: "paper",
+    group: "Privacy and ownership",
   },
   {
     href: "/me/trackers",
@@ -38,6 +42,7 @@ const drawers = [
     title: "Trackers",
     detail: "The odd little things you care about. No scores, no nagging.",
     tone: "sage",
+    group: "Make it yours",
   },
   {
     href: "/me/install",
@@ -45,6 +50,7 @@ const drawers = [
     title: "Install the journal",
     detail: "Keep it on this device and understand offline startup.",
     tone: "accent",
+    group: "On this device",
   },
   {
     href: "/me/storage",
@@ -52,6 +58,7 @@ const drawers = [
     title: "Storage on this device",
     detail: "Local space, photos, persistence, and what the browser can promise.",
     tone: "sage",
+    group: "On this device",
   },
   {
     href: "/me/data",
@@ -59,15 +66,17 @@ const drawers = [
     title: "Data controls",
     detail: "See the deletion path before you ever need it.",
     tone: "quiet",
+    group: "Privacy and ownership",
   },
 ] as const;
 
 export default function MePage() {
+  const groups = ["Make it yours", "Privacy and ownership", "On this device"] as const;
   return (
     <main className={styles.mePage}>
       <header>
         <div>
-          <p>Me · notebook cabinet</p>
+          <p>Me</p>
           <h1>Your journal, on your terms.</h1>
         </div>
         <aside>
@@ -82,15 +91,24 @@ export default function MePage() {
           <small>Filed by you</small>
         </div>
         <div className={styles.drawers}>
-          {drawers.map((item) => (
-            <Link href={item.href} key={item.href} data-tone={item.tone}>
-              <i aria-hidden="true">{item.mark}</i>
+          {groups.map((group) => (
+            <section className={styles.drawerGroup} key={group}>
+              <h2>{group}</h2>
               <div>
-                <h2>{item.title}</h2>
-                <p>{item.detail}</p>
+                {drawers
+                  .filter((item) => item.group === group)
+                  .map((item) => (
+                    <Link href={item.href} key={item.href} data-tone={item.tone}>
+                      <i aria-hidden="true">{item.mark}</i>
+                      <span>
+                        <strong>{item.title}</strong>
+                        <small>{item.detail}</small>
+                      </span>
+                      <b aria-hidden="true">→</b>
+                    </Link>
+                  ))}
               </div>
-              <b aria-hidden="true">→</b>
-            </Link>
+            </section>
           ))}
         </div>
       </section>

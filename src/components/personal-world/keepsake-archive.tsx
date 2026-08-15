@@ -27,9 +27,9 @@ export function KeepsakeArchive() {
   return (
     <main className={styles.archive}>
       <header>
-        <p>Keepsakes · tucked away</p>
-        <h1>The bits you meant to keep handy.</h1>
-        <span>No boards. No collecting contest. Just a short way back.</span>
+        <p>Your keepsakes</p>
+        <h1>The bits you wanted an easier way back to.</h1>
+        <span>No collecting contest. Just things you chose to keep close.</span>
         <Link href="/my-world">Back to your desk</Link>
       </header>
       {items === undefined ? (

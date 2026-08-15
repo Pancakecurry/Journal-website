@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { DaySummary } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalHistoryRepository } from "@/infrastructure/local/history-repository";
@@ -12,6 +13,7 @@ import styles from "./day-index.module.css";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export function DayIndex() {
+  const reduceMotion = useReducedMotion();
   const today = useMemo(() => currentDayContext().localDate, []);
   const router = useRouter();
   const [cursor, setCursor] = useState(() => today.slice(0, 7));
@@ -20,6 +22,7 @@ export function DayIndex() {
     summaries: DaySummary[];
   } | null>(null);
   const [selected, setSelected] = useState<DaySummary | null>(null);
+  const [direction, setDirection] = useState(1);
   const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
   useEffect(() => {
     let alive = true;
@@ -42,6 +45,7 @@ export function DayIndex() {
   function moveMonth(amount: number) {
     const next = new Date(`${cursor}-01T12:00:00`);
     next.setMonth(next.getMonth() + amount);
+    setDirection(amount);
     setCursor(`${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}`);
     setSelected(null);
   }
@@ -49,74 +53,101 @@ export function DayIndex() {
     <section className={styles.calendar}>
       <header>
         <div>
-          <p>Calendar · notebook</p>
+          <p>Calendar</p>
           <h1>When was that again?</h1>
           <span>Marks mean something lives there. They are not a score.</span>
         </div>
-        <Link href={`/calendar/${cursor}/recap`}>Open monthly recap</Link>
       </header>
-      <div className={styles.monthControls}>
-        <button onClick={() => moveMonth(-1)} aria-label="Previous month">
-          ←
-        </button>
-        <h2 aria-live="polite">
-          {new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" }).format(date)}
-        </h2>
-        <button onClick={() => moveMonth(1)} aria-label="Next month">
-          →
-        </button>
-      </div>
-      <div className={styles.weekdays} aria-hidden="true">
-        {WEEKDAYS.map((day) => (
-          <span key={day}>{day}</span>
-        ))}
-      </div>
-      {summaries === null ? (
-        <div className={styles.loading}>Lining up the pages…</div>
-      ) : (
-        <div className={styles.grid} aria-label="Month planner">
-          {cells.map((number, index) => {
-            if (!number) return <span className={styles.blank} key={`blank-${index}`} />;
-            const localDate = `${cursor}-${String(number).padStart(2, "0")}`;
-            const summary = byDate.get(localDate as DaySummary["localDate"]);
-            return (
-              <button
-                key={localDate}
-                className={`${styles.day} ${localDate === today ? styles.today : ""}`}
-                onClick={() => (summary ? setSelected(summary) : router.push(`/day/${localDate}`))}
-              >
-                <time dateTime={localDate}>{number}</time>
-                {summary ? (
-                  <span className={styles.marks} aria-label={summaryLabel(summary)}>
-                    {summary.mood ? <i data-mark="mood" /> : null}
-                    {summary.photoCount ? <i data-mark="photo" /> : null}
-                    {summary.journalCount ? <i data-mark="journal" /> : null}
-                    {summary.momentCount || summary.reflectionCount || summary.trackerCount ? (
-                      <i data-mark="note" />
-                    ) : null}
-                  </span>
-                ) : null}
-              </button>
-            );
-          })}
+      <div className={styles.calendarStage}>
+        <div className={styles.planner}>
+          <div className={styles.monthControls}>
+            <button onClick={() => moveMonth(-1)} aria-label="Previous month">
+              ←
+            </button>
+            <h2 aria-live="polite">
+              {new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" }).format(date)}
+            </h2>
+            <button onClick={() => moveMonth(1)} aria-label="Next month">
+              →
+            </button>
+          </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              className={styles.monthPage}
+              key={cursor}
+              initial={reduceMotion ? false : { opacity: 0, x: direction * 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={reduceMotion ? undefined : { opacity: 0, x: direction * -14 }}
+              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.weekdays} aria-hidden="true">
+                {WEEKDAYS.map((day) => (
+                  <span key={day}>{day}</span>
+                ))}
+              </div>
+              {summaries === null ? (
+                <div className={styles.loading}>Lining up the pages…</div>
+              ) : (
+                <div className={styles.grid} aria-label="Month planner">
+                  {cells.map((number, index) => {
+                    if (!number) return <span className={styles.blank} key={`blank-${index}`} />;
+                    const localDate = `${cursor}-${String(number).padStart(2, "0")}`;
+                    const summary = byDate.get(localDate as DaySummary["localDate"]);
+                    return (
+                      <button
+                        key={localDate}
+                        className={`${styles.day} ${localDate === today ? styles.today : ""}`}
+                        onClick={() =>
+                          summary ? setSelected(summary) : router.push(`/day/${localDate}`)
+                        }
+                      >
+                        <time dateTime={localDate}>{number}</time>
+                        {summary ? (
+                          <span className={styles.marks} aria-label={summaryLabel(summary)}>
+                            {summary.mood ? <i data-mark="mood" /> : null}
+                            {summary.photoCount ? <i data-mark="photo" /> : null}
+                            {summary.journalCount ? <i data-mark="journal" /> : null}
+                            {summary.momentCount ||
+                            summary.reflectionCount ||
+                            summary.trackerCount ? (
+                              <i data-mark="note" />
+                            ) : null}
+                          </span>
+                        ) : null}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
-      )}
-      {selected ? (
-        <aside className={styles.preview} aria-labelledby="day-preview-title">
-          <button
-            className={styles.close}
-            onClick={() => setSelected(null)}
-            aria-label="Close day preview"
-          >
-            ×
-          </button>
-          <p>Day preview</p>
-          <h2 id="day-preview-title">{readableDate(selected.localDate)}</h2>
-          <strong>{selected.preview || "A few things are tucked into this page."}</strong>
-          <span>{summaryLabel(selected)}</span>
-          <Link href={`/day/${selected.localDate}`}>Open the Day</Link>
+        <aside className={styles.indexPanel} aria-live="polite">
+          {selected ? (
+            <div className={styles.preview} aria-labelledby="day-preview-title">
+              <button
+                className={styles.close}
+                onClick={() => setSelected(null)}
+                aria-label="Close day preview"
+              >
+                ×
+              </button>
+              <p>Open page</p>
+              <h2 id="day-preview-title">{readableDate(selected.localDate)}</h2>
+              <strong>{selected.preview || "A few things are tucked into this page."}</strong>
+              <span>{summaryLabel(selected)}</span>
+              <Link href={`/day/${selected.localDate}`}>Open the Day</Link>
+            </div>
+          ) : (
+            <div className={styles.monthNote}>
+              <span aria-hidden="true">{String(date.getMonth() + 1).padStart(2, "0")}</span>
+              <h2>{summaries?.length ?? 0} days have something in them.</h2>
+              <p>Pick a marked day for a quick look. Empty days open directly.</p>
+              <Link href={`/calendar/${cursor}/recap`}>Open monthly recap</Link>
+            </div>
+          )}
         </aside>
-      ) : null}
+      </div>
     </section>
   );
 }

@@ -58,9 +58,9 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span aria-hidden="true">⌕</span> <b>Find something</b>
             </Link>
           )}
-          <Link className={styles.add} href="/today#quick-capture">
+          <a className={styles.add} href="/today#quick-capture">
             + Add to Today
-          </Link>
+          </a>
           <div className={styles.statusArea}>
             <NetworkStatus />
             <SyncCoordinator />

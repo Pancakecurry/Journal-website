@@ -67,8 +67,8 @@ export function JournalResearch() {
   return (
     <main className={styles.researchPage}>
       <header className={styles.researchHero}>
-        <p>Journal research desk</p>
-        <h1>Follow a thread through your days.</h1>
+        <p>Look across your journal</p>
+        <h1>Follow that thought through your days.</h1>
         <span>
           Meaning-based search is optional. Ordinary Search remains local and right where you left
           it.
@@ -152,8 +152,8 @@ export function JournalResearch() {
       ) : null}
       {answer ? (
         <section className={styles.answer}>
-          <p>Grounded synthesis</p>
-          <h2>Here’s what those pages support.</h2>
+          <p>What the pages actually say</p>
+          <h2>Here is the thread we can honestly see.</h2>
           <div>{answer.answer}</div>
           {answer.uncertainty ? <small>{answer.uncertainty}</small> : null}
           <p className={styles.ephemeral}>

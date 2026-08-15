@@ -56,3 +56,9 @@ My World objects remain semantic links in a readable source order even when the 
 ## Verification expectation
 
 Future feature tasks should define applicable accessibility acceptance criteria, add automated checks where valuable, and include manual verification for interactions automation cannot establish. Any unverified requirement must be disclosed.
+
+## Phase 5 hardening
+
+Automated browser checks now run axe against the primary journaling, history, personal-world, privacy, export, personalization, and intelligence routes. A reflow check uses a 640 CSS-pixel viewport as the browser equivalent of 200% zoom on a 1280-pixel desktop, and a reduced-motion run verifies that core controls stay operable. These checks supplement—not replace—keyboard and screen-reader review.
+
+AI scope choices use semantic checkboxes and never rely on color. Source references precede generated synthesis. Export progress uses native progress semantics and cancellation remains keyboard reachable. Game controls have button/keyboard paths, touch targets, readable session state, timer cleanup, and a non-animated reduced-motion mode. The redesigned personalization preview is decorative support; every choice also has a visible label and pressed/selected state.

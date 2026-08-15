@@ -73,15 +73,15 @@ Personality emerges from authorship and accumulated use. Play stays inside My Wo
 
 ## Phase 5 — Intelligence, Privacy & Hardening
 
-| Task | Outcome                    |
-| ---- | -------------------------- |
-| 028  | Semantic memory            |
-| 029  | Optional journal assistant |
-| 030  | AI privacy controls        |
-| 031  | Export and data ownership  |
-| 032  | Accessibility hardening    |
-| 033  | Performance hardening      |
-| 034  | Security review            |
+| Task | Outcome                    | Status   |
+| ---- | -------------------------- | -------- |
+| 028  | Semantic memory            | Complete |
+| 029  | Optional journal assistant | Complete |
+| 030  | AI privacy controls        | Complete |
+| 031  | Export and data ownership  | Complete |
+| 032  | Accessibility hardening    | Complete |
+| 033  | Performance hardening      | Complete |
+| 034  | Security review            | Complete |
 
 Core journaling remains fully useful without AI. AI work requires transparent processing boundaries and meaningful user control before access to private content.
 
@@ -98,4 +98,4 @@ Hardening tasks deepen continuous responsibilities; they do not defer accessibil
 
 ## Current gate
 
-The next recommended work is **Phase 5 — Intelligence, Privacy & Hardening**. It must not begin without separate authorization, and optional intelligence must not get ahead of consent, export, or security boundaries.
+The next recommended work is **Phase 6 — Installability & Release Polish**. It must not begin without separate authorization. Production release remains gated on configured Supabase/RLS verification, configured-provider AI verification, representative-device profiling, and the unresolved risks in the security threat model.

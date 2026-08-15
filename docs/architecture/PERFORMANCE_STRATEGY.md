@@ -44,3 +44,18 @@ No performance number is claimed as a production guarantee from this local envir
 - Doodles keep normalized structured strokes for editing, draw pointer-move segments incrementally, cap canvas device-pixel ratio at two, and store one bounded JPEG preview.
 - Games are dynamically imported only when their drawer is opened. Timers are cleared on exit/unmount and game state is discarded rather than persisted into the journal.
 - The Phase 4 long-term fixture verifies 720 indexed Days without changing My World's query shape. Browser performance remains subject to representative-device profiling in Phase 5 hardening.
+
+## Phase 5 mature-journal budgets
+
+- Semantic source text is split at 1,800 characters with bounded overlap. Incremental fingerprints avoid re-embedding unchanged chunks; external calls contain at most 16 chunks per batch.
+- Query retrieval considers at most 5,000 local chunks, returns at most 20 results, and sends at most eight sources or 12,000 characters for synthesis. Beyond that candidate ceiling, a future local/approximate vector index is required rather than an unbounded scan.
+- Semantic and export modules load only on their dedicated routes. Both games remain dynamically imported from their desk drawer, and their animation loops/timers stop on unmount.
+- Complete export reads canonical structure once, reports asset progress, checks cancellation between stages, and compresses binary files without converting media to giant strings. Browser ZIP output is still accumulated before download; multi-gigabyte archives need a future file-system streaming sink.
+- AI routes cap body sizes and context. Indexing is deliberate user work rather than an automatic operation on every keystroke.
+- My World decoration is CSS/material composition; routes that do not use it do not download game code or journal media.
+
+The large deterministic history fixture remains the repeatable personal-scale regression case: 1,050 Days, 3,150 Moments, and 350 journals. Semantic tests additionally assert batch width, incremental work, deletion, and retrieval bounds. Build output and browser checks are recorded per delivery because local compile duration, disk pressure, and development caches are environment-dependent.
+
+## Phase 6 follow-up
+
+Collect Web Vitals and long-task telemetry on representative mobile hardware; establish route and asset budgets in CI; evaluate a Web Worker for larger semantic indexes; stream large exports directly to a user-selected file where supported; and profile My World/game battery behavior over sustained sessions. None of these should weaken the current bounds.

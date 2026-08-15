@@ -73,29 +73,29 @@ Personality emerges from authorship and accumulated use. Play stays inside My Wo
 
 ## Phase 5 — Intelligence, Privacy & Hardening
 
-| Task | Outcome                    |
-| ---- | -------------------------- |
-| 028  | Semantic memory            |
-| 029  | Optional journal assistant |
-| 030  | AI privacy controls        |
-| 031  | Export and data ownership  |
-| 032  | Accessibility hardening    |
-| 033  | Performance hardening      |
-| 034  | Security review            |
+| Task | Outcome                    | Status   |
+| ---- | -------------------------- | -------- |
+| 028  | Semantic memory            | Complete |
+| 029  | Optional journal assistant | Complete |
+| 030  | AI privacy controls        | Complete |
+| 031  | Export and data ownership  | Complete |
+| 032  | Accessibility hardening    | Complete |
+| 033  | Performance hardening      | Complete |
+| 034  | Security review            | Complete |
 
 Core journaling remains fully useful without AI. AI work requires transparent processing boundaries and meaningful user control before access to private content.
 
 ## Phase 6 — Installability & Release Polish
 
-| Task | Outcome                     |
-| ---- | --------------------------- |
-| 035  | PWA and installability      |
-| 036  | Native packaging evaluation |
-| 037  | Beta                        |
-| 038  | Final polish                |
+| Task | Outcome                     | Status   |
+| ---- | --------------------------- | -------- |
+| 035  | PWA and installability      | Complete |
+| 036  | Native packaging evaluation | Complete |
+| 037  | Beta readiness              | Complete |
+| 038  | Final polish                | Complete |
 
 Hardening tasks deepen continuous responsibilities; they do not defer accessibility, performance, privacy, security, or ownership from earlier work.
 
 ## Current gate
 
-The next recommended work is **Phase 5 — Intelligence, Privacy & Hardening**. It must not begin without separate authorization, and optional intelligence must not get ahead of consent, export, or security boundaries.
+The planned v1.0 product scope is complete. A hosted release is an operational action, not another product phase: configure Supabase and deployment secrets, apply and verify migrations/RLS, and perform the documented production smoke test. Optional live AI requires its own provider credentials and consent review.

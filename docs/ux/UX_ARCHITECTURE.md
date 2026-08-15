@@ -60,7 +60,11 @@ Journal is a chronological route into longer writing, reflections, and relevant 
 
 Trackers are open-ended personal notation—coffee, sleep, called home, headaches, movies, exercise, a good hair day, or anything else. The product does not decide what deserves tracking. Notebook-like visualization is preferred over business analytics; trackers must not create scores, streak pressure, or a productivity hierarchy.
 
-Search is a near-global utility, not a sixth primary product area. It searches locally available words and dates with conventional matching, clear empty states, and Day-preserving results. It never implies semantic understanding.
+Search is a near-global utility, not a sixth primary product area. Conventional Search always searches locally available words and dates with clear empty states and Day-preserving results. Optional Journal Research may add meaning-based recall and grounded synthesis, but it stays source-first, consent-gated, visually native to the notebook, and unnecessary for ordinary retrieval.
+
+## Privacy and data ownership
+
+Me groups serious controls as a readable private cabinet rather than an enterprise settings panel. AI permissions use category-specific choices and explain local versus external work. The off state removes optional entry points without weakening conventional Search. Export offers readable, structured, and complete copies; local deletion uses literal language and explicit confirmation. Beauty never obscures what leaves the device, what is derived, or what will be deleted.
 
 ## My World
 

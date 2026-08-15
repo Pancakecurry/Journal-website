@@ -2,16 +2,25 @@
 .library {
   min-height: 100vh;
   padding: clamp(1rem, 4vw, 3rem);
-  background: #c9b69a;
+  background:
+    radial-gradient(circle at 82% 6%, rgb(255 251 238 / 34%), transparent 22%),
+    linear-gradient(145deg, #cdbb9f, #b69d7d);
 }
 .studio > header,
 .library > header {
   display: flex;
-  max-width: 68rem;
+  max-width: 72rem;
   margin: 0 auto 1.2rem;
   align-items: end;
   justify-content: space-between;
   gap: 1rem;
+}
+.studio > header,
+.library > header {
+  padding: 1.4rem;
+  border: 1px solid rgb(72 57 40 / 20%);
+  background: rgb(248 242 229 / 72%);
+  box-shadow: 0 14px 34px rgb(60 44 28 / 9%);
 }
 .studio header p,
 .library header p {
@@ -35,15 +44,24 @@
   gap: 0.7rem;
 }
 .tools {
+  position: relative;
+  z-index: 2;
   display: flex;
-  max-width: 68rem;
+  max-width: 66rem;
   margin: auto;
   padding: 0.75rem;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.55rem;
-  border: 1px solid #a79579;
+  border: 1px solid #8f806b;
   background: var(--paper-cream);
+}
+.tools::before {
+  content: "TOOLS";
+  margin-right: 0.3rem;
+  color: var(--ink-500);
+  font: 700 0.58rem var(--font-numeric);
+  letter-spacing: 0.12em;
 }
 .tools button,
 .tools select {
@@ -57,6 +75,10 @@
   background: var(--accent);
   border-color: var(--ink-900);
 }
+.tools button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 2px 3px 0 color-mix(in srgb, var(--accent) 50%, transparent);
+}
 .tools label {
   display: flex;
   align-items: center;
@@ -64,23 +86,35 @@
 }
 .canvas {
   display: block;
-  width: min(100%, 68rem);
+  width: min(calc(100% - 2rem), 68rem);
   height: min(62vh, 42rem);
   min-height: 24rem;
   margin: 0 auto;
-  border: 1px solid #a69b88;
+  border: 1rem solid var(--paper-cool);
+  outline: 1px solid #a69b88;
   background: var(--paper-warm);
   background-image: var(--paper-pattern);
-  box-shadow: var(--shadow-paper);
+  box-shadow:
+    0 2px 3px rgb(55 46 34 / 12%),
+    0 24px 50px rgb(55 46 34 / 17%);
   touch-action: none;
   cursor: crosshair;
+}
+.canvas:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 .details {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  max-width: 68rem;
+  max-width: 66rem;
   margin: 1rem auto 0;
   gap: 0.8rem;
+}
+.details {
+  padding: 1rem;
+  border: 1px solid #a79579;
+  background: var(--paper-cream);
 }
 .details label {
   display: grid;
@@ -95,7 +129,7 @@
 }
 .saveRow {
   display: flex;
-  max-width: 68rem;
+  max-width: 66rem;
   margin: 1rem auto 0;
   gap: 0.7rem;
 }

@@ -115,3 +115,21 @@ Accumulation never depends on XP, currency, streaks, or engagement pressure.
 2. Open the original Day or artifact when wanted.
 3. Hide that item, hide the whole Day, or disable resurfacing in preferences.
 4. Nothing is pushed, scored, or interpreted by AI.
+
+## 14. Explore the journal by meaning
+
+1. In Me → Privacy & AI, the user sees that AI is off and ordinary Search still works.
+2. The user chooses specific content categories, confirms external processing, and explicitly builds a removable meaning index.
+3. Journal Research finds related local excerpts and keeps their dates and source links visible.
+4. Ask My Journal sends only a bounded set of those sources for synthesis; source pages appear before the generated answer.
+5. The answer disappears on leaving. The user can turn AI off or delete the derived index without deleting original writing.
+
+When configuration, consent, or connectivity is missing, the app says so plainly and routes back to conventional on-device Search.
+
+## 15. Take the journal elsewhere
+
+1. The user opens Me → Export & ownership.
+2. They choose readable Markdown, structured JSON, or a complete ZIP with locally available media.
+3. Progress and cancellation remain visible while a large archive is assembled on the device.
+4. The download contains format/version metadata and excludes derived embeddings and temporary AI answers.
+5. Local deletion remains a separate, typed confirmation and never implies that unconfigured remote account data was deleted.

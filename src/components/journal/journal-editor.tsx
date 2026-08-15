@@ -9,6 +9,7 @@ import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalJournalRepository } from "@/infrastructure/local/journal-repository";
 import { readableDate } from "@/lib/journal-session";
 import styles from "./journal-editor.module.css";
+import { storageFailureMessage } from "@/lib/storage-errors";
 
 export function JournalEditor() {
   const { id } = useParams<{ id: string }>();
@@ -56,9 +57,27 @@ export function JournalEditor() {
               : "Saved here while you're offline.",
           );
         })
-        .catch(() => setStatus("Couldn't save that yet. Keep this tab open and try another edit."));
+        .catch((error) =>
+          setStatus(
+            storageFailureMessage(
+              error,
+              "Couldn't save that yet. Keep this tab open and try another edit.",
+            ),
+          ),
+        );
     }, 650);
     return () => window.clearTimeout(timeout);
+  }, [body, entry, repository, title]);
+
+  useEffect(() => {
+    if (!entry) return;
+    const flush = () => {
+      void repository
+        .saveJournal(entry.id, title, body)
+        .finally(() => window.dispatchEvent(new Event("campus-atelier:drafts-flushed")));
+    };
+    window.addEventListener("campus-atelier:flush-drafts", flush);
+    return () => window.removeEventListener("campus-atelier:flush-drafts", flush);
   }, [body, entry, repository, title]);
 
   async function remove() {

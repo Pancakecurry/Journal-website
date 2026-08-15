@@ -20,7 +20,17 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  await client.auth.getClaims();
+  const { data } = await client.auth.getClaims();
+  const pathname = request.nextUrl.pathname;
+  const isProductRoute =
+    /^\/(today|calendar|day|journal|search|my-world|me|reflection|onboarding)(\/|$)/.test(pathname);
+  if (isProductRoute && !data?.claims?.sub) {
+    const authUrl = new URL("/auth", request.url);
+    authUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(authUrl);
+  }
+  if (pathname === "/auth" && data?.claims?.sub)
+    return NextResponse.redirect(new URL("/today", request.url));
   return response;
 }
 

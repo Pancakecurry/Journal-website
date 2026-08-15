@@ -8,22 +8,22 @@ Task 000 intentionally made no stack decisions. Phase 1 accepted the decisions i
 
 ## Decision status
 
-| Area                   | Status             | Decision                                                                                                                   |
-| ---------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| Frontend framework     | Accepted           | Next.js App Router with React and strict TypeScript ([ADR-001](adr/001-application-architecture.md))                       |
-| Runtime                | Accepted           | Node.js LTS-compatible runtime; browser client for local-first operations ([ADR-001](adr/001-application-architecture.md)) |
-| Primary database       | Accepted           | Supabase-managed PostgreSQL with RLS ([ADR-003](adr/003-cloud-data-and-auth.md))                                           |
-| Local database/storage | Accepted           | IndexedDB through Dexie, versioned locally ([ADR-002](adr/002-local-persistence.md))                                       |
-| Server architecture    | Accepted           | Next.js server boundaries plus Supabase Data API protected by RLS ([ADR-003](adr/003-cloud-data-and-auth.md))              |
-| Authentication         | Accepted           | Supabase Auth with cookie-based SSR integration ([ADR-003](adr/003-cloud-data-and-auth.md))                                |
-| File/media storage     | Accepted           | Local IndexedDB blobs pending upload; private Supabase Storage remotely ([ADR-004](adr/004-private-media.md))              |
-| Sync mechanism         | Accepted           | Client outbox, stable IDs, idempotent versioned mutations, pull cursor ([ADR-005](adr/005-synchronization.md))             |
-| Conflict strategy      | Accepted           | Preserve both ambiguous revisions; no silent last-writer data loss ([ADR-005](adr/005-synchronization.md))                 |
-| Deployment provider    | Recommended        | Vercel for Next.js plus Supabase; architecture remains portable ([ADR-009](adr/009-deployment-and-packaging.md))           |
-| PWA technology         | Direction accepted | Web manifest now; service-worker application shell in Task 035 ([ADR-009](adr/009-deployment-and-packaging.md))            |
-| Native wrapper         | Deferred           | Preserve Capacitor/Tauri evaluation path; do not select yet ([ADR-009](adr/009-deployment-and-packaging.md))               |
-| AI provider            | Undecided          | Deferred; AI is optional and post-MVP                                                                                      |
-| Encryption approach    | Undecided          | Requires explicit threat model and verified design                                                                         |
+| Area                   | Status      | Decision                                                                                                                                            |
+| ---------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend framework     | Accepted    | Next.js App Router with React and strict TypeScript ([ADR-001](adr/001-application-architecture.md))                                                |
+| Runtime                | Accepted    | Node.js LTS-compatible runtime; browser client for local-first operations ([ADR-001](adr/001-application-architecture.md))                          |
+| Primary database       | Accepted    | Supabase-managed PostgreSQL with RLS ([ADR-003](adr/003-cloud-data-and-auth.md))                                                                    |
+| Local database/storage | Accepted    | IndexedDB through Dexie, versioned locally ([ADR-002](adr/002-local-persistence.md))                                                                |
+| Server architecture    | Accepted    | Next.js server boundaries plus Supabase Data API protected by RLS ([ADR-003](adr/003-cloud-data-and-auth.md))                                       |
+| Authentication         | Accepted    | Supabase Auth with cookie-based SSR integration ([ADR-003](adr/003-cloud-data-and-auth.md))                                                         |
+| File/media storage     | Accepted    | Local IndexedDB blobs pending upload; private Supabase Storage remotely ([ADR-004](adr/004-private-media.md))                                       |
+| Sync mechanism         | Accepted    | Client outbox, stable IDs, idempotent versioned mutations, pull cursor ([ADR-005](adr/005-synchronization.md))                                      |
+| Conflict strategy      | Accepted    | Preserve both ambiguous revisions; no silent last-writer data loss ([ADR-005](adr/005-synchronization.md))                                          |
+| Deployment provider    | Recommended | Vercel for Next.js plus Supabase; architecture remains portable ([ADR-009](adr/009-deployment-and-packaging.md))                                    |
+| PWA technology         | Accepted    | Project-owned manifest and narrow app-shell service worker ([ADR-013](adr/013-pwa-release-lifecycle.md))                                            |
+| Native wrapper         | Deferred    | Preserve Capacitor/Tauri evaluation path; do not select yet ([ADR-009](adr/009-deployment-and-packaging.md))                                        |
+| AI provider            | Accepted    | Provider-neutral port with an initial optional OpenAI server adapter; local derived vectors ([ADR-012](adr/012-optional-ai-and-semantic-memory.md)) |
+| Encryption approach    | Undecided   | Requires explicit threat model and verified design                                                                                                  |
 
 “Undecided” is deliberate. Product aspirations—private data, secure authentication, offline use, export, backups, app locking, and transparent AI consent—are requirements to design for, not evidence that a mechanism already exists.
 
@@ -68,6 +68,8 @@ How will the decision be validated, reviewed, or revisited?
 - [ADR-009: Deployment and future packaging](adr/009-deployment-and-packaging.md)
 - [ADR-010: Derived local history indexes](adr/010-derived-local-history-indexes.md)
 - [ADR-011: Personal-world references and structured doodles](adr/011-personal-world-references-and-doodles.md)
+- [ADR-012: Optional AI and local semantic memory](adr/012-optional-ai-and-semantic-memory.md)
+- [ADR-013: PWA release and update lifecycle](adr/013-pwa-release-lifecycle.md)
 
 ## Decision criteria used in Phase 1
 

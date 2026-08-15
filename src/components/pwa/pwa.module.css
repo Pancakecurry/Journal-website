@@ -1,0 +1,118 @@
+.update {
+  position: fixed;
+  z-index: 90;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  width: min(38rem, calc(100% - 2rem));
+  padding: 1rem;
+  border: 1px solid var(--ink-900);
+  background: var(--paper-warm);
+  box-shadow: var(--shadow-lift);
+}
+.update div {
+  display: grid;
+  gap: 0.2rem;
+}
+.update span {
+  color: var(--ink-700);
+  font-size: 0.78rem;
+}
+.update button,
+.primary {
+  min-height: 2.75rem;
+  border: 1px solid var(--ink-900);
+  background: var(--ink-900);
+  color: var(--paper-warm);
+  padding: 0.6rem 0.85rem;
+  cursor: pointer;
+}
+.update button:last-child {
+  background: transparent;
+  color: var(--ink-900);
+}
+.page {
+  min-height: 100vh;
+  padding: clamp(1.2rem, 4vw, 4rem);
+  background: var(--paper-warm);
+}
+.page > header {
+  max-width: 52rem;
+}
+.page header > p {
+  font: 700 0.68rem var(--font-ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.page h1 {
+  margin: 0.6rem 0;
+  font: clamp(2.2rem, 6vw, 4.8rem)/0.96 var(--font-editorial);
+}
+.page header span,
+.page article span {
+  color: var(--ink-700);
+}
+.sheet {
+  display: grid;
+  grid-template-columns: 8rem 1fr auto;
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: center;
+  margin: 3rem 0 2rem;
+  padding: clamp(1.2rem, 3vw, 2.5rem);
+  border: 1px solid rgb(49 44 37 / 20%);
+  background: white;
+  box-shadow: 0.8rem 0.8rem 0 color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.iconPreview img {
+  width: 100%;
+  border-radius: 22%;
+}
+.sheet button {
+  min-height: 3rem;
+  border: 1px solid var(--ink-900);
+  background: var(--ink-900);
+  color: white;
+  padding: 0.8rem 1rem;
+}
+.storageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 3rem 0 2rem;
+  background: rgb(49 44 37 / 18%);
+  border: 1px solid rgb(49 44 37 / 18%);
+}
+.storageGrid article {
+  display: grid;
+  gap: 0.55rem;
+  padding: 2rem;
+  background: white;
+}
+.storageGrid strong {
+  font: 2rem var(--font-editorial);
+}
+.storageGrid small {
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+@media (max-width: 760px) {
+  .update {
+    grid-template-columns: 1fr 1fr;
+  }
+  .update div {
+    grid-column: 1/-1;
+  }
+  .sheet {
+    grid-template-columns: 5rem 1fr;
+  }
+  .sheet button {
+    grid-column: 1/-1;
+  }
+  .storageGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -6,6 +6,7 @@ import type { LocalDate } from "@/domain/shared";
 import { prepareImage } from "@/infrastructure/media/image-processing";
 import type { LocalJournalRepository } from "@/infrastructure/local/journal-repository";
 import styles from "./quick-capture.module.css";
+import { storageFailureMessage } from "@/lib/storage-errors";
 
 interface Props {
   open: boolean;
@@ -79,9 +80,7 @@ export function QuickCapture({
       }
       close();
     } catch (reason) {
-      setError(
-        reason instanceof Error ? reason.message : "No luck saving that. Your draft is still here.",
-      );
+      setError(storageFailureMessage(reason, "No luck saving that. Your draft is still here."));
     } finally {
       setBusy(false);
     }

@@ -54,6 +54,10 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
 - Journal library
   - Chronological writing associated with its Day
 - Search/filter
+  - Conventional Search (always available)
+  - Journal Research (optional, consent-gated)
+    - Explore by meaning
+    - Ask My Journal with sources first
 - New entry
   - Focused writing surface
   - Autosave and recovery status
@@ -82,9 +86,13 @@ This is the conceptual hierarchy, not a commitment to routes, component boundari
   - Visible-range notebook history with textual summary
 - Reflection preferences
 - Privacy and data controls
+  - AI scopes, provider state, index removal
 - App lock
 - Offline/sync
 - Export
+  - Structured JSON
+  - Readable Markdown
+  - Complete ZIP with local media
 - Backup
 - Accessibility
 - Appearance

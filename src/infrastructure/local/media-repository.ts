@@ -1,6 +1,8 @@
 import type { LocalMedia } from "@/domain/media";
 import type { JournalDatabase } from "@/infrastructure/local/database";
 import { nowIso } from "@/domain/shared";
+import { newEntityId } from "@/domain/shared";
+import { OutboxOperationSchema } from "@/domain/sync";
 
 export class LocalMediaRepository {
   constructor(private readonly database: JournalDatabase) {}
@@ -17,7 +19,10 @@ export class LocalMediaRepository {
     return this.database.media
       .where("userId")
       .equals(userId)
-      .filter((item) => item.status === "pending_upload" || item.status === "failed")
+      .filter(
+        (item) =>
+          item.status === "local" || item.status === "pending_upload" || item.status === "failed",
+      )
       .toArray();
   }
 
@@ -54,12 +59,34 @@ export class LocalMediaRepository {
     if (!record) return;
     if (!objectKey.startsWith(`${record.userId}/`))
       throw new Error("Private media key owner mismatch");
-    await this.database.media.update(id, {
+    const updated: LocalMedia = {
+      ...record,
       status: "uploaded",
       objectKey,
       lastError: null,
       updatedAt: nowIso(),
-      syncState: "synced",
+      version: record.version + 1,
+      syncState: "pending",
+    };
+    const timestamp = nowIso();
+    await this.database.transaction("rw", [this.database.media, this.database.outbox], async () => {
+      await this.database.media.put(updated);
+      await this.database.outbox.add(
+        OutboxOperationSchema.parse({
+          operationId: newEntityId(),
+          userId: record.userId,
+          entityType: "media",
+          entityId: id,
+          action: "upsert",
+          expectedVersion: updated.version,
+          payload: updated,
+          status: "pending",
+          attempts: 0,
+          createdAt: timestamp,
+          nextAttemptAt: timestamp,
+          lastError: null,
+        }),
+      );
     });
   }
 }

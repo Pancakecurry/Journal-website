@@ -1,6 +1,6 @@
 {
   "name": "campus-atelier-journal",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Private, Day-centered journaling application foundation.",
@@ -18,13 +18,17 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:pwa": "vitest run src/application/pwa-release.test.ts && playwright test tests/e2e/release-readiness.spec.ts",
     "test:db": "supabase test db",
-    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build"
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build",
+    "verify:release": "npm run verify && npm run test:e2e && npm audit --audit-level=high"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.4",
     "@supabase/supabase-js": "2.112.3",
     "dexie": "4.4.4",
+    "fflate": "0.8.2",
     "motion": "13.1.0",
     "next": "16.3.0",
     "react": "19.2.8",
@@ -32,6 +36,7 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
     "@playwright/test": "1.62.1",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.2",

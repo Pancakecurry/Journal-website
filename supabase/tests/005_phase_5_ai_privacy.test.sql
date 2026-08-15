@@ -1,0 +1,10 @@
+begin;
+select plan(6);
+select col_not_null('public', 'user_preferences', 'ai_enabled', 'AI enabled choice is required');
+select col_not_null('public', 'user_preferences', 'ai_external_processing_consent', 'external processing consent is required');
+select col_not_null('public', 'user_preferences', 'ai_content_scopes', 'AI scopes are required');
+select col_default_is('public', 'user_preferences', 'ai_enabled', 'false', 'AI defaults off');
+select col_default_is('public', 'user_preferences', 'ai_external_processing_consent', 'false', 'external processing defaults off');
+select policies_are('public', 'user_preferences', array['preferences_owner_all'], 'AI privacy choices retain owner-only policy');
+select * from finish();
+rollback;

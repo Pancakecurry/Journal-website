@@ -1,19 +1,12 @@
-import Link from "next/link";
-import { DeskSurface, FocusPaper, Label } from "@/design-system/surfaces";
+import { Suspense } from "react";
+import { AuthExperience } from "@/components/auth/auth-experience";
+import { getRemoteConfiguration } from "@/config/env";
 
-export default function AuthFoundationPage() {
+export default function AuthPage() {
+  const configured = getRemoteConfiguration().configured;
   return (
-    <DeskSurface>
-      <FocusPaper>
-        <Label>Private account foundation</Label>
-        <h1>Your journal stays yours.</h1>
-        <p>
-          Authentication is structurally prepared, but no account provider is configured in this
-          local checkout. Add the documented Supabase public environment values before implementing
-          sign-in flows.
-        </p>
-        <Link href="/today">Continue to the local foundation</Link>
-      </FocusPaper>
-    </DeskSurface>
+    <Suspense fallback={<p>Opening the lock screen…</p>}>
+      <AuthExperience configured={configured} />
+    </Suspense>
   );
 }

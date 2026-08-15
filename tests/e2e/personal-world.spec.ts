@@ -93,9 +93,10 @@ test("both desk games mount lazily and leave navigation clean", async ({ page })
   await page.getByRole("button", { name: /Tiny Fishing/ }).click();
   await expect(page.getByRole("heading", { name: "Tiny Fishing" })).toBeVisible();
   await page.getByRole("button", { name: "Cast" }).click();
-  await expect(page.getByText("Tiny tug!")).toBeVisible();
+  await page.getByRole("button", { name: "Drop the line here" }).click();
+  await expect(page.getByRole("button", { name: "Reel it in" })).toBeVisible({ timeout: 3_000 });
   await page.getByRole("button", { name: "Reel it in" }).click();
-  await expect(page.getByText("A perfectly ordinary fish.")).toBeVisible();
+  await expect(page.getByText("Easy. Keep it in the green.")).toBeVisible();
   await page.getByRole("button", { name: "Put it away" }).click();
   await page.getByRole("link", { name: "Back to your desk" }).click();
   await expect(page).toHaveURL(/\/my-world$/);
@@ -153,6 +154,7 @@ test("keepsakes, doodles, and a loaded desk game remain usable offline", async (
   await page.mouse.up();
   await expect(page.getByRole("button", { name: "Undo" })).toBeEnabled();
   await page.getByRole("button", { name: "Save to Today" }).click();
+  await expect(page.getByText("Saved to Today. Your scribble has an address now.")).toBeVisible();
   await expect
     .poll(() => savedDoodleCount(page), { message: "offline doodle reached IndexedDB" })
     .toBe(1);
@@ -168,7 +170,8 @@ test("keepsakes, doodles, and a loaded desk game remain usable offline", async (
   await page.getByRole("button", { name: /Tiny Fishing/ }).click();
   await expect(page.getByRole("heading", { name: "Tiny Fishing" })).toBeVisible();
   await page.getByRole("button", { name: "Cast" }).click();
-  await expect(page.getByText("Tiny tug!")).toBeVisible();
+  await page.getByRole("button", { name: "Drop the line here" }).click();
+  await expect(page.getByRole("button", { name: "Reel it in" })).toBeVisible({ timeout: 3_000 });
   await page.getByRole("button", { name: "Put it away" }).click();
   await context.setOffline(false);
 });

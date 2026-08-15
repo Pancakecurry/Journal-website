@@ -4,14 +4,25 @@ import { useEffect, useMemo, useState } from "react";
 import type { SearchDocument } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalHistoryRepository } from "@/infrastructure/local/history-repository";
+import { LocalPersonalWorldRepository } from "@/infrastructure/local/personal-world-repository";
 import { LOCAL_FOUNDATION_USER_ID, readableDate } from "@/lib/journal-session";
 import styles from "./search-experience.module.css";
 
 export function SearchExperience() {
   const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
+  const preferencesRepository = useMemo(
+    () => new LocalPersonalWorldRepository(getApplicationDatabase()),
+    [],
+  );
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchDocument[]>([]);
   const [searched, setSearched] = useState(false);
+  const [aiEnabled, setAiEnabled] = useState(false);
+  useEffect(() => {
+    void preferencesRepository
+      .preferences(LOCAL_FOUNDATION_USER_ID)
+      .then((item) => setAiEnabled(item.aiEnabled));
+  }, [preferencesRepository]);
   useEffect(() => {
     const task = window.setTimeout(() => {
       if (!query.trim()) {
@@ -49,6 +60,17 @@ export function SearchExperience() {
             ? "Looking through local pages…"
             : "Try a person, place, phrase, or date."}
       </p>
+      {aiEnabled ? (
+        <aside className={styles.researchNote}>
+          <div>
+            <span>Meaning index</span>
+            <b>Looking for a theme instead of an exact word?</b>
+          </div>
+          <Link href="/journal/research">
+            Open journal research <i aria-hidden="true">→</i>
+          </Link>
+        </aside>
+      ) : null}
       {searched && !results.length ? (
         <div className={styles.empty}>
           <h2>Nope, nothing by that name.</h2>

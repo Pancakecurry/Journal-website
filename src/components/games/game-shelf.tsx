@@ -7,11 +7,11 @@ import { GAME_REGISTRY, type GameId } from "./game-registry";
 import { GameBoundary } from "./game-boundary";
 import styles from "./games.module.css";
 
-const MemoryFlip = dynamic(() => import("./memory-flip"), {
+const MemoryFlip = dynamic(() => import("./memory-flip-v2"), {
   ssr: false,
   loading: () => <p>Opening the card tin…</p>,
 });
-const TinyFishing = dynamic(() => import("./tiny-fishing"), {
+const TinyFishing = dynamic(() => import("./tiny-fishing-v2"), {
   ssr: false,
   loading: () => <p>Untangling the tiny line…</p>,
 });

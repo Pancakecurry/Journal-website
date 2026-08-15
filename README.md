@@ -4,9 +4,9 @@ Campus Atelier Journal is the working codename for a private, playful, local-fri
 
 ## Project status
 
-**Current phase:** Phase 5 — Intelligence, Privacy & Hardening (Tasks 028–034)
+**Current phase:** Phase 6 — v1.0 release candidate (Tasks 035–038 complete)
 
-The repository contains the complete ordinary-Day, history, and Personal World loops plus optional consent-gated semantic memory and grounded journal research, local data export, and dedicated accessibility, performance, and security hardening. Core writing remains local-first and fully usable without AI. Semantic vectors are removable local derived data; assistant conversations are not retained.
+The repository contains the complete ordinary-Day, history, Personal World, optional intelligence, ownership, installability, and release-hardening loops. Core writing remains local-first, installable, and useful without AI. A real hosted release still requires operator-owned Supabase and deployment configuration; the repository does not pretend those external services are configured.
 
 Future contributors and coding agents must read [AGENTS.md](AGENTS.md) before making changes.
 
@@ -46,6 +46,7 @@ npm run typecheck
 npm test
 npm run build
 npm run test:e2e
+npm run verify:release
 ```
 
 `npm run test:db` additionally verifies PostgreSQL policies when the local Supabase stack is available.
@@ -77,8 +78,17 @@ npm run test:e2e
 - [Phase 3 history and organization](docs/architecture/PHASE_3_HISTORY_ORGANIZATION.md)
 - [Phase 4 personal world](docs/architecture/PHASE_4_PERSONAL_WORLD.md)
 - [Phase 5 intelligence, privacy, and hardening](docs/architecture/PHASE_5_INTELLIGENCE_PRIVACY_HARDENING.md)
+- [Phase 6 release completion](docs/architecture/PHASE_6_RELEASE.md)
 - [Export format](docs/architecture/EXPORT_FORMAT.md)
 - [Performance strategy](docs/architecture/PERFORMANCE_STRATEGY.md)
 - [Security threat model](docs/architecture/SECURITY_THREAT_MODEL.md)
+- [PWA and offline architecture](docs/architecture/PWA_OFFLINE_ARCHITECTURE.md)
+- [Sync architecture](docs/architecture/SYNC_ARCHITECTURE.md)
+- [Release and PWA lifecycle decision](docs/architecture/adr/013-pwa-release-lifecycle.md)
+- [User guide](docs/release/USER_GUIDE.md)
+- [Privacy and data handling](docs/release/PRIVACY_AND_DATA_HANDLING.md)
+- [Deployment guide](docs/release/DEPLOYMENT.md)
+- [Native packaging evaluation](docs/release/NATIVE_PACKAGING_EVALUATION.md)
+- [Release checklist](docs/release/RELEASE_CHECKLIST.md)
 
 Meaningful changes to product or architecture must update the relevant source-of-truth document and, for lasting technical choices, add or supersede an ADR.

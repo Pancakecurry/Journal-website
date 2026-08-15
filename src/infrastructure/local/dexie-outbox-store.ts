@@ -18,6 +18,27 @@ export class DexieOutboxStore implements OutboxStore {
   }
 
   async acknowledge(operationId: string): Promise<void> {
+    const operation = await this.database.outbox.get(operationId);
+    if (operation) {
+      const stores: Record<OutboxOperation["entityType"], string> = {
+        day: "days",
+        moment: "moments",
+        journal_entry: "journalEntries",
+        media: "media",
+        reflection: "reflections",
+        preferences: "preferences",
+        bookmark: "bookmarks",
+        tracker_definition: "trackerDefinitions",
+        tracker_entry: "trackerEntries",
+        monthly_reflection: "monthlyReflections",
+        keepsake: "keepsakes",
+        doodle: "doodles",
+        hidden_memory: "hiddenMemories",
+      };
+      await this.database
+        .table(stores[operation.entityType])
+        .update(operation.entityId, { syncState: "synced" });
+    }
     await this.database.outbox.delete(operationId);
   }
 

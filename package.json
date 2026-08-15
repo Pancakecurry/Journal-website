@@ -1,6 +1,6 @@
 {
   "name": "campus-atelier-journal",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Private, Day-centered journaling application foundation.",
@@ -18,8 +18,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:pwa": "vitest run src/application/pwa-release.test.ts && playwright test tests/e2e/release-readiness.spec.ts",
     "test:db": "supabase test db",
-    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build"
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build",
+    "verify:release": "npm run verify && npm run test:e2e && npm audit --audit-level=high"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.4",

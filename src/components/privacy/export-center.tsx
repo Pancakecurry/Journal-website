@@ -113,6 +113,7 @@ export function ExportCenter() {
         </p>
       </aside>
       <nav className={styles.links}>
+        <Link href="/me/import">Restore an archive</Link>
         <Link href="/me/privacy">AI privacy</Link>
         <Link href="/me/data">Delete local data</Link>
       </nav>

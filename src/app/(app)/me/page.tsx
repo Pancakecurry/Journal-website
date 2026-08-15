@@ -26,10 +26,31 @@ const drawers = [
     tone: "paper",
   },
   {
+    href: "/me/import",
+    mark: "R",
+    title: "Restore an archive",
+    detail: "Inspect a Campus Atelier backup, then bring it back without silent overwrites.",
+    tone: "paper",
+  },
+  {
     href: "/me/trackers",
     mark: "T",
     title: "Trackers",
     detail: "The odd little things you care about. No scores, no nagging.",
+    tone: "sage",
+  },
+  {
+    href: "/me/install",
+    mark: "I",
+    title: "Install the journal",
+    detail: "Keep it on this device and understand offline startup.",
+    tone: "accent",
+  },
+  {
+    href: "/me/storage",
+    mark: "S",
+    title: "Storage on this device",
+    detail: "Local space, photos, persistence, and what the browser can promise.",
     tone: "sage",
   },
   {

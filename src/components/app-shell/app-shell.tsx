@@ -5,6 +5,10 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { NetworkStatus } from "./network-status";
+import { SessionControl } from "@/components/auth/session-control";
+import { PwaManager } from "@/components/pwa/pwa-manager";
+import { SyncCoordinator } from "./sync-coordinator";
+import { WelcomeBack } from "./welcome-back";
 import styles from "./app-shell.module.css";
 
 const destinations = [
@@ -19,6 +23,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   return (
     <>
+      <PwaManager />
+      <WelcomeBack />
       <a className={styles.skipLink} href="#main-content">
         Skip to main content
       </a>
@@ -58,7 +64,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <div className={styles.statusArea}>
             <NetworkStatus />
-            <div className={styles.status}>Remote sync not configured</div>
+            <SyncCoordinator />
+            <SessionControl />
           </div>
         </aside>
         <motion.main

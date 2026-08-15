@@ -10,6 +10,7 @@ import { LocalPersonalWorldRepository } from "@/infrastructure/local/personal-wo
 import { currentDayContext, LOCAL_FOUNDATION_USER_ID } from "@/lib/journal-session";
 import { KeepsakeButton } from "./keepsake-button";
 import styles from "./doodle.module.css";
+import { storageFailureMessage } from "@/lib/storage-errors";
 
 const COLORS = {
   ink: "#252b2a",
@@ -106,20 +107,29 @@ export function DoodleStudio({ fresh = false }: { fresh?: boolean }) {
       return;
     }
     const canvas = canvasRef.current!;
-    const item = await repository.saveDoodle({
-      id: savedId,
-      userId: LOCAL_FOUNDATION_USER_ID,
-      ...context,
-      title,
-      description,
-      width: Math.round(canvas.clientWidth),
-      height: Math.round(canvas.clientHeight),
-      strokes,
-      previewDataUrl: thumbnail(canvas),
-    });
-    setSavedId(item.id);
-    setStatus("Saved to Today. Your scribble has an address now.");
-    if (!id && navigator.onLine) router.replace(`/my-world/doodles/${item.id}`);
+    try {
+      const item = await repository.saveDoodle({
+        id: savedId,
+        userId: LOCAL_FOUNDATION_USER_ID,
+        ...context,
+        title,
+        description,
+        width: Math.round(canvas.clientWidth),
+        height: Math.round(canvas.clientHeight),
+        strokes,
+        previewDataUrl: thumbnail(canvas),
+      });
+      setSavedId(item.id);
+      setStatus("Saved to Today. Your scribble has an address now.");
+      if (!id && navigator.onLine) router.replace(`/my-world/doodles/${item.id}`);
+    } catch (error) {
+      setStatus(
+        storageFailureMessage(
+          error,
+          "That doodle couldn't be saved yet. It is still on this canvas.",
+        ),
+      );
+    }
   }
   return (
     <main className={styles.studio}>

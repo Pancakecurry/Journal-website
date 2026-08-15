@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Campus Atelier notebook window">
+  <rect width="512" height="512" rx="112" fill="#e8ddc9"/>
+  <path d="M108 92h270c22 0 40 18 40 40v270H148c-22 0-40-18-40-40V92Z" fill="#fbf7eb" stroke="#302b25" stroke-width="18"/>
+  <path d="M148 92v310" stroke="#8aa5b7" stroke-width="24"/>
+  <path d="M196 176h152M196 240h120M196 304h144" stroke="#302b25" stroke-linecap="round" stroke-width="16"/>
+  <path d="m322 91 46 0 0 118-23-19-23 19Z" fill="#e9937d" stroke="#302b25" stroke-width="10"/>
+  <circle cx="387" cy="383" r="45" fill="#b8c7a3" stroke="#302b25" stroke-width="12"/>
+  <path d="m366 383 15 15 28-34" fill="none" stroke="#302b25" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/>
+</svg>

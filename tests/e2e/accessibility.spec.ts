@@ -13,6 +13,9 @@ const routes = [
   "/me/export",
   "/my-world/games",
   "/my-world/doodles/new",
+  "/me/install",
+  "/me/storage",
+  "/me/import",
 ];
 
 for (const route of routes) {

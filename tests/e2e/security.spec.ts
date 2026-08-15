@@ -30,3 +30,13 @@ test("AI routes reject oversized bodies before touching private processing", asy
   });
   expect(response.status()).toBe(413);
 });
+
+test("account deletion rejects a cross-site request before authentication", async ({ request }) => {
+  const response = await request.delete("/api/account", {
+    headers: { origin: "https://not-your-journal.example" },
+  });
+  expect(response.status()).toBe(403);
+  await expect(response.json()).resolves.toEqual({
+    error: "Request origin was not accepted.",
+  });
+});

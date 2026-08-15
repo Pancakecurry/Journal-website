@@ -58,4 +58,6 @@ The large deterministic history fixture remains the repeatable personal-scale re
 
 ## Phase 6 follow-up
 
-Collect Web Vitals and long-task telemetry on representative mobile hardware; establish route and asset budgets in CI; evaluate a Web Worker for larger semantic indexes; stream large exports directly to a user-selected file where supported; and profile My World/game battery behavior over sustained sessions. None of these should weaken the current bounds.
+The release fixture contains 1,500 Days, 10,500 Moments, and 500 journals. Automated regression checks retain bounded Calendar month reads, paginated body-free Journal summaries, capped Search candidates, indexed My World counts, lazy games, bounded semantic retrieval, and staged export/import validation. The production build and 98 desktop/mobile E2E journeys passed on the release host; these are regression results, not universal latency guarantees.
+
+Production operations should still collect Web Vitals and long-task telemetry on representative mobile hardware. Future scale work may move large semantic indexes to a worker and stream multi-gigabyte exports directly to a user-selected file; neither changes the v1.0 bounded query model.

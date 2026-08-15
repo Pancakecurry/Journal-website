@@ -12,13 +12,13 @@ import {
 } from "@/domain/history";
 import type { JournalDatabase } from "@/infrastructure/local/database";
 
-export type HistoryFixtureSize = "several" | "year" | "large";
+export type HistoryFixtureSize = "several" | "year" | "large" | "release";
 export async function seedHistoryFixture(
   database: JournalDatabase,
   userId: string,
   size: HistoryFixtureSize,
 ) {
-  const count = size === "several" ? 8 : size === "year" ? 365 : 1_050;
+  const count = size === "several" ? 8 : size === "year" ? 365 : size === "release" ? 1_500 : 1_050;
   const days: Day[] = [];
   const moments: Moment[] = [];
   const journals: JournalEntry[] = [];
@@ -53,7 +53,7 @@ export async function seedHistoryFixture(
     };
     days.push(day);
     const dayMoments: Moment[] = [];
-    for (let item = 0; item < (size === "large" ? 3 : 1); item += 1) {
+    for (let item = 0; item < (size === "release" ? 7 : size === "large" ? 3 : 1); item += 1) {
       const moment: Moment = {
         id: id(index * 10 + item + 2, userId),
         userId,

@@ -183,6 +183,44 @@
   align-items: center;
   gap: 0.45rem;
 }
+.signOut {
+  width: fit-content;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  padding: 0.2rem 0;
+  font: inherit;
+  cursor: pointer;
+}
+.welcome {
+  position: fixed;
+  z-index: 80;
+  top: 1rem;
+  left: 50%;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  transform: translateX(-50%);
+  padding: 0.85rem 1rem;
+  border: 1px solid rgb(49 44 37 / 24%);
+  background: var(--butter);
+  box-shadow: var(--shadow-paper);
+}
+.welcome div {
+  display: grid;
+  gap: 0.15rem;
+}
+.welcome span {
+  font-size: 0.76rem;
+  color: var(--ink-700);
+}
+.welcome button {
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+}
 
 .statusDot {
   width: 0.55rem;

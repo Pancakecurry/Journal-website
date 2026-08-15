@@ -29,6 +29,7 @@ export const DEFAULT_PREFERENCES = {
   reducedMotionOverride: "system",
   memoryResurfacingEnabled: true,
   memoryRangeYears: 5,
+  onboardingComplete: false,
   aiEnabled: false,
   aiExternalProcessingConsent: false,
   aiContentScopes: {
@@ -72,6 +73,7 @@ export class LocalPersonalWorldRepository {
         | "reducedMotionOverride"
         | "memoryResurfacingEnabled"
         | "memoryRangeYears"
+        | "onboardingComplete"
         | "aiEnabled"
         | "aiExternalProcessingConsent"
         | "aiContentScopes"

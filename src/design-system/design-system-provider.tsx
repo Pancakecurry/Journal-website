@@ -6,6 +6,7 @@ import type { UserPreferences } from "@/domain/preferences";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalPersonalWorldRepository } from "@/infrastructure/local/personal-world-repository";
 import { LOCAL_FOUNDATION_USER_ID } from "@/lib/journal-session";
+import { useJournalIdentity } from "@/components/auth/journal-identity";
 
 function applyPreferences(preferences: UserPreferences) {
   const root = document.documentElement;
@@ -17,9 +18,11 @@ function applyPreferences(preferences: UserPreferences) {
 }
 
 export function DesignSystemProvider({ children }: { children: ReactNode }) {
+  const identity = useJournalIdentity();
   const [reducedMotion, setReducedMotion] = useState<"user" | "always" | "never">("user");
   useEffect(() => {
     let alive = true;
+    if (identity.loading || !identity.userId) return;
     const repository = new LocalPersonalWorldRepository(getApplicationDatabase());
     void repository.preferences(LOCAL_FOUNDATION_USER_ID).then((preferences) => {
       if (!alive) return;
@@ -36,7 +39,7 @@ export function DesignSystemProvider({ children }: { children: ReactNode }) {
       alive = false;
       window.removeEventListener("campus-atelier:preferences", update);
     };
-  }, []);
+  }, [identity.loading, identity.userId]);
   return (
     <MotionConfig
       reducedMotion={reducedMotion}

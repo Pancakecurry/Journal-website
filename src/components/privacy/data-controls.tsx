@@ -4,20 +4,37 @@ import { useMemo, useState } from "react";
 import { JournalExportService } from "@/application/journal-export";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LOCAL_FOUNDATION_USER_ID } from "@/lib/journal-session";
+import { useJournalIdentity } from "@/components/auth/journal-identity";
+import { useRouter } from "next/navigation";
 import styles from "./privacy.module.css";
 
 export function DataControls() {
+  const identity = useJournalIdentity();
+  const router = useRouter();
   const service = useMemo(() => new JournalExportService(getApplicationDatabase()), []);
   const [confirmation, setConfirmation] = useState("");
   const [message, setMessage] = useState("This local journal has no pretend undo button.");
   async function remove() {
-    if (confirmation !== "DELETE MY LOCAL JOURNAL") return;
+    const phrase = identity.configured ? "DELETE MY ACCOUNT" : "DELETE MY LOCAL JOURNAL";
+    if (confirmation !== phrase) return;
+    if (identity.configured) {
+      const response = await fetch("/api/account", { method: "DELETE" });
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        setMessage(
+          body?.error ??
+            "Remote deletion did not finish. Your local journal was kept so you can retry.",
+        );
+        return;
+      }
+    }
     await fetch("/api/ai/consent", { method: "DELETE" }).catch(() => undefined);
     await service.deleteLocalUserData(LOCAL_FOUNDATION_USER_ID);
     setConfirmation("");
-    setMessage(
-      "Local journal data was deleted from this browser. Remote deletion was not claimed or attempted.",
-    );
+    if (identity.configured) {
+      router.push("/auth?deleted=1");
+      router.refresh();
+    } else setMessage("Local journal data was deleted from this browser.");
   }
   return (
     <main className={styles.dataPage}>
@@ -37,15 +54,21 @@ export function DataControls() {
           <Link href="/me/export">Open export desk</Link>
         </div>
         <div className={styles.deleteCard}>
-          <p>Local deletion</p>
-          <h2>Erase this browser’s journal</h2>
+          <p>{identity.configured ? "Account deletion" : "Local deletion"}</p>
+          <h2>
+            {identity.configured
+              ? "Delete the account and its journal"
+              : "Erase this browser’s journal"}
+          </h2>
           <span>
             This removes Days, writing, photos stored here, trackers, keepsakes, doodles,
-            preferences, search indexes, and derived AI data. It does not claim to delete a remote
-            account while remote identity is unconfigured.
+            preferences, search indexes, and derived AI data.{" "}
+            {identity.configured
+              ? "Private remote records, media, and the authenticated account are deleted first. Local data is erased only after the server confirms completion."
+              : "No remote account is configured in this local checkout."}
           </span>
           <label htmlFor="delete-confirmation">
-            Type <b>DELETE MY LOCAL JOURNAL</b>
+            Type <b>{identity.configured ? "DELETE MY ACCOUNT" : "DELETE MY LOCAL JOURNAL"}</b>
             <input
               id="delete-confirmation"
               value={confirmation}
@@ -54,10 +77,13 @@ export function DataControls() {
             />
           </label>
           <button
-            disabled={confirmation !== "DELETE MY LOCAL JOURNAL"}
+            disabled={
+              confirmation !==
+              (identity.configured ? "DELETE MY ACCOUNT" : "DELETE MY LOCAL JOURNAL")
+            }
             onClick={() => void remove()}
           >
-            Delete local journal data
+            {identity.configured ? "Delete account and journal" : "Delete local journal data"}
           </button>
         </div>
       </section>

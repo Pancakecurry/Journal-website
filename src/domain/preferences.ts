@@ -25,6 +25,7 @@ export const UserPreferencesSchema = z.object({
   reducedMotionOverride: z.enum(["system", "reduce", "full"]),
   memoryResurfacingEnabled: z.boolean().default(true),
   memoryRangeYears: z.number().int().min(1).max(10).default(5),
+  onboardingComplete: z.boolean().default(false),
   aiEnabled: z.boolean().default(false),
   aiExternalProcessingConsent: z.boolean().default(false),
   aiContentScopes: AiContentScopesSchema.default(DEFAULT_AI_SCOPES),

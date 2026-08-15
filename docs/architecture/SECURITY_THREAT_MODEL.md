@@ -1,6 +1,6 @@
 # Campus Atelier Security Review and Threat Model
 
-Reviewed 2026-08-15 for the Phase 5 application boundary.
+Reviewed 2026-08-15 for the v1.0 release boundary.
 
 ## Protected assets and trust boundaries
 
@@ -20,18 +20,21 @@ The protected assets are journal text, reflections, captions, media, tracker his
 | Media exposure                       | The Supabase bucket is private, policy-scoped by owner path, size-limited, and restricted to JPEG/PNG/WebP/GIF. Local object URLs remain device-local and are revoked by consuming views.                                                       |
 | Browser embedding and framing        | CSP limits scripts/connections, `frame-ancestors 'none'` prevents framing, and CORP, no-sniff, referrer, permissions, and frame headers reduce ambient browser attack surface.                                                                  |
 | Sensitive logs                       | AI code does not log journal bodies, context, provider responses, tokens, media URLs, or exports. Errors shown to users are content-free.                                                                                                       |
+| Service-worker leakage               | The worker handles only same-origin GETs and excludes API, auth, AI, export, and private-media responses. Canonical records remain in IndexedDB rather than Cache Storage.                                                                      |
+| Malicious restore archive            | Inspection precedes writes; versions and record schemas are validated; traversal/backslash paths, oversized JSON/archives, excessive file counts, and decompression expansion are rejected. Existing IDs are preserved through remapping.       |
+| Destructive account request          | The endpoint requires same-origin DELETE, a verified user session, and a server-only service-role key. Remote media is removed before auth deletion; local state is cleared only after server success.                                          |
 
 ## Review by user-owned domain
 
 Migrations cover Days, moments, journals, media, reflections, preferences, sync records, bookmarks, trackers and entries, monthly reflections, keepsakes, doodles, and hidden memories with owner policies. Semantic chunks and index state are local derived data, not server tables. Assistant conversations are not stored. Phase 5 adds only preference columns, so existing owner policy coverage applies.
 
-## Unresolved risks and release blockers
+## Unresolved risks and operational gates
 
 - The in-process AI request limiter is best-effort and not shared across server instances. A distributed authenticated-user limiter is required before broad production AI access.
 - A real configured Supabase project and private bucket must pass pgTAP and live cross-account tests before release; static migration review is not a substitute.
 - A configured AI staging environment must verify provider policy, quotas, deletion/retention controls, and failure behavior. No secrets belong in the repository.
 - Complete ZIP generation eventually needs direct file streaming for multi-gigabyte archives.
-- Final remote account deletion, media orphan cleanup, backup restoration, app lock, and an encryption-at-rest/end-to-end decision remain release work. The app makes no end-to-end encryption claim.
+- Provider backup restoration remains an operator procedure, and app lock plus an encryption-at-rest/end-to-end decision are intentionally not claimed in v1.0.
 - CSP currently permits framework-required inline styles/scripts and development evaluation. Reassess nonce-based strict CSP with deployment telemetry rather than claiming a maximal CSP.
 
-The first two items are production-release gates, not blockers to local Phase 5 behavior.
+Configured Supabase/RLS and optional provider checks are external production gates, not substitutes for repository verification and not blockers to local-only journaling.

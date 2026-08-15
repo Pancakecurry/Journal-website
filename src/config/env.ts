@@ -22,6 +22,15 @@ export function getRemoteConfiguration(): RemoteConfiguration {
   return { configured: true, url, publishableKey };
 }
 
+const adminEnvironmentSchema = z.object({ SUPABASE_SERVICE_ROLE_KEY: optionalSecret(20) });
+export function getSupabaseAdminKey(): string | null {
+  return (
+    adminEnvironmentSchema.parse({
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    }).SUPABASE_SERVICE_ROLE_KEY ?? null
+  );
+}
+
 const aiEnvironmentSchema = z.object({
   AI_PROVIDER: z.enum(["openai"]).default("openai"),
   OPENAI_API_KEY: optionalSecret(1),

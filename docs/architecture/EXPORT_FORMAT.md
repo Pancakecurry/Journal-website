@@ -8,7 +8,7 @@ Campus Atelier exports are generated in the browser from locally available Index
 - **Readable Markdown:** a chronological journal grouped by Day, with journal writing, reflection answers, moods, text moments, photo captions, and monthly reflections.
 - **Complete ZIP:** `manifest.json`, `data/journal.json`, `journal.md`, a short README, locally available image blobs under `media/`, and saved doodle previews under `media/doodles/`.
 
-Current `formatVersion` is `1.0.0`. Consumers must branch on that value rather than assuming future fields. Import is deferred.
+Current `formatVersion` is `1.0.0`. Consumers must branch on that value rather than assuming future fields. Phase 6 can inspect and restore the complete ZIP or structured JSON formats. Inspection validates format/version, schemas, archive paths, file counts, and size bounds before any write. Restore maps records to the active owner, preserves existing preferences, remaps colliding IDs and relationships, and queues imported canonical records for sync. It never silently overwrites an existing record.
 
 ## Exclusions and privacy
 

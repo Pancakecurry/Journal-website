@@ -87,15 +87,15 @@ Core journaling remains fully useful without AI. AI work requires transparent pr
 
 ## Phase 6 — Installability & Release Polish
 
-| Task | Outcome                     |
-| ---- | --------------------------- |
-| 035  | PWA and installability      |
-| 036  | Native packaging evaluation |
-| 037  | Beta                        |
-| 038  | Final polish                |
+| Task | Outcome                     | Status   |
+| ---- | --------------------------- | -------- |
+| 035  | PWA and installability      | Complete |
+| 036  | Native packaging evaluation | Complete |
+| 037  | Beta readiness              | Complete |
+| 038  | Final polish                | Complete |
 
 Hardening tasks deepen continuous responsibilities; they do not defer accessibility, performance, privacy, security, or ownership from earlier work.
 
 ## Current gate
 
-The next recommended work is **Phase 6 — Installability & Release Polish**. It must not begin without separate authorization. Production release remains gated on configured Supabase/RLS verification, configured-provider AI verification, representative-device profiling, and the unresolved risks in the security threat model.
+The planned v1.0 product scope is complete. A hosted release is an operational action, not another product phase: configure Supabase and deployment secrets, apply and verify migrations/RLS, and perform the documented production smoke test. Optional live AI requires its own provider credentials and consent review.

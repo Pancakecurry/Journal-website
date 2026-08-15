@@ -45,6 +45,16 @@ describe("Phase 3 local history", () => {
     expect((await repo.search(USER, "ordinary", 40)).length).toBeLessThanOrEqual(40);
     db.close();
   }, 30000);
+  it("keeps the 1,500-Day release journal inside bounded query shapes", async () => {
+    const db = make();
+    const seeded = await seedHistoryFixture(db, USER, "release");
+    const repo = new LocalHistoryRepository(db);
+    expect(seeded).toEqual({ days: 1500, moments: 10500, journals: 500 });
+    expect((await repo.month(USER, "2026-08")).length).toBeLessThanOrEqual(31);
+    expect(await repo.journals(USER, { limit: 20 })).toHaveLength(20);
+    expect((await repo.search(USER, "ramen", 40)).length).toBeLessThanOrEqual(40);
+    db.close();
+  }, 30000);
   it("creates flexible tracker values on their actual Day and queues sync", async () => {
     const db = make();
     const repo = new LocalHistoryRepository(db);

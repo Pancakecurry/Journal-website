@@ -201,6 +201,49 @@ export class JournalDatabase extends Dexie {
             };
           });
       });
+
+    this.version(7)
+      .stores({
+        days: "id,[userId+localDate],userId,updatedAt,syncState",
+        moments: "id,[userId+dayId],dayId,userId,occurredAt,syncState",
+        journalEntries: "id,[userId+dayId],dayId,userId,updatedAt,syncState",
+        media: "id,[userId+dayId],dayId,userId,status,updatedAt,syncState",
+        reflections: "id,[userId+dayId],[userId+dayId+period],dayId,userId,updatedAt,syncState",
+        preferences: "userId,updatedAt,syncState",
+        outbox: "operationId,status,entityType,createdAt,nextAttemptAt",
+        syncMeta: "userId",
+        daySummaries: "id,[userId+localDate],userId,updatedAt",
+        journalSummaries: "id,[userId+updatedAt],[userId+localDate],userId,dayId,bookmarked",
+        searchDocuments: "id,[userId+localDate],[userId+kind],userId,entityId,updatedAt",
+        searchTerms: "id,[userId+token],documentId",
+        bookmarks: "id,[userId+journalEntryId],userId,createdAt",
+        trackerDefinitions: "id,[userId+name],userId,pinned,archivedAt,updatedAt",
+        trackerEntries:
+          "id,[userId+trackerId+localDate],[userId+localDate],userId,trackerId,dayId,updatedAt",
+        monthlyReflections: "id,[userId+month],userId,updatedAt",
+        keepsakes:
+          "id,[userId+createdAt],[userId+sourceType],[userId+sourceId],userId,dayId,deletedAt",
+        doodles: "id,[userId+localDate],[userId+updatedAt],userId,dayId,deletedAt",
+        hiddenMemories: "id,[userId+entityId],[userId+dayId],userId,deletedAt",
+        semanticChunks:
+          "id,[userId+sourceKind],[userId+sourceId],userId,sourceId,sourceUpdatedAt,indexedAt",
+        semanticIndexState: "userId,status,lastIndexedAt",
+      })
+      .upgrade(async (transaction) => {
+        await transaction
+          .table<UserPreferences, string>("preferences")
+          .toCollection()
+          .modify((preference) => {
+            preference.onboardingComplete = true;
+          });
+      });
+
+    this.on("ready", () => {
+      this.outbox.hook("creating", () => {
+        if (typeof window !== "undefined")
+          window.setTimeout(() => window.dispatchEvent(new Event("campus-atelier:local-write")), 0);
+      });
+    });
   }
 }
 

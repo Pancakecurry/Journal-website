@@ -57,6 +57,8 @@ test("a historical moment can be tucked away, reopened, and removed", async ({ p
 });
 
 test("a doodle supports undo, persistence, Day association, and reopen", async ({ page }) => {
+  const pageErrors: Error[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error));
   await page.goto("/my-world/doodles/new");
   const canvas = page.getByLabel("Doodle canvas");
   const box = await canvas.boundingBox();
@@ -78,6 +80,7 @@ test("a doodle supports undo, persistence, Day association, and reopen", async (
   );
   await page.goto("/today");
   await expect(page.getByRole("link", { name: "Open sketchbook" })).toBeVisible();
+  expect(pageErrors).toEqual([]);
 });
 
 test("both desk games mount lazily and leave navigation clean", async ({ page }) => {

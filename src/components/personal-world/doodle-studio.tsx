@@ -93,11 +93,12 @@ export function DoodleStudio({ fresh = false }: { fresh?: boolean }) {
     drawLatestSegment(event.currentTarget, stroke);
   }
   function pointerUp(event: PointerEvent<HTMLCanvasElement>) {
-    if (!drawing.current) return;
+    const completedStroke = drawing.current;
+    if (!completedStroke) return;
     event.currentTarget.releasePointerCapture(event.pointerId);
-    setStrokes((items) => [...items, drawing.current!]);
-    setRedo([]);
     drawing.current = null;
+    setStrokes((items) => [...items, completedStroke]);
+    setRedo([]);
   }
   async function save() {
     if (!strokes.length) {
@@ -273,11 +274,12 @@ function drawCanvas(canvas: HTMLCanvasElement, strokes: DoodleStroke[]) {
 }
 function drawStroke(
   context: CanvasRenderingContext2D,
-  stroke: DoodleStroke,
+  stroke: DoodleStroke | null | undefined,
   width: number,
   height: number,
   ratio: number,
 ) {
+  if (!stroke || !Array.isArray(stroke.points)) return;
   const points = stroke.points;
   if (!points.length) return;
   context.save();

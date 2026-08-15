@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { DaySummary, MonthlyReflection, TrackerDefinition } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
 import { LocalHistoryRepository } from "@/infrastructure/local/history-repository";
@@ -15,22 +15,25 @@ export function MonthlyRecap({ month }: { month: string }) {
   const [body, setBody] = useState("");
   const [status, setStatus] = useState("Opening the month…");
   const hydrated = useRef(false);
-  const load = useCallback(async () => {
-    const [monthDays, trackerRows, writing] = await Promise.all([
+  useEffect(() => {
+    let alive = true;
+    void Promise.all([
       repository.month(LOCAL_FOUNDATION_USER_ID, month),
       repository.trackers(LOCAL_FOUNDATION_USER_ID),
       repository.monthReflection(LOCAL_FOUNDATION_USER_ID, month),
-    ]);
-    setDays(monthDays);
-    setTrackers(trackerRows);
-    setReflection(writing);
-    setBody(writing?.body ?? "");
-    hydrated.current = true;
-    setStatus("Month ready.");
+    ]).then(([monthDays, trackerRows, writing]) => {
+      if (!alive) return;
+      setDays(monthDays);
+      setTrackers(trackerRows);
+      setReflection(writing);
+      setBody(writing?.body ?? "");
+      hydrated.current = true;
+      setStatus("Month ready.");
+    });
+    return () => {
+      alive = false;
+    };
   }, [month, repository]);
-  useEffect(() => {
-    void load();
-  }, [load]);
   useEffect(() => {
     if (!hydrated.current) return;
     setStatus("Saving your note…");

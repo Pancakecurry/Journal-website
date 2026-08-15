@@ -20,6 +20,7 @@ test("local search finds a saved ordinary moment", async ({ page }) => {
   await page.getByRole("button", { name: "+ Add something" }).click();
   await page.getByLabel("A moment from today").fill("Ate mango ice cream after class");
   await page.getByRole("button", { name: "Put it on today" }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await page.goto("/search");
   await page.getByLabel("Search your words and dates").fill("mango");
   await expect(page.getByRole("link", { name: "Moment" })).toBeVisible();

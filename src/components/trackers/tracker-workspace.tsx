@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   TRACKER_TYPES,
@@ -35,8 +36,14 @@ export function TrackerIndex() {
     [repository],
   );
   useEffect(() => {
-    void load();
-  }, [load]);
+    let alive = true;
+    void repository.trackers(LOCAL_FOUNDATION_USER_ID).then((rows) => {
+      if (alive) setTrackers(rows);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [repository]);
   async function create() {
     await repository.createTracker({
       userId: LOCAL_FOUNDATION_USER_ID,
@@ -131,6 +138,7 @@ export function TrackerIndex() {
 
 export function TrackerDetail({ id }: { id: string }) {
   const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
+  const router = useRouter();
   const today = useMemo(() => currentDayContext(), []);
   const [tracker, setTracker] = useState<TrackerDefinition | null | undefined>(undefined);
   const [entries, setEntries] = useState<TrackerEntry[]>([]);
@@ -138,21 +146,21 @@ export function TrackerDetail({ id }: { id: string }) {
   const [date, setDate] = useState(today.localDate);
   const [note, setNote] = useState("");
   const load = useCallback(async () => {
-    const item =
-      (await repository.trackers(LOCAL_FOUNDATION_USER_ID, true)).find((row) => row.id === id) ??
-      null;
+    const { item, rows } = await loadTracker(repository, id, date);
     setTracker(item);
-    if (item) {
-      const start = `${date.slice(0, 7)}-01` as TrackerEntry["localDate"];
-      const monthStart = new Date(`${start}T12:00:00Z`);
-      const end =
-        `${date.slice(0, 7)}-${String(new Date(monthStart.getUTCFullYear(), monthStart.getUTCMonth() + 1, 0).getDate()).padStart(2, "0")}` as TrackerEntry["localDate"];
-      setEntries(await repository.trackerEntries(LOCAL_FOUNDATION_USER_ID, id, start, end));
-    }
+    setEntries(rows);
   }, [date, id, repository]);
   useEffect(() => {
-    void load();
-  }, [load]);
+    let alive = true;
+    void loadTracker(repository, id, date).then(({ item, rows }) => {
+      if (!alive) return;
+      setTracker(item);
+      setEntries(rows);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [date, id, repository]);
   if (tracker === undefined) return <section className={styles.notebook}>Opening tracker…</section>;
   if (!tracker)
     return (
@@ -233,13 +241,26 @@ export function TrackerDetail({ id }: { id: string }) {
         className={styles.archive}
         onClick={async () => {
           await repository.updateTracker(id, { archived: !tracker.archivedAt });
-          location.assign("/me/trackers");
+          router.push("/me/trackers");
         }}
       >
         {tracker.archivedAt ? "Unarchive tracker" : "Archive tracker"}
       </button>
     </section>
   );
+}
+
+async function loadTracker(repository: LocalHistoryRepository, id: string, date: string) {
+  const item =
+    (await repository.trackers(LOCAL_FOUNDATION_USER_ID, true)).find((row) => row.id === id) ??
+    null;
+  if (!item) return { item, rows: [] as TrackerEntry[] };
+  const start = `${date.slice(0, 7)}-01` as TrackerEntry["localDate"];
+  const monthStart = new Date(`${start}T12:00:00Z`);
+  const end =
+    `${date.slice(0, 7)}-${String(new Date(monthStart.getUTCFullYear(), monthStart.getUTCMonth() + 1, 0).getDate()).padStart(2, "0")}` as TrackerEntry["localDate"];
+  const rows = await repository.trackerEntries(LOCAL_FOUNDATION_USER_ID, id, start, end);
+  return { item, rows };
 }
 function ValueField({
   tracker,

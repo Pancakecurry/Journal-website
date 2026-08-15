@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { DaySummary } from "@/domain/history";
 import { getApplicationDatabase } from "@/infrastructure/local/database";
@@ -12,20 +13,24 @@ const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export function DayIndex() {
   const today = useMemo(() => currentDayContext().localDate, []);
+  const router = useRouter();
   const [cursor, setCursor] = useState(() => today.slice(0, 7));
-  const [summaries, setSummaries] = useState<DaySummary[] | null>(null);
+  const [loadedMonth, setLoadedMonth] = useState<{
+    cursor: string;
+    summaries: DaySummary[];
+  } | null>(null);
   const [selected, setSelected] = useState<DaySummary | null>(null);
   const repository = useMemo(() => new LocalHistoryRepository(getApplicationDatabase()), []);
   useEffect(() => {
     let alive = true;
-    setSummaries(null);
     void repository.month(LOCAL_FOUNDATION_USER_ID, cursor).then((rows) => {
-      if (alive) setSummaries(rows);
+      if (alive) setLoadedMonth({ cursor, summaries: rows });
     });
     return () => {
       alive = false;
     };
   }, [cursor, repository]);
+  const summaries = loadedMonth?.cursor === cursor ? loadedMonth.summaries : null;
   const date = new Date(`${cursor}-01T12:00:00`);
   const first = (date.getDay() + 6) % 7;
   const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -78,9 +83,7 @@ export function DayIndex() {
               <button
                 key={localDate}
                 className={`${styles.day} ${localDate === today ? styles.today : ""}`}
-                onClick={() =>
-                  summary ? setSelected(summary) : location.assign(`/day/${localDate}`)
-                }
+                onClick={() => (summary ? setSelected(summary) : router.push(`/day/${localDate}`))}
               >
                 <time dateTime={localDate}>{number}</time>
                 {summary ? (

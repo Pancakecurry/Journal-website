@@ -59,7 +59,7 @@ export class LocalHistoryRepository {
   ): Promise<JournalSummary[]> {
     await this.seedMissingJournalSummaries(userId);
     const limit = Math.min(options.limit ?? 20, 50);
-    let collection = this.database.journalSummaries
+    const collection = this.database.journalSummaries
       .where("[userId+updatedAt]")
       .between([userId, ""], [userId, options.cursor ?? "\uffff"]);
     const page = await collection

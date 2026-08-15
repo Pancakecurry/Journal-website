@@ -90,82 +90,133 @@ export function PersonalizationPanel() {
   return (
     <main className={styles.preferences}>
       <header>
-        <p>Appearance · notebook materials</p>
-        <h1>Pick your stationery.</h1>
-        <span>A few good choices. No 400-switch theme laboratory.</span>
-      </header>
-      <section className={styles.preview} aria-label="Live notebook preview">
-        <div data-preview-cover={draft.notebookCover}>
-          <span>August notes</span>
-          <strong>Lunch absolutely counts.</strong>
-          <small>{PAPERS.find(([value]) => value === draft.paper)?.[1]} paper</small>
+        <div>
+          <p>Atelier drawer · materials</p>
+          <h1>Make the desk feel like yours.</h1>
         </div>
-      </section>
-      <ChoiceGroup
-        label="Accent family"
-        options={ACCENTS}
-        value={draft.accent}
-        onChange={(value) => update("accent", value as Accent)}
-        swatches
-      />
-      <ChoiceGroup
-        label="Paper character"
-        options={PAPERS}
-        value={draft.paper}
-        onChange={(value) => update("paper", value as PaperCharacter)}
-      />
-      <ChoiceGroup
-        label="Notebook cover"
-        options={COVERS}
-        value={draft.notebookCover}
-        onChange={(value) => update("notebookCover", value as NotebookCover)}
-      />
-      <ChoiceGroup
-        label="Desk detail"
-        options={DENSITIES}
-        value={draft.environmentDensity}
-        onChange={(value) => update("environmentDensity", value as EnvironmentDensity)}
-      />
-      <ChoiceGroup
-        label="Motion"
-        options={MOTION}
-        value={draft.reducedMotionOverride}
-        onChange={(value) =>
-          update("reducedMotionOverride", value as UserPreferences["reducedMotionOverride"])
-        }
-      />
-      <fieldset className={styles.memorySettings}>
-        <legend>Old memories</legend>
-        <label>
-          <input
-            type="checkbox"
-            checked={draft.memoryResurfacingEnabled}
-            onChange={(event) => update("memoryResurfacingEnabled", event.target.checked)}
+        <span>
+          A small set of good paper, cloth, and color choices. Enough personality; no theme-control
+          cockpit.
+        </span>
+      </header>
+      <div className={styles.atelierLayout}>
+        <section className={styles.preview} aria-label="Live notebook preview">
+          <div className={styles.previewDesk} data-density={draft.environmentDensity}>
+            <i className={styles.previewTape} aria-hidden="true" />
+            <div
+              className={styles.previewNotebook}
+              data-preview-cover={draft.notebookCover}
+              data-preview-paper={draft.paper}
+            >
+              <span>August notes · 14</span>
+              <strong>Lunch absolutely counts.</strong>
+              <p>Found a quiet table by the window. Stayed longer than planned.</p>
+              <small>{PAPERS.find(([value]) => value === draft.paper)?.[1]} paper</small>
+            </div>
+            <span className={styles.previewTab}>TODAY</span>
+            {draft.environmentDensity !== "minimal" ? (
+              <span className={styles.previewClip} aria-hidden="true">
+                ⌇
+              </span>
+            ) : null}
+            {draft.environmentDensity === "expressive" ? (
+              <span className={styles.previewNote}>bring the blue pen</span>
+            ) : null}
+          </div>
+          <div className={styles.previewCaption}>
+            <span>Live desk sample</span>
+            <b>
+              {COVERS.find(([value]) => value === draft.notebookCover)?.[1]} ·{" "}
+              {PAPERS.find(([value]) => value === draft.paper)?.[1]}
+            </b>
+          </div>
+        </section>
+        <div className={styles.materialRack}>
+          <ChoiceGroup
+            label="Highlighter drawer"
+            note="One accent leads; the notebook stays calm."
+            options={ACCENTS}
+            value={draft.accent}
+            onChange={(value) => update("accent", value as Accent)}
+            swatches
           />
-          Occasionally show something from this date inside My World
-        </label>
-        <label>
-          Look back up to
-          <select
-            value={draft.memoryRangeYears}
-            onChange={(event) => update("memoryRangeYears", Number(event.target.value))}
-            disabled={!draft.memoryResurfacingEnabled}
-          >
-            {[1, 3, 5, 10].map((value) => (
-              <option key={value} value={value}>
-                {value} {value === 1 ? "year" : "years"}
-              </option>
-            ))}
-          </select>
-        </label>
-      </fieldset>
-      <div className={styles.preferenceActions}>
-        <button onClick={() => saved && setDraft(saved)}>Put it back</button>
-        <button className={styles.primary} onClick={() => void save()}>
-          Save these choices
-        </button>
+          <ChoiceGroup
+            label="Paper stack"
+            note="This pattern follows focused and notebook surfaces."
+            options={PAPERS}
+            value={draft.paper}
+            onChange={(value) => update("paper", value as PaperCharacter)}
+            material="paper"
+          />
+          <ChoiceGroup
+            label="Cover cloth"
+            note="The edge you notice when you open your notebook."
+            options={COVERS}
+            value={draft.notebookCover}
+            onChange={(value) => update("notebookCover", value as NotebookCover)}
+            material="cover"
+          />
+          <ChoiceGroup
+            label="Desk detail"
+            note="How inhabited expressive spaces become."
+            options={DENSITIES}
+            value={draft.environmentDensity}
+            onChange={(value) => update("environmentDensity", value as EnvironmentDensity)}
+          />
+          <ChoiceGroup
+            label="Motion"
+            note="System follows your device; Keep still removes nonessential movement."
+            options={MOTION}
+            value={draft.reducedMotionOverride}
+            onChange={(value) =>
+              update("reducedMotionOverride", value as UserPreferences["reducedMotionOverride"])
+            }
+          />
+          <fieldset className={styles.memorySettings}>
+            <legend>Old memory drawer</legend>
+            <p>
+              My World can occasionally tuck in something from this date. It never calls a quiet day
+              incomplete.
+            </p>
+            <label>
+              <input
+                type="checkbox"
+                checked={draft.memoryResurfacingEnabled}
+                onChange={(event) => update("memoryResurfacingEnabled", event.target.checked)}
+              />
+              <span>
+                <b>Show an old memory now and then</b>
+                <small>You can hide any item or turn this off.</small>
+              </span>
+            </label>
+            <label className={styles.rangeLabel}>
+              <span>Look back up to</span>
+              <select
+                value={draft.memoryRangeYears}
+                onChange={(event) => update("memoryRangeYears", Number(event.target.value))}
+                disabled={!draft.memoryResurfacingEnabled}
+              >
+                {[1, 3, 5, 10].map((value) => (
+                  <option key={value} value={value}>
+                    {value} {value === 1 ? "year" : "years"}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </fieldset>
+        </div>
       </div>
-      <p role="status">{status}</p>
+      <div className={styles.preferenceActions}>
+        <p role="status" aria-live="polite">
+          {status}
+        </p>
+        <div>
+          <button onClick={() => saved && setDraft(saved)}>Put it back</button>
+          <button className={styles.primary} onClick={() => void save()}>
+            Save these choices
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
@@ -176,26 +227,33 @@ function ChoiceGroup({
   value,
   onChange,
   swatches = false,
+  note,
+  material,
 }: {
   label: string;
   options: Array<[string, string]>;
   value: string;
   onChange(value: string): void;
   swatches?: boolean;
+  note?: string;
+  material?: "paper" | "cover";
 }) {
   return (
     <fieldset className={styles.choices}>
       <legend>{label}</legend>
+      {note ? <p>{note}</p> : null}
       <div>
         {options.map(([option, name]) => (
           <button
             key={option}
             type="button"
             aria-pressed={value === option}
+            data-material={material}
+            data-option={option}
             onClick={() => onChange(option)}
           >
             {swatches ? <i data-swatch={option} aria-hidden="true" /> : null}
-            {name}
+            <span>{name}</span>
           </button>
         ))}
       </div>

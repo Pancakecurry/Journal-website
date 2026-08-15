@@ -1,0 +1,221 @@
+.mePage {
+  width: min(100%, 76rem);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: clamp(1.2rem, 4vw, 4rem);
+  color: var(--ink-900);
+}
+.mePage > header {
+  display: grid;
+  grid-template-columns: 1fr minmax(15rem, 24rem);
+  gap: 3rem;
+  align-items: end;
+  padding: clamp(1.5rem, 5vw, 4.5rem);
+  border: 1px solid var(--rule-strong);
+  background: linear-gradient(
+    130deg,
+    var(--paper-warm),
+    color-mix(in srgb, var(--accent) 16%, var(--paper-warm))
+  );
+  box-shadow: 0 20px 55px rgb(55 43 31 / 10%);
+}
+.mePage header p {
+  margin: 0 0 0.9rem;
+  color: var(--ink-500);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.mePage h1 {
+  max-width: 12ch;
+  margin: 0;
+  font: 500 clamp(2.5rem, 6vw, 5.5rem)/0.93 var(--font-editorial);
+  letter-spacing: -0.055em;
+}
+.mePage header aside {
+  padding: 1.2rem;
+  border: 1px solid var(--rule);
+  background: rgb(255 255 255 / 48%);
+}
+.mePage header aside span {
+  display: inline-block;
+  padding: 0.4rem 0.65rem;
+  border: 2px solid color-mix(in srgb, var(--accent) 70%, var(--ink-900));
+  color: color-mix(in srgb, var(--accent) 62%, var(--ink-900));
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  rotate: -3deg;
+}
+.mePage header aside p {
+  margin: 1.2rem 0 0;
+  color: var(--ink-700);
+  font: 1rem/1.6 var(--font-reading);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.cabinet {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  margin: 1.4rem 1rem 0;
+  border: 1px solid #8e7a61;
+  background: #a99172;
+  box-shadow: 0 26px 46px rgb(61 44 27 / 16%);
+}
+.cabinetLabel {
+  display: flex;
+  min-height: 30rem;
+  padding: 1.4rem;
+  border-right: 1px solid #7f6c54;
+  flex-direction: column;
+  background: linear-gradient(160deg, #ad9474, #897155);
+  color: #f8efe1;
+}
+.cabinetLabel span {
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.cabinetLabel b {
+  max-width: 5ch;
+  margin-top: auto;
+  font: 500 2rem/1 var(--font-editorial);
+}
+.cabinetLabel small {
+  margin-top: 0.6rem;
+  opacity: 0.72;
+}
+.drawers {
+  display: grid;
+  gap: 1px;
+  padding: 1px;
+  background: #8e7a61;
+}
+.drawers > a {
+  display: grid;
+  grid-template-columns: 2.5rem 3rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 6.5rem;
+  padding: 1rem 1.3rem;
+  background: var(--paper-warm);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 200ms var(--ease-lift),
+    filter 200ms;
+}
+.drawers > a:hover {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-0.5rem);
+  filter: brightness(1.02);
+  box-shadow: 10px 10px 20px rgb(46 34 23 / 18%);
+}
+.drawers > a[data-tone="accent"] {
+  background: linear-gradient(
+    95deg,
+    color-mix(in srgb, var(--accent) 24%, var(--paper-warm)),
+    var(--paper-warm) 45%
+  );
+}
+.drawers > a[data-tone="ink"] {
+  background: linear-gradient(95deg, #d8d9d5, var(--paper-warm) 45%);
+}
+.drawers > a[data-tone="sage"] {
+  background: linear-gradient(
+    95deg,
+    color-mix(in srgb, var(--sage) 30%, var(--paper-warm)),
+    var(--paper-warm) 45%
+  );
+}
+.drawers > a[data-tone="quiet"] {
+  background: var(--paper-cool);
+}
+.index {
+  color: var(--ink-500);
+  font: 0.7rem var(--font-numeric);
+}
+.drawers i {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 45%);
+  font: normal 700 0.8rem var(--font-ui);
+}
+.drawers h2 {
+  margin: 0;
+  font: 520 1.35rem var(--font-editorial);
+}
+.drawers p {
+  margin: 0.25rem 0 0;
+  color: var(--ink-700);
+  line-height: 1.45;
+}
+.drawers > a > b {
+  font-size: 1.2rem;
+  transition: transform 180ms var(--ease-place);
+}
+.drawers > a:hover > b {
+  transform: translateX(0.25rem);
+}
+.mePage > footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-700);
+}
+.mePage footer a {
+  color: inherit;
+  font-weight: 750;
+}
+@media (max-width: 720px) {
+  .mePage {
+    padding: 0.8rem 0.8rem 7rem;
+  }
+  .mePage > header {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .cabinet {
+    grid-template-columns: 1fr;
+    margin-inline: 0.4rem;
+  }
+  .cabinetLabel {
+    min-height: 7rem;
+    border-right: 0;
+    border-bottom: 1px solid #7f6c54;
+  }
+  .cabinetLabel b {
+    margin-top: 1.5rem;
+    max-width: none;
+  }
+  .drawers > a {
+    grid-template-columns: 2rem 2.6rem 1fr;
+    min-height: 7.5rem;
+    padding: 0.85rem;
+  }
+  .drawers > a > b {
+    display: none;
+  }
+  .drawers p {
+    font-size: 0.87rem;
+  }
+  .mePage > footer {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .drawers > a,
+  .drawers > a > b {
+    transition: none;
+  }
+}

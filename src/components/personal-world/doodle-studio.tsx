@@ -119,7 +119,7 @@ export function DoodleStudio({ fresh = false }: { fresh?: boolean }) {
     });
     setSavedId(item.id);
     setStatus("Saved to Today. Your scribble has an address now.");
-    if (!id) router.replace(`/my-world/doodles/${item.id}`);
+    if (!id && navigator.onLine) router.replace(`/my-world/doodles/${item.id}`);
   }
   return (
     <main className={styles.studio}>

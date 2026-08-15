@@ -1,14 +1,28 @@
 .shelf {
   min-height: 100vh;
   padding: clamp(1rem, 4vw, 3rem);
-  background: #bca486;
+  background:
+    radial-gradient(circle at 78% 12%, rgb(255 248 231 / 26%), transparent 25%),
+    linear-gradient(145deg, #c9b18f, #a98d69);
 }
 .shelf > header {
-  max-width: 66rem;
+  position: relative;
+  max-width: 70rem;
   margin: 0 auto 2rem;
   padding: 1.5rem;
   background: var(--paper-warm);
   box-shadow: var(--shadow-paper);
+}
+.shelf > header::before {
+  content: "";
+  position: absolute;
+  width: 8rem;
+  height: 1.8rem;
+  left: 50%;
+  top: -0.65rem;
+  translate: -50%;
+  rotate: -1deg;
+  background: color-mix(in srgb, var(--accent) 45%, rgb(255 255 255 / 55%));
 }
 .shelf header p,
 .game header p {
@@ -33,21 +47,46 @@
 .gameChoices {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  max-width: 66rem;
+  max-width: 70rem;
   margin: auto;
   gap: 1.2rem;
 }
 .gameChoices > button {
+  position: relative;
   display: grid;
-  min-height: 17rem;
+  min-height: 21rem;
   align-content: end;
   padding: 1.5rem;
   border: 1px solid #8f7a60;
-  background: #e9dfcd;
+  overflow: hidden;
+  background: linear-gradient(145deg, #f1eadc, #ddcfb9);
   color: inherit;
   text-align: left;
   box-shadow: 5px 7px 0 rgb(70 52 33 / 15%);
   cursor: pointer;
+}
+.gameChoices > button::before {
+  content: "";
+  position: absolute;
+  width: 11rem;
+  height: 11rem;
+  right: -2rem;
+  top: -2rem;
+  border: 1px solid rgb(54 46 38 / 12%);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 1.2rem rgb(255 255 255 / 10%),
+    inset 0 0 0 2.4rem rgb(54 46 38 / 5%);
+}
+.gameChoices > button:nth-child(2)::before {
+  border-radius: 44% 56% 42% 58%;
+  background: color-mix(in srgb, var(--powder) 38%, transparent);
+  box-shadow: none;
+  transform: rotate(18deg);
+}
+.gameChoices > button:hover {
+  transform: translateY(-5px) rotate(-0.25deg);
+  box-shadow: 10px 14px 0 rgb(70 52 33 / 14%);
 }
 .gameChoices strong {
   font: 2rem var(--font-editorial);
@@ -62,12 +101,60 @@
   text-decoration: underline;
 }
 .game {
-  max-width: 48rem;
+  max-width: 62rem;
   margin: auto;
   padding: clamp(1rem, 4vw, 2.5rem);
   border: 1px solid #9a896f;
-  background: var(--paper-warm);
+  background: linear-gradient(135deg, var(--paper-warm), var(--paper-cream));
   box-shadow: var(--shadow-paper);
+}
+.gameIntro {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-block: 1px solid var(--rule);
+}
+.gameIntro p {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--ink-700);
+  line-height: 1.55;
+}
+.gameIntro span {
+  color: var(--ink-500);
+  font-size: 0.75rem;
+  text-align: right;
+}
+.sizePicker {
+  display: flex;
+  width: fit-content;
+  margin: 1rem 0;
+  border: 1px solid var(--rule-strong);
+}
+.sizePicker button {
+  display: grid;
+  min-width: 7rem;
+  min-height: 3.2rem;
+  place-items: center;
+  padding: 0.5rem 0.8rem;
+  border: 0;
+  background: var(--paper-cool);
+  color: inherit;
+  cursor: pointer;
+}
+.sizePicker button + button {
+  border-left: 1px solid var(--rule);
+}
+.sizePicker button[aria-pressed="true"] {
+  background: var(--ink-900);
+  color: var(--paper-cool);
+}
+.sizePicker small {
+  opacity: 0.7;
+  font-size: 0.63rem;
 }
 .game > header {
   display: flex;
@@ -93,20 +180,44 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 0.65rem;
   margin-top: 1.5rem;
+  perspective: 900px;
+}
+.cardGrid[data-pairs="8"] {
+  grid-template-columns: repeat(4, 1fr);
+}
+.cardGrid[data-pairs="10"] {
+  grid-template-columns: repeat(5, 1fr);
 }
 .cardGrid button {
   aspect-ratio: 3/4;
   border: 1px solid #9f917d;
-  background: #76878b;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #7d8e90, #576e72);
   color: var(--paper-warm);
   font: 2rem var(--font-editorial);
   cursor: pointer;
   transition: transform var(--motion-place) var(--ease-place);
 }
+.cardGrid button::before {
+  content: "";
+  position: absolute;
+  inset: 0.35rem;
+  border: 1px solid rgb(255 255 255 / 24%);
+}
+.cardGrid button span {
+  display: block;
+  transform: rotateY(var(--card-face-rotation, 0deg));
+}
 .cardGrid button[data-open="true"] {
   background: var(--paper-cream);
   color: var(--ink-900);
   transform: rotateY(180deg);
+  --card-face-rotation: 180deg;
+}
+.cardGrid button[data-matched="true"] {
+  border-color: color-mix(in srgb, var(--accent) 80%, var(--ink-900));
+  box-shadow: 0 7px 14px rgb(54 43 32 / 15%);
 }
 .cardGrid button:disabled {
   opacity: 0.65;
@@ -117,21 +228,143 @@
   align-items: center;
   justify-content: space-between;
 }
-.pond {
+.done > div {
   display: grid;
-  min-height: 15rem;
+  gap: 0.25rem;
+}
+.done span {
+  color: var(--ink-500);
+  font-size: 0.8rem;
+}
+.pond {
+  position: relative;
+  display: grid;
+  min-height: 20rem;
   margin: 1.5rem 0;
   place-items: center;
   align-content: center;
   gap: 1rem;
   border: 1px solid #71888b;
-  background: linear-gradient(#c8dadd 0 30%, #8eb0b5 31%);
+  overflow: hidden;
+  background: #c8dadd;
 }
-.pond span {
-  font: 2.5rem var(--font-numeric);
+.sky {
+  position: absolute;
+  inset: 0 0 58%;
+  background: linear-gradient(#dce8e6, #c7d8d8);
+}
+.sky > i {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  right: 10%;
+  top: 12%;
+  border-radius: 50%;
+  background: var(--butter);
+  box-shadow: 0 0 3rem rgb(232 210 138 / 65%);
+}
+.sky > span {
+  position: absolute;
+  left: 12%;
+  top: 24%;
+  color: rgb(255 255 255 / 74%);
+  font: 4rem var(--font-editorial);
+}
+.water {
+  position: absolute;
+  inset: 42% 0 0;
+  overflow: hidden;
+  background:
+    repeating-radial-gradient(
+      ellipse at 50% 0,
+      transparent 0 1.5rem,
+      rgb(255 255 255 / 13%) 1.6rem 1.7rem
+    ),
+    linear-gradient(#8fb4b9, #668f97);
+}
+.water > i {
+  position: absolute;
+  width: 6rem;
+  height: 1rem;
+  border-top: 2px solid rgb(255 255 255 / 25%);
+  border-radius: 50%;
+  animation: waterDrift 5s ease-in-out infinite alternate;
+}
+.water > i:nth-of-type(1) {
+  left: 7%;
+  top: 42%;
+}
+.water > i:nth-of-type(2) {
+  right: 9%;
+  top: 24%;
+  animation-delay: -2s;
+}
+.water > i:nth-of-type(3) {
+  left: 42%;
+  bottom: 10%;
+  animation-delay: -3s;
+}
+.float {
+  position: absolute;
+  z-index: 2;
+  top: 12%;
+  color: var(--coral);
+  font: 1rem var(--font-ui);
+  text-shadow: 0 2px white;
+  transition:
+    left 100ms linear,
+    transform 160ms;
+}
+.pond[data-state="tug"] .float {
+  animation: bob 0.22s ease-in-out infinite alternate;
+}
+.fish {
+  position: absolute;
+  right: 18%;
+  bottom: 22%;
+  color: var(--paper-cool);
+  font: 1.9rem var(--font-numeric);
+  animation: fishPlace 0.45s var(--ease-place) both;
 }
 .pond strong {
+  position: relative;
+  z-index: 4;
+  align-self: end;
+  margin-bottom: 1rem;
+  padding: 0.55rem 0.8rem;
+  background: rgb(251 247 235 / 78%);
   font: 1.4rem var(--font-editorial);
+}
+.castMeter {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.7rem;
+  align-items: center;
+  margin: -1rem 0 1rem;
+  font-size: 0.72rem;
+}
+.castMeter meter {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.reelPanel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: -1rem 0 1rem;
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  background: var(--paper-cool);
+}
+.reelPanel label {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+}
+.reelPanel meter,
+.reelPanel progress {
+  width: 100%;
+  accent-color: var(--sage);
 }
 .cast {
   width: 100%;
@@ -143,9 +376,30 @@
   margin-top: 0.7rem;
   color: var(--ink-500);
 }
+@keyframes waterDrift {
+  to {
+    transform: translateX(2rem) scaleX(1.2);
+  }
+}
+@keyframes bob {
+  to {
+    transform: translateY(0.5rem) rotate(8deg);
+  }
+}
+@keyframes fishPlace {
+  from {
+    opacity: 0;
+    transform: translate(5rem, 2rem) rotate(8deg);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .cardGrid button {
     transition: none;
+  }
+  .water > i,
+  .pond[data-state="tug"] .float,
+  .fish {
+    animation: none;
   }
 }
 @media (max-width: 700px) {
@@ -161,10 +415,31 @@
   .game > header {
     flex-direction: column;
   }
+  .gameIntro {
+    align-items: start;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .gameIntro span {
+    text-align: left;
+  }
+  .sizePicker {
+    width: 100%;
+  }
+  .sizePicker button {
+    min-width: 0;
+    flex: 1;
+  }
   .cardGrid {
     gap: 0.4rem;
   }
   .cardGrid button {
     font-size: 1.55rem;
+  }
+  .cardGrid[data-pairs="10"] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .reelPanel {
+    grid-template-columns: 1fr;
   }
 }

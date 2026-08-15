@@ -2,8 +2,8 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { act } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { GameBoundary } from "./game-boundary";
-import MemoryFlip from "./memory-flip";
-import TinyFishing from "./tiny-fishing";
+import MemoryFlip from "./memory-flip-v2";
+import TinyFishing from "./tiny-fishing-v2";
 
 afterEach(() => {
   cleanup();
@@ -14,7 +14,7 @@ describe("isolated desk games", () => {
   it("keeps Memory Flip progress local to the mounted session", () => {
     const { unmount } = render(<MemoryFlip onExit={() => undefined} />);
     fireEvent.click(screen.getByRole("button", { name: /^Turn over card 1$/ }));
-    expect(screen.getByRole("button", { name: "Card 1: ✎" })).toBeVisible();
+    expect(screen.getByRole("button", { name: /^Card 1:/ })).toBeVisible();
     unmount();
     render(<MemoryFlip onExit={() => undefined} />);
     expect(screen.getByRole("button", { name: /^Turn over card 1$/ })).toBeVisible();

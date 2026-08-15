@@ -8,11 +8,11 @@ import { NetworkStatus } from "./network-status";
 import styles from "./app-shell.module.css";
 
 const destinations = [
-  ["Today", "/today"],
-  ["Calendar", "/calendar"],
-  ["Journal", "/journal"],
-  ["My World", "/my-world"],
-  ["Me", "/me"],
+  ["Today", "/today", "01"],
+  ["Calendar", "/calendar", "02"],
+  ["Journal", "/journal", "03"],
+  ["My World", "/my-world", "04"],
+  ["Me", "/me", "05"],
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -25,18 +25,26 @@ export function AppShell({ children }: { children: ReactNode }) {
       <div className={styles.shell}>
         <aside className={styles.rail}>
           <Link className={styles.brand} href="/today">
-            Campus Atelier
+            <span>CA</span>
+            <b>Campus Atelier</b>
             <small>private journal</small>
           </Link>
           <nav className={styles.nav} aria-label="Primary">
-            {destinations.map(([label, href]) => (
+            {destinations.map(([label, href, index]) => (
               <Link
                 key={href}
                 className={`${styles.navLink} ${pathname.startsWith(href) ? styles.navLinkActive : ""}`}
                 href={href}
                 aria-current={pathname.startsWith(href) ? "page" : undefined}
               >
-                {label}
+                <small aria-hidden="true">{index}</small>
+                <span>{label}</span>
+                {pathname.startsWith(href) ? (
+                  <motion.i
+                    layoutId="active-divider"
+                    transition={{ duration: 0.28, ease: [0.2, 0.8, 0.2, 1] }}
+                  />
+                ) : null}
               </Link>
             ))}
           </nav>
@@ -58,9 +66,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           className={styles.content}
           id="main-content"
           tabIndex={-1}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
+          initial={{ y: 12, scale: 0.996 }}
+          animate={{ y: 0, scale: 1 }}
+          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
         >
           {children}
         </motion.main>

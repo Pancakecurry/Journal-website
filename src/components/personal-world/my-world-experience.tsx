@@ -38,16 +38,36 @@ export function MyWorldExperience() {
   return (
     <main className={styles.world} data-cover={preferences.notebookCover}>
       <header>
-        <p>My World · your desk</p>
-        <h1>{inhabited ? "Looks like you live here." : "All set. No fake memories included."}</h1>
-        <span>
-          {inhabited
-            ? "The useful bits showed up because you actually made them."
-            : "A notebook, a pen, and plenty of room. That's enough for day one."}
-        </span>
-        <Link href="/me/personalization">Choose stationery</Link>
+        <div>
+          <p>My World · your desk</p>
+          <h1>{inhabited ? "Looks like you live here." : "All set. No fake memories included."}</h1>
+        </div>
+        <aside>
+          <span>
+            {inhabited
+              ? "The useful bits showed up because you actually made them."
+              : "A notebook, a pen, and plenty of room. That's enough for day one."}
+          </span>
+          <Link href="/me/personalization">
+            Tune the desk <i aria-hidden="true">→</i>
+          </Link>
+        </aside>
       </header>
       <section className={styles.deskScene} aria-label="Your accumulated journal objects">
+        <div className={styles.deskBackdrop} aria-hidden="true">
+          <span>CA / PERSONAL DESK</span>
+          <i />
+          <i />
+          <i />
+        </div>
+        <span className={styles.deskLamp} aria-hidden="true">
+          <i />
+        </span>
+        <span className={styles.deskPlant} aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
         <Link className={styles.notebookObject} href="/calendar">
           <small>
             {summary.dayCount
